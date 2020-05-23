@@ -1,0 +1,55 @@
+.footer{
+    margin-top: 40px;
+    background-color: #F0F0F0;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    font-size: 12px;
+}
+
+.footer-item{
+    margin-right: 120px;
+    margin-top: 20px;
+}
+
+.footer-item > p{
+    cursor: pointer;
+}
+
+p{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.detail .icon{
+    margin-right: 15px;
+    width: 15px;
+    height: 20px;
+}
+
+.fixed-icon{
+    margin: 0px 15px;
+}
+
+.detail{
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.phone, .connection{
+    margin-top: 25px;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+img{
+    width: 80px;
+    height: 80px;
+}
+
+.grid img{
+    margin-right: 10px;
+}

@@ -1,0 +1,88 @@
+.root{
+    height: 500px;
+}
+
+div > .non-border{
+    border-bottom: 0px;
+}
+
+ul{
+    text-decoration: none;
+    list-style-type: none;
+    
+}
+
+.flex{
+    display: flex;
+    justify-content: right;
+}
+
+li{
+    margin: 10px;
+}
+
+img{
+    margin-right: 10px;
+}
+
+p{
+    height: 40px;
+    line-height: 40px;
+}
+
+.icon-big{
+    height: 40px;
+    width: 40px;
+}
+
+.navi{
+    margin: 40px 0px;
+}
+
+.info{
+    margin-bottom: 15px;
+}
+
+.info > span{
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    border-bottom: 1px solid gray;
+}
+
+.order{
+    margin-top: 40px;
+    margin-left: 100px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+.order > span{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+nav .breadcrumb{
+    padding: 0px;
+    cursor: pointer;
+}
+
+.info ul li{
+    cursor: pointer;
+}

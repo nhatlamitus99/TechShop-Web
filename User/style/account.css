@@ -1,0 +1,146 @@
+.root{
+    position: relative;
+    margin-bottom: 80px;
+}
+
+div > .non-border{
+    border-bottom: 0px;
+}
+
+ul{
+    text-decoration: none;
+    list-style-type: none;
+    
+}
+
+.flex{
+    display: flex;
+    justify-content: right;
+}
+
+li{
+    margin: 10px;
+}
+
+img{
+    margin-right: 10px;
+}
+
+p{
+    height: 40px;
+    line-height: 40px;
+}
+
+.icon-big{
+    height: 40px;
+    width: 40px;
+}
+
+.navi{
+    margin: 40px 0px;
+}
+
+.info{
+    margin-bottom: 15px;
+}
+
+.info > span{
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    border-bottom: 1px solid gray;
+}
+
+.account{
+    margin-top: 40px;
+    margin-left: 100px;
+}
+
+
+
+.account > span{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+#info-user{
+    border: 1px solid rgb(201, 197, 197);
+    padding-left: 40px;
+    padding-bottom: 40px;
+    margin-right: 200px;
+}
+
+input{
+    width: 400px;
+    height: 38px;
+    padding-left: 10px;
+    border-radius: 4px;
+    border: 1px solid rgb(182, 180, 180);
+}
+
+input[type=button], input[type=submit]{
+    background-color: #FDF000;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    width: 150px;
+}
+
+input[type=submit]{
+    height: 50px;
+    margin-left: 30%;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+input[type=radio], input[type=checkbox]{
+    width: 20px;
+    height: 40px;
+}
+
+form > p{
+    padding: 10px 0px;
+}
+
+.check{
+    margin-top: 20px;
+}
+
+.flex-gender{
+    display: flex;
+}
+
+label{
+    padding-left: 40px;
+}
+
+.row > p{
+    margin-left: 20px;
+    margin-bottom: 0px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.row > input {
+    width: 20px;
+    height: 20px;
+}
+
+#info-user p{
+    margin-bottom: 5px;
+}
+
+.info ul li p{
+    height: 40px;
+    line-height: 40px;
+}
+
+nav .breadcrumb{
+    padding: 0px;
+    cursor: pointer;
+}
+
+.info ul li{
+    cursor: pointer;
+}

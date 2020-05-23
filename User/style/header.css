@@ -1,0 +1,93 @@
+
+.info{
+    color: rgb(124, 126, 126);
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-end;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: gray solid 1px;
+}
+
+
+.info-header{
+    margin-left: 40px;
+}
+
+.icon{
+    width: 20px;
+    height: 20px;
+}
+
+.main{
+    margin: 20px 0px;
+}
+
+.logo{
+    margin-left: 150px;
+    width: 220px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.search{
+    height: 50px;
+    line-height: 50px;
+    margin-left: 40px;
+    padding-left: 40px;
+    width: 1000px;
+}
+
+#search-input{
+    font-size: 20px;
+    background-color: #F3F3F3;
+    border: 0px;
+    padding-left: 10px;
+    width: 900px;
+    height: 60px;
+    line-height: 60px;
+}
+
+#search-btn{
+    border: 0px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.cover-btn{
+    background-color: yellow;
+    width: 60px;
+}
+
+.icon-medium{
+    height: 50px;
+    width: 50px;
+}
+
+.liked-btn{
+    margin-left: 80px;
+    cursor: pointer;
+}
+
+.cart-btn{
+    margin-left: 60px;
+    cursor: pointer;
+}
+
+.nav{
+    display: flex;
+    justify-content: center;
+    background-color: #FDF000;
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+}
+
+.sub-nav{
+    margin-right: 70px;
+}
+
+span{
+    cursor: pointer;
+}
+

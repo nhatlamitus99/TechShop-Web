@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>My Account</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./style/account.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    <header></header>
+
+    <div class="bread-cumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Thông tin tài khoản</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="container-fluid root row">
+      <div class="navi col-ms-4" style="flex-grow: 2;">        
+        <div class="info non-border">
+          <img class="icon-big" src="https://pluspng.com/img-png/user-png-icon-male-user-icon-512.png">
+          <span class="name">Nhật Lâm</span>
+        </div>
+        <div class="flex info non-border">
+          <ul>
+            <li class="row"><img class="icon-big" src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"> <p>Thông tin tài khoản</p></li>
+            <li class="row"><img class="icon-big" src="https://www.pinclipart.com/picdir/big/170-1704481_finance-purchase-order-icon-order-icon-png-vector.png"><p>Quản lý đơn hàng</p></li>
+            <li class="row"><img class="icon-big" src="https://image.flaticon.com/icons/png/512/60/60378.png"><p>Thông tin thanh toán</p></li>
+            <li class="row"><img class="icon-big" src="https://www.shareicon.net/data/512x512/2015/12/01/680518_button_512x512.png"><p>Sản phẩm yêu thích</p></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <div class="account col-ms-8" style="flex-grow: 8;">
+        <span class="name">Thông tin tài khoản</span>
+        <form id="info-user">
+          <p class="ok">Họ và tên</p><input type="text" id="username" placeholder="Nhật Lâm"><br>
+          <p>Số điện thoại</p><input type="text" id="phone" placeholder="Hãy nhập SĐT để trải nghiệm tối hơn">
+          <input type="button" id="verify" value="Gửi mã xác thực"><br>
+          <p>Mã xác thực</p><input type="text" id="verifyID" placeholder="Nhập mã xác thực gửi tới SĐT trên"><br> 
+          <p>Email</p><input type="email" id="email" placeholder="ngophannhatlam@gmail.com"><br>
+          <p>Giới tính</p>
+          <label class="row">
+            <input type="radio" checked="checked" name="radio">
+            <p>Nam</p>
+          </label>
+          <label class="row">
+            <input type="radio" name="radio">
+            <p>Nữ</p>
+          </label>
+          <p>Ngày sinh</p><input type="date" id="birthday"><br>
+          <label class="row check">
+            <input type="checkbox" id="changepassword"><p>Thay đổi mật khẩu</p>
+          </label>
+          <form>
+            <p>Mật khẩu cũ</p><input type="password" id="prepassword" placeholder="Nhập mật khẩu cũ"><br>
+            <p>Mật khẩu mới</p><input type="password" id="postpassword" placeholder="Nhập mật khẩu mới từ 6 đến 32 ký tự"><br>
+            <p>Nhập lại mật khẩu</p><input type="password" id="repassword" placeholder="Nhập lại mật khẩu"><br>
+          </form>
+          <input type="submit" id="sumbit" value="Cập nhật">
+        </form>
+      </div>
+    </div>
+  
+
+    <footer></footer>
+    <script src="./js/embedded-html.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
