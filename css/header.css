@@ -1,0 +1,71 @@
+.container {
+    font-family: Roboto;
+    /* border: 1px solid; */
+}
+
+.header-top {
+    color: #757575;
+    background-color: #f8f8f8;
+    border-bottom: 0.01em solid #dddddd;
+}
+
+.ht-list > div {
+    color: #757575;
+    font-size: 12px;
+    margin-left: 25px;
+    display: inline-block;
+}
+
+.language-popup {
+    border-top: 1px solid #ffe600;
+    padding: 20px 20px 10px 20px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    z-index: 10;
+}
+
+.language-popup img {
+    width: 15px;
+    margin-right: 3px;
+}
+
+.language-popup > div {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+#logo-img {
+    width: 215px;
+}
+
+.header-middle .row > div {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.header-middle button,
+.header-middle input {
+    border-radius: 0px;
+}
+
+.btn-search {
+    background-color: #ffe600;
+    border: 0px;
+    width: 60px;
+}
+
+.btn-wish-list {
+    border: 1px solid #a8a8a8;
+}
+
+.btn-shopping-cart {
+    background-color: #ff0000;
+    width: 50px;
+}
+
+.header-bottom {
+    background-color: #ffe600;
+    font-weight: 500;
+}
