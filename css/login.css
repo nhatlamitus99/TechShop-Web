@@ -2,6 +2,10 @@
     font-family: Roboto;
 }
 
+.icon-input {
+    color: #757575;
+}
+
 .login-via {
     margin-top: 60px;
     text-align: center;
