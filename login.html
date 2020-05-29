@@ -24,10 +24,115 @@
         <script src="js/fontawesome-pro.js"></script>
         <!-- Style -->
         <link rel="stylesheet" href="css/login.css" />
+        <link rel="stylesheet" href="css/header.css" />
+        <link rel="stylesheet" href="css/footer.css" />
     </head>
 
     <body>
-        <header></header>
+        <header>
+            <div class="header-top">
+                <div class="container">
+                    <div class="ht-list row pt-1 pb-1 justify-content-end">
+                        <div id="ht-item-1">
+                            <i class="far fa-shopping-bag mr-2"></i>
+                            KIỂM TRA ĐƠN HÀNG
+                        </div>
+                        <div id="ht-item-2">
+                            <i class="far fa-user-circle mr-2"></i>
+                            ĐĂNG NHẬP/ĐĂNG KÝ
+                        </div>
+                        <div id="ht-item-3" class="d-none">
+                            <i class="far fa-user-circle mr-2"></i>
+                            CAO NHƠN HƯNG
+                        </div>
+                        <div id="ht-item-4" class="d-none d-sm-block">
+                            <i class="far fa-globe mr-2"></i>
+                            CHANGE LANGUAGE
+                            <!-- Popup to change language -->
+                            <div class="language-popup d-none">
+                                <div>
+                                    <img
+                                        src="images/header/flag-icons/vn.svg"
+                                        alt=""
+                                    />
+                                    Tiếng Việt
+                                </div>
+                                <div>
+                                    <img
+                                        src="images/header/flag-icons/uk.svg"
+                                        alt=""
+                                    />
+                                    English
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-middle">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="logo col-lg-3 col-12">
+                            <div class="py-3">
+                                <a href="index.html">
+                                    <img
+                                        id="logo-img"
+                                        src="images/header/logo.png"
+                                        alt="logo"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-9">
+                            <div class="input-group">
+                                <input
+                                    id="search-box"
+                                    class="form-control"
+                                    type="search"
+                                    placeholder="Tìm kiếm trên Favada"
+                                />
+                                <div class="input-group-append">
+                                    <button class="btn-search btn btn-warning">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-3 d-flex justify-content-end">
+                            <button
+                                class="btn-wish-list btn btn-outline-dark mr-3"
+                            >
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="btn-shopping-cart btn btn-danger">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-bottom d-none d-md-block">
+                <div class="container">
+                    <div class="menu row pt-2 pb-2">
+                        <div class="mr-4">
+                            <i class="fas fa-list mr-1"></i>
+                            DANH MỤC SẢN PHẨM
+                        </div>
+                        <div class="mr-4">
+                            HƯỚNG DẪN MUA HÀNG
+                        </div>
+                        <div class="mr-4">
+                            QUY ĐỊNH BẢO HÀNH
+                        </div>
+                        <div>
+                            MUA TRẢ GÓP
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
         <div class="container">
             <div class="login-via">
@@ -148,8 +253,122 @@
                 </div>
             </div>
         </div>
+        <br />
+        <br />
+        <footer class="d-none d-sm-block">
+            <div class="container pt-3 pb-1 px-0">
+                <div class="row d-flex justify-content-between no-gutters">
+                    <div class="col-md-6">
+                        <div>
+                            <h5>ĐỊA ĐIỂM MUA HÀNG</h5>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <dl style="list-style: none;">
+                                        <dt>
+                                            <i
+                                                class="fas fa-map-marker-alt mr-2"
+                                            ></i
+                                            >227 Đường Nguyễn Văn Cừ, phường 4,
+                                            quận 5, Hồ Chí Minh
+                                        </dt>
+                                        <dd>Thứ 2 - Thứ 6: Từ 9h - 20h</dd>
+                                        <dd>
+                                            Thứ 7: Từ 9h - 18h, Chủ Nhật: Từ 9h
+                                            - 16h
+                                        </dd>
+                                        <dt>
+                                            <i
+                                                class="fas fa-map-marker-alt mr-2"
+                                            ></i
+                                            >Khu phố 6, Phường Linh Trung, Quận
+                                            Thủ Đức, Hồ Chí Minh
+                                        </dt>
+                                        <dd>Thứ 2 - Thứ 7: Từ 9h - 18h</dd>
+                                        <dd>Chủ Nhật: Không hoạt động</dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </div>
 
-        <footer></footer>
+                        <div>
+                            <h5>ĐIỆN THOẠI HỖ TRỢ</h5>
+                            <ul class="list-unstyled normal-text">
+                                <li>Mua hàng: <b>0843 969 899</b></li>
+                                <li>
+                                    Bảo hành: <b>0843 969 899 (Line: 8200)</b>
+                                </li>
+                                <li>
+                                    Kỹ thuật: <b>0843 969 899 (Line: 8345)</b>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>CHÍNH SÁCH</h5>
+                        <ul class="list-unstyled normal-text">
+                            <li>Chính sách bán hàng</li>
+                            <li>Chính sách bảo hành</li>
+                            <li>Chính sách bảo mật</li>
+                            <li>Tìm hiểu về trả góp</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div>
+                            <h5>PHƯƠNG THỨC THANH TOÁN</h5>
+                            <img
+                                src="images/footer/visa.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img
+                                src="images/footer/maestro.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img
+                                src="images/footer/american-express.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img
+                                src="images/footer/jcb.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img
+                                src="images/footer/paypal.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img src="images/footer/ebay.svg" width="54" />
+                        </div>
+                        <br />
+                        <br />
+                        <div>
+                            <h5>KẾT NỐI VỚI CHÚNG TÔI</h5>
+                            <img
+                                src="images/footer/facebook.svg"
+                                width="40"
+                                class="mr-3"
+                            />
+                            <img src="images/footer/youtube.svg" width="50" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="container p-0">
+                    <div class="row no-gutters">
+                        <span class="col-md-10 col-sm-9 text-right"
+                            >Powered by Team10 - 17CNTN</span
+                        >
+                        <span class="col-md-2 col-sm-3 text-right"
+                            >@Favada 2020</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

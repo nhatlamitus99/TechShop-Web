@@ -1,22 +1,21 @@
-.container {
+* {
     font-family: Roboto;
-    /* border: 1px solid; */
 }
 
-.header-top {
+header .header-top {
     color: #757575;
     background-color: #f8f8f8;
     border-bottom: 0.01em solid #dddddd;
 }
 
-.ht-list > div {
+header .ht-list > div {
     color: #757575;
     font-size: 12px;
     margin-left: 25px;
     display: inline-block;
 }
 
-.language-popup {
+header .language-popup {
     border-top: 1px solid #ffe600;
     padding: 20px 20px 10px 20px;
     background: white;
@@ -26,46 +25,46 @@
     z-index: 10;
 }
 
-.language-popup img {
+header .language-popup img {
     width: 15px;
     margin-right: 3px;
 }
 
-.language-popup > div {
+header .language-popup > div {
     margin-bottom: 10px;
     text-align: left;
 }
 
-#logo-img {
+header #logo-img {
     width: 215px;
 }
 
-.header-middle .row > div {
+header .header-middle .row > div {
     padding-left: 0px;
     padding-right: 0px;
 }
 
-.header-middle button,
-.header-middle input {
+header .header-middle button,
+header .header-middle input {
     border-radius: 0px;
 }
 
-.btn-search {
+header .btn-search {
     background-color: #ffe600;
     border: 0px;
     width: 60px;
 }
 
-.btn-wish-list {
+header .btn-wish-list {
     border: 1px solid #a8a8a8;
 }
 
-.btn-shopping-cart {
+header .btn-shopping-cart {
     background-color: #ff0000;
     width: 50px;
 }
 
-.header-bottom {
+header .header-bottom {
     background-color: #ffe600;
     font-weight: 500;
 }
