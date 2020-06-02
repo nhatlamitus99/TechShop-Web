@@ -81,7 +81,7 @@ h2 span {
     margin-left: 2px;
 }
 
-.main-area input {
+.main-area input:not(#btn-login):not(#btn-register) {
     border: 0;
     outline: none;
     height: 100%;

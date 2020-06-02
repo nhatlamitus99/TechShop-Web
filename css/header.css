@@ -1,5 +1,11 @@
 * {
     font-family: Roboto;
+    /* border: 1px solid; */
+}
+
+.header-middle > .container {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 header .header-top {
@@ -40,8 +46,8 @@ header #logo-img {
 }
 
 header .header-middle .row > div {
-    padding-left: 0px;
-    padding-right: 0px;
+    /* padding-left: 0px;
+    padding-right: 0px; */
 }
 
 header .header-middle button,
@@ -61,7 +67,7 @@ header .btn-wish-list {
 
 header .btn-shopping-cart {
     background-color: #ff0000;
-    width: 50px;
+    width: 60px;
 }
 
 header .header-bottom {

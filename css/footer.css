@@ -8,11 +8,13 @@ footer {
 
 footer > div:nth-child(2) {
     background-color: white;
+    font-size: 15px;
 }
 
 footer h5 {
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    font-size: 16px;
 }
 
 footer dt {
@@ -20,6 +22,7 @@ footer dt {
     font-weight: 500;
     margin-bottom: 5px;
     margin-top: 5px;
+    font-size: 15px;
 }
 
 footer dd {
@@ -27,11 +30,13 @@ footer dd {
     font-weight: 400;
     margin-bottom: 0px;
     padding-left: 20px;
+    font-size: 15px;
 }
 
 footer .normal-text {
     font-weight: 400;
     color: #757575;
+    font-size: 15px;
 }
 
 footer li {
@@ -40,4 +45,11 @@ footer li {
 
 footer b {
     font-weight: 500;
+}
+
+footer h2.line {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #757575;
+    margin-bottom: 10px;
 }
