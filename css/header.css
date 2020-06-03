@@ -1,57 +1,60 @@
 * {
     font-family: Roboto;
-    /* border: 1px solid; */
 }
 
-.header-middle > .container {
-    padding-left: 0px;
-    padding-right: 0px;
+.container {
+    padding-left: 5px;
+    padding-right: 5px;
+    max-width: 1180px;
 }
 
-header .header-top {
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.header-top {
     color: #757575;
     background-color: #f8f8f8;
     border-bottom: 0.01em solid #dddddd;
 }
 
-header .ht-list > div {
+.header-top .ht-item {
     color: #757575;
     font-size: 12px;
     margin-left: 25px;
     display: inline-block;
+    border: 0;
+    outline: none;
+    background-color: inherit;
 }
 
-header .language-popup {
+.header-top .ht-item:hover,
+.header-top .ht-item a:hover {
+    color: black;
+}
+
+.header-top .ht-item a {
+    color: #757575;
+}
+
+.header-top .dropdown-menu {
     border-top: 1px solid #ffe600;
-    padding: 20px 20px 10px 20px;
     background: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease-in-out;
-    position: absolute;
-    z-index: 10;
 }
 
-header .language-popup img {
+.header-top .dropdown-menu img {
     width: 15px;
     margin-right: 3px;
-}
-
-header .language-popup > div {
-    margin-bottom: 10px;
-    text-align: left;
 }
 
 header #logo-img {
     width: 215px;
 }
 
-header .header-middle .row > div {
-    /* padding-left: 0px;
-    padding-right: 0px; */
-}
-
-header .header-middle button,
-header .header-middle input {
+.header-middle button,
+.header-middle input {
     border-radius: 0px;
 }
 
@@ -70,7 +73,38 @@ header .btn-shopping-cart {
     width: 60px;
 }
 
-header .header-bottom {
+.header-bottom {
     background-color: #ffe600;
     font-weight: 500;
+}
+
+.header-bottom .menu-bar .dropdown > button {
+    font-weight: 500;
+    background-color: #ffe600;
+    border: 0;
+    outline: none;
+}
+
+.header-bottom .menu-bar .dropdown-menu {
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+}
+
+.header-bottom .menu-bar > div {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.header-bottom .menu-item > a {
+    color: black;
+    font-weight: 500;
+}
+header a:hover {
+    text-decoration: none;
+}
+
+.header-bottom .menu-bar .dropdown-item:hover,
+.header-top .dropdown-item:hover {
+    color: #ffe600;
 }
