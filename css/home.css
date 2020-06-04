@@ -1,0 +1,149 @@
+.slider-content {
+    position: absolute;
+    top: 20%;
+    left: 60px;
+}
+
+.slider-content .btn-shopnow {
+    background-color: #ffe600;
+    border: 0px;
+    width: 120px;
+    border-radius: 0px;
+    font-weight: 500;
+}
+
+.section-title {
+    background-color: #f5f5f5;
+}
+
+.section-title-highlight {
+    background-color: #ffe600;
+    display: inline-block;
+    padding: 10px 10px 10px 12px;
+    font-weight: 500;
+    position: relative;
+}
+
+.section-title-highlight:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: -25px;
+    border-top: 22px solid transparent;
+    border-bottom: 22px solid transparent;
+    border-left: 25px solid #ffe600;
+}
+
+.card-body {
+    padding: 0px 0px 8px 0px;
+}
+
+.card {
+    border: 0;
+}
+
+.card:hover {
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-category {
+    color: #a7a7a7;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #d7d7d7;
+    font-size: 16px;
+}
+
+.rating-stars {
+    background: #fff;
+    display: block;
+    line-height: 1;
+    overflow: hidden;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+.rating {
+    margin: 0px;
+    padding: 0px;
+}
+
+.rating > li {
+    display: inline-block;
+    margin: 0;
+    list-style: none;
+}
+
+.rating li .fa-star {
+    font-size: 16px;
+    color: #ffe600;
+    margin-right: 5px;
+}
+
+.card-product-name {
+    color: #0071ce;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.card-price {
+    font-weight: 500;
+    color: #ff0000;
+    margin-right: 5px;
+}
+
+.card-old-price {
+    text-decoration: line-through;
+    font-size: 13px;
+    font-style: italic;
+    color: #757575;
+}
+
+.card-body button {
+    padding: 0;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    background: none;
+    color: #a7a7a7;
+}
+
+.card-btn-wish {
+    margin-right: 10px;
+}
+
+.card-btn-wish.in-wish-list {
+    color: #ff0000;
+}
+
+.card-btn-wish:hover {
+    color: #ff0000;
+}
+
+.card-btn-cart:hover {
+    color: #ffe600;
+}
+
+.list-choice .text {
+    color: #757575;
+    font-size: 18px;
+    border-bottom: 0.5px solid #c0c0c0;
+    padding-bottom: 5px;
+}
+
+.list-choice .card * {
+    font-size: 15px;
+}
+
+.list-choice .card .fa-star {
+    font-size: 13px;
+}
+
+.list-choice .line {
+    z-index: 20;
+    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+
+.big-banner .container {
+    position: relative;
+}
