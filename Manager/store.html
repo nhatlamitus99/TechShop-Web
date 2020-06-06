@@ -4,101 +4,24 @@
 	<title>FAVADA MANAGER</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="stylesheet" href="style/button.css" >
+	<link rel="stylesheet" href="style/style.css" >
+	<link rel="icon" href="img/icon.png">
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 <style>
-body, html {
-  
-   font-family: Arial, Helvetica, sans-serif;
-   
-}
-#navi
-{
-	float:left;
-	position:relative;
-	background-color:#EFEEEB;
-	width:15%;
-	height:800px;
-}
-#logo
-{
-	width:100%;
-	
-	background-color:#CCCCCC;
-}
-img{
-	width:90%;
-	height:90%;
-	
-}
-.footer{
-	
-	height:100px;
-	width:100%;
-	background-color:#CCCCCC;
-	bottom:0%;
-	text-align:center
-}
-#header{
-	width:100%;
-	height:50px;
-	background-color:#8F8F80;
-	position:relative;
-	margin-top:0%;
-	padding-top:0px;
-}
-p{
-	color:black;
-	font-weight: bold;
-	float:left;
-}
-.icon
-{
-	height:20px;
-	width:20px;
-	float:left;
-	position:relative;
-	top:10px;
-	left:10px;
-}
-a{
-	color:black;
-}
-.divider{
-	border-top-style:solid;
-	margin-left:10%;
-	margin-right:10%;
-	border-top-color:grey;
-	border-top-width:1px;
-}
-
-li{
-	padding-left:10%;
-}
-#avt{
-	border-style:solid;border-width:1px;border-color:white;background-color:white;position:relative;top:15%;height:25px;width:auto;border-radius: 50%;float:right;
-}
-#avt:hover{
-	border-color:#5555DD;
-	border-width:3px;
-}
-.reddot
-{
-	font-weight:bold;line-height:20px;background-color:yellow;float:left;width:20px;height:20px;border-radius:50%;text-align:center;
-}
 </style>
 
 </head>
 
 <body>
 <div style="height:100%;">
-	<div id="navi">
-		<div id="logo">
+	<div class="d_logo t_logo">
 			<img src="img/logo.png"></img>
-		</div>
+			</div>
+	<div class="d_navi t_navi" >
 		
 		<ul class="nav flex-column">
 			<li class="nav-item">
@@ -106,15 +29,15 @@ li{
 				<p class="nav-link active" href="#">Đơn hàng</p>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" style="float:left;" href="#">Đơn hàng mới</a>
+				<a class="nav-link active" style="float:left;" href="bill.html">• Đơn hàng mới</a>
 				<div class="reddot">1</div>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" style="float:left;" href="#">Đơn hàng đang xử lý</a>
+				<a class="nav-link active" style="float:left;" href="#">• Đơn hàng đang xử lý</a>
 				<div class="reddot">8</div>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" href="#">Đơn hàng đã hủy</a>
+				<a class="nav-link active" href="#">• Đơn hàng đã hủy</a>
 			</li>
 			
 			<div style="" class="divider"></div>
@@ -124,10 +47,13 @@ li{
 				<p class="nav-link active">Hàng hóa</p>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" href="#">Quản lý kho hàng</a>
+				<a class="nav-link active" href="store.html">• Quản lý kho hàng</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" href="#">Quản lý danh mục</a>
+				<a class="nav-link active" href="#">• Quản lý danh mục</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="product.html">• Quản lý hàng hóa</a>
 			</li>
 			
 			
@@ -141,38 +67,74 @@ li{
 				<a class="nav-link disabled" href="#">Disabled</a>
 			</li>
 			</ul>
-		
-		<div valign="bottom" class="footer">powered by TEAM10</div>	
 	</div>
-	
-	<div style="height:100px;width:85%;float:left;">
-		<div id="header">
+	<!--<div valign="bottom" class="footer">powered by TEAM10</div>	-->
+	<div style="height:100vh;width:500px;float:left;">
+		<div class="d_header t_header">
+			
 			<!-- Search form -->
 			<input style="top:15%;position:relative;height:70%;float:left;width:40%;margin-left:2%;" class="form-control" type="text" placeholder="Search" aria-label="Search"></input>
 			
 			<!-- button-->
 			
-				<button style="float:left;height:70%;width:10%;top:15%;position:relative;font-size:1vw;line-height:1vw;" class="btn btn-search" type="button"> Search</button>
+			<button style="float:left;height:70%;width:10%;top:15%;position:relative;font-size:1vw;line-height:1vw;" class="btn btn-search" type="button"> Search</button>
 			
-			<div style="color:white;margin-right:5px;height:70%;float:right;padding-left:5px;border-left-style:solid;top:15%;position:relative;margin-left:10px;border-color:#555555;border-width:1px;">
-				<div style="font-size:1.2vw;height:70%;top:0%;font-weight:bold;position:relative;top:0%;">Hoàng Đức</div>
-				<div style="font-size:1vw;height:30%;font-weight:normal;">Nhân viên</div>
+			<div id="id">
+				<div style="font-size:15px;height:20px;top:0%;font-weight:bold;position:relative;top:0%;">Hoàng Đức</div>
+				<div style="font-size:12px;height:10px;font-weight:normal;">Nhân viên</div>
 			</div>
 	
-			<img id="avt" onclick="option()" style="" src="img/avt.png"></img>
+			<img class="t_avt d_avt" onclick="option()" style="" src="img/avt.png"></img>
 			<div id="opt" style="visibility:hidden;width:15%;background-color:#DDDDDD;float:right;clear:both;top:100%;right:0%;position:absolute;">
 				<div>tài khoản</div>
 				<div style="width:100%;border-top-style:solid;border-width:1px;"></div>
 				<div>đăng xuất</div>
 			</div>
 		</div>
-		<div style="height:93%;width:100%;">
-			dàhaslkk
+		<div class="d_content t_content" >
+			<div>danh sách kho</div>
+			<div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);width:90%;height:auto;overflow:auto;">
+				<div style="background-color:#8F8F80;overflow:auto;">
+					<div class="cell" style="width:10%;float:left;">tên kho</div>
+					<div class="cell" style="width:40%;float:left;">vị trí</div>
+					<div class="cell" style="width:50%;float:left;">thao tác</div>
+				</div>
+				<div style="clear:both;">
+					<div class="cell" style="width:10%;float:left;">1A</div>
+					<div class="cell" style="width:40%;float:left;">123 Nguyễn Tri Phương Q5</div>
+					<div class="cell" style="width:50%;float:left;">
+						<div class="btnrow" style="background-color:#06993c;">chi tiết</div>
+						<div class="btnrow" style="background-color:#3955e3;">sửa</div>
+					</div>
+						
+				</div>
+				<div style="clear:both;">
+					<div class="cell" style="width:10%;float:left;">2A</div>
+					<div class="cell" style="width:40%;float:left;">227 Nguyễn Văn Cừ Q5</div>
+					<div class="cell" style="width:50%;float:left;">
+						<div class="btnrow" style="background-color:#06993c;">chi tiết</div>
+						<div class="btnrow" style="background-color:#3955e3;">sửa</div>
+					</div>
+						
+				</div>
+				<div style="clear:both;">
+					<div class="cell" style="width:10%;float:left;">1B</div>
+					<div class="cell" style="width:40%;float:left;">Linh Trung, Thủ Đức</div>
+					<div class="cell" style="width:50%;float:left;">
+						<div class="btnrow" style="background-color:#06993c;">chi tiết</div>
+						<div class="btnrow" style="background-color:#3955e3;">sửa</div>
+					</div>
+						
+				</div>
+			</div>
+			
+			<div class="btnrow" style="background-color:#f02e41;clear:both;">thêm</div>	
+				
 		</div>
 	</div>
 </div>
 <script>
-
+	
 	var myvar;
 	function affect()
 	{
