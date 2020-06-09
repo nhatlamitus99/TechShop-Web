@@ -1,0 +1,186 @@
+.navigation-bar {
+    background-color: #f5f5f5;
+    color: #7d7d7d;
+}
+
+.navigation-bar a {
+    color: #7d7d7d;
+}
+
+.banner-content {
+    position: absolute;
+    top: 17%;
+    left: 60px;
+}
+
+.filter-area {
+    background-color: #f5f5f5;
+    height: 100%;
+}
+
+.filter-title {
+    font-size: 18px;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid #767676;
+    font-weight: 500;
+}
+
+.filter-brand > div,
+.filter-brand > button {
+    border-radius: 0;
+}
+
+.filter-brand .text {
+    color: #757575;
+}
+
+.filter-brand > button {
+    width: 40px;
+    background-color: #ffe600;
+    border: 0;
+}
+
+.btn-filter {
+    background-color: #ffe600;
+    border: 0;
+    width: 100%;
+    border-radius: 0px;
+    font-weight: 500;
+    height: 30px;
+    padding-top: 4px;
+}
+
+.filter-area .btn-clear {
+    border-radius: 0px;
+    height: 30px;
+    padding-top: 3px;
+}
+
+.filter-area .price {
+    border-radius: 0px;
+}
+
+.sort-area {
+    background-color: #f5f5f5;
+}
+
+.sort-area .right-area .dropdown > button {
+    width: 150px;
+}
+
+.sort-filter *:not(.dropdown-menu) {
+    height: 30px;
+    border-radius: 0px;
+}
+
+.sort-filter .text {
+    width: 140px;
+    padding-top: 2px;
+}
+
+.sort-filter button {
+    border: 1px solid #d7d7d7;
+    border-left: 0;
+    outline: none;
+}
+
+.sort-area .view-filter button {
+    outline: none;
+    border: 0;
+    background-color: inherit;
+    color: #7d7d7d;
+}
+
+.sort-area .view-filter button.active {
+    color: black;
+}
+
+.card-body {
+    padding: 0px 0px 8px 0px;
+}
+
+.card {
+    border: 0;
+}
+
+.card:hover {
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-category {
+    color: #a7a7a7;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #d7d7d7;
+    font-size: 16px;
+}
+
+.rating-stars {
+    background: #fff;
+    display: block;
+    line-height: 1;
+    overflow: hidden;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+.rating {
+    margin: 0px;
+    padding: 0px;
+}
+
+.rating > li {
+    display: inline-block;
+    margin: 0;
+    list-style: none;
+}
+
+.rating li .fa-star {
+    font-size: 16px;
+    color: #ffe600;
+    margin-right: 5px;
+}
+
+.card-product-name {
+    color: #0071ce;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.card-price {
+    font-weight: 500;
+    color: #ff0000;
+    margin-right: 5px;
+}
+
+.card-old-price {
+    text-decoration: line-through;
+    font-size: 13px;
+    font-style: italic;
+    color: #757575;
+}
+
+.card-body button {
+    padding: 0;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    background: none;
+    color: #a7a7a7;
+}
+
+.card-btn-wish {
+    margin-right: 10px;
+}
+
+.card-btn-wish.in-wish-list {
+    color: #ff0000;
+}
+
+.card-btn-wish:hover {
+    color: #ff0000;
+}
+
+.card-btn-cart:hover {
+    color: #ffe600;
+}

@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>FAVADA</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+            crossorigin="anonymous"
+        />
+        <!-- Import font Roboto -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Font Awesome -->
+        <script src="js/fontawesome-pro.js"></script>
+        <!-- Style -->
+        <link rel="stylesheet" href="css/category.css" />
+        <link rel="stylesheet" href="css/header.css" />
+        <link rel="stylesheet" href="css/footer.css" />
+    </head>
+
+    <body>
+        <!-- Begin Header -->
+        <header>
+            <div class="header-top">
+                <div class="container">
+                    <div
+                        class="ht-list row pt-1 pb-1 justify-content-end align-items-center"
+                    >
+                        <button
+                            onclick="location.href=''"
+                            type="button"
+                            class="ht-item"
+                        >
+                            <i class="far fa-shopping-bag mr-2"></i>
+                            KIỂM TRA ĐƠN HÀNG
+                        </button>
+                        <button
+                            onclick="location.href='login.html'"
+                            type="button"
+                            class="ht-item"
+                        >
+                            <i class="far fa-user-circle mr-2"></i>
+                            ĐĂNG NHẬP/ĐĂNG KÝ
+                        </button>
+                        <button
+                            onclick="location.href=''"
+                            type="button"
+                            class="ht-item d-none"
+                        >
+                            <i class="far fa-user-circle mr-2"></i>
+                            CAO NHƠN HƯNG
+                        </button>
+                        <div class="dropdown">
+                            <button
+                                class="ht-item d-none d-sm-block"
+                                data-toggle="dropdown"
+                            >
+                                <i class="far fa-globe mr-2"></i>
+                                CHANGE LANGUAGE
+                            </button>
+                            <!-- Popup to change language -->
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item">
+                                    <img
+                                        src="images/header/flag-icons/vn.svg"
+                                        alt=""
+                                    />
+                                    Tiếng Việt
+                                </a>
+                                <a class="dropdown-item">
+                                    <img
+                                        src="images/header/flag-icons/uk.svg"
+                                        alt=""
+                                    />
+                                    English
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-middle">
+                <div class="container">
+                    <div class="d-md-flex flex-md-row align-items-center">
+                        <div class="logo text-center mr-md-4">
+                            <div class="py-3">
+                                <a href="index.html">
+                                    <img
+                                        id="logo-img"
+                                        src="images/header/logo.png"
+                                        alt="logo"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-fill">
+                            <div class="input-group mr-lg-5 mr-3">
+                                <input
+                                    id="search-box"
+                                    class="form-control"
+                                    type="search"
+                                    placeholder="Tìm kiếm trên Favada"
+                                />
+                                <div class="input-group-append">
+                                    <button class="btn-search btn btn-warning">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button
+                                    onclick="location.href=''"
+                                    type="button"
+                                    class="btn-wish-list btn btn-outline-dark mr-lg-3 mr-2"
+                                >
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button
+                                    onclick="location.href=''"
+                                    type="button"
+                                    class="btn-shopping-cart btn btn-danger"
+                                >
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-bottom d-none d-md-block">
+                <div class="container">
+                    <div class="menu-bar row">
+                        <div class="menu-item dropdown mr-4">
+                            <button data-toggle="dropdown">
+                                <i class="fas fa-list mr-1"></i>
+                                DANH MỤC SẢN PHẨM
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">
+                                    LAPTOP
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    PC - LINH KIỆN
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    MÁN HÌNH
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    BÀN PHÍM
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    CHUỘT
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    TAI NGHE
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    GHẾ GAMING
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    THIẾT BỊ ÂM THANH
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    THIẾT BỊ MẠNG
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    THIẾT BỊ VĂN PHÒNG
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    PHỤ KIỆN
+                                </a>
+                            </div>
+                        </div>
+                        <div class="menu-item mr-4">
+                            <a href="#">
+                                HƯỚNG DẪN MUA HÀNG
+                            </a>
+                        </div>
+                        <div class="menu-item mr-4">
+                            <a href="#">
+                                QUY ĐỊNH BẢO HÀNH
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="#">
+                                MUA TRẢ GÓP
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End Header -->
+
+        <!-- Nav bar begin-->
+        <div class="navigation-bar py-1 d-none d-sm-block">
+            <div class="container">
+                <a href="./index.html">Trang chủ</a>
+                <i class="far fa-angle-right mx-2"></i>
+                <a>Laptop chính hãng</a>
+            </div>
+        </div>
+        <!-- Nav bar end -->
+        <br />
+
+        <div class="main-area">
+            <div class="filter-banner-section d-none d-sm-block">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 px-0 d-none d-lg-block">
+                            <div class="filter-area px-3 py-2">
+                                <div class="filter-title">
+                                    <i class="fas fa-filter mr-2"></i>
+                                    Lọc bởi
+                                </div>
+                                <div class="mt-3 mb-1">Thương hiệu</div>
+                                <div class="filter-brand btn-group w-100">
+                                    <div class="form-control text">
+                                        Bất kỳ
+                                    </div>
+                                    <button
+                                        type="button"
+                                        class="btn btn-warning dropdown-toggle dropdown-toggle-split"
+                                        id="dropdownMenuReference"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        data-reference="parent"
+                                    >
+                                        <span class="sr-only">
+                                            Toggle Dropdown
+                                        </span>
+                                    </button>
+                                    <div
+                                        class="dropdown-menu"
+                                        aria-labelledby="dropdownMenuReference"
+                                    >
+                                        <a class="dropdown-item" href="#">
+                                            LENOVO
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            ACER
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            ASUS
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            DELL
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="mt-2 mb-1">Giá thành</div>
+                                <div class="d-flex align-items-center">
+                                    <input
+                                        class="form-control price"
+                                        placeholder="Thấp nhất"
+                                    />
+                                    <i
+                                        class="far fa-horizontal-rule mx-1 px-1"
+                                    ></i>
+                                    <input
+                                        class="form-control price"
+                                        placeholder="Cao nhất"
+                                    />
+                                </div>
+                                <button class="btn-filter btn btn-warning mt-3">
+                                    Lọc
+                                </button>
+                                <button
+                                    class="btn-clear btn btn-outline-dark mt-3"
+                                >
+                                    Hủy
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 p-0 m-0 pl-lg-1">
+                            <div class="banner p-0 d-none d-md-block">
+                                <div class="container">
+                                    <img
+                                        class="w-100"
+                                        src="./images/bg-banner/bg-banner.jpg"
+                                        alt="Big banner"
+                                    />
+                                    <div class="banner-content">
+                                        <h5 style="font-weight: 400;">
+                                            Khuyến mãi
+                                            <span style="color: #ff0000;">
+                                                Black Friday
+                                            </span>
+                                        </h5>
+                                        <h2 style="font-weight: 400;">
+                                            Samsum Galaxy <br />
+                                            S9 | S9+
+                                        </h2>
+                                        <h5 style="font-weight: 400;">
+                                            Giá chỉ từ
+                                            <span
+                                                style="
+                                                    color: #ff0000;
+                                                    font-weight: 700;
+                                                "
+                                            >
+                                                18.990.000đ
+                                            </span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            .
+            <div class="list-product-section">
+                <div class="container">
+                    <div
+                        class="sort-area py-2 px-2 row justify-content-between align-items-center"
+                    >
+                        <div class="number-of-products mr-5">
+                            Tìm thấy <b>169</b> sản phẩm
+                        </div>
+                        <div class="right-area d-flex justify-content-between">
+                            <div class="sort mr-5 row align-items-center">
+                                <span class="mr-2">Sắp xếp theo:</span>
+                                <span class="sort-filter row">
+                                    <div class="form-control text">
+                                        Tên: A-Z
+                                    </div>
+                                    <button
+                                        class="dropdown-toggle dropdown-toggle-split"
+                                        id="dropdownMenuReference"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        data-reference="parent"
+                                    >
+                                        <span class="sr-only">
+                                            Toggle Dropdown
+                                        </span>
+                                    </button>
+                                    <div
+                                        class="dropdown-menu"
+                                        aria-labelledby="dropdownMenuReference"
+                                    >
+                                        <a class="dropdown-item" href="#">
+                                            Tên: A-Z
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            Tên: Z-A
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            Giá: Tăng dần
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            Giá: Giảm dần
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            Mới nhất
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            Cũ nhất
+                                        </a>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="view row align-items-center">
+                                <span class="mr-2">Xem:</span>
+                                <span class="view-filter row">
+                                    <button class="active">
+                                        <i class="fas fa-th"></i>
+                                    </button>
+                                    <button>
+                                        <i class="fas fa-list-ul"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card List begin -->
+                    <div class="row">
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/4.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="card-btn-wish in-wish-list"
+                                        >
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/3.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-wish"
+                                        >
+                                            <i class="fal fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/5.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-wish"
+                                        >
+                                            <i class="fal fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/6.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-wish"
+                                        >
+                                            <i class="fal fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/4.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="card-btn-wish in-wish-list"
+                                        >
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/3.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-wish"
+                                        >
+                                            <i class="fal fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/5.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-wish"
+                                        >
+                                            <i class="fal fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/6.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-wish"
+                                        >
+                                            <i class="fal fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/4.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="card-btn-wish in-wish-list"
+                                        >
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/3.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-wish"
+                                        >
+                                            <i class="fal fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/5.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-wish"
+                                        >
+                                            <i class="fal fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-4 col-6">
+                            <img
+                                class="card-img-top"
+                                src="images/featured-product/6.jpg"
+                                alt="Card image cap"
+                            />
+                            <div class="card-body card-category">
+                                Phụ kiện chơi game
+                            </div>
+                            <div class="card-body rating-stars">
+                                <ul class="rating">
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="far fa-star"></i></li>
+                                </ul>
+                            </div>
+                            <a href="" class="card-body card-product-name">
+                                Tay cầm chơi game Microsoft Xboxe One
+                            </a>
+                            <div class="card-body">
+                                <div class="d-flex align-items-end">
+                                    <div class="price-box">
+                                        <span class="card-price">780.000đ</span>
+                                        <span class="card-old-price">980.000đ</span>
+                                    </div>
+                                    <div
+                                        class="flex-fill d-flex justify-content-end"
+                                    >
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-wish"
+                                        >
+                                            <i class="fal fa-heart"></i>
+                                        </button>
+                                        <button
+                                            onclick="location.href=''"
+                                            type="button"
+                                            class="card-btn-cart"
+                                        >
+                                            <i class="fal fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card List end -->
+
+
+                    <br />
+                    <br />
+
+                    <nav aria-label="pagination-area">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled">
+                                <a class="page-link">Trước</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link">...</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">15</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Sau</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <!-- Footer begin -->
+        <footer>
+            <div class="container pt-3 pb-1">
+                <div class="row d-flex justify-content-between no-gutters">
+                    <div class="col-lg-6 pr-lg-5">
+                        <div>
+                            <h5>ĐỊA ĐIỂM MUA HÀNG</h5>
+                            <h2 class="line"></h2>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <dl style="list-style: none;">
+                                        <dt>
+                                            <i
+                                                class="fas fa-map-marker-alt mr-2"
+                                            ></i
+                                            >227 Đường Nguyễn Văn Cừ, phường 4,
+                                            quận 5, Hồ Chí Minh
+                                        </dt>
+                                        <dd>Thứ 2 - Thứ 6: Từ 9h - 20h</dd>
+                                        <dd>
+                                            Thứ 7: Từ 9h - 18h, Chủ Nhật: Từ 9h
+                                            - 16h
+                                        </dd>
+                                        <dt>
+                                            <i
+                                                class="fas fa-map-marker-alt mr-2"
+                                            ></i
+                                            >Khu phố 6, Phường Linh Trung, Quận
+                                            Thủ Đức, Hồ Chí Minh
+                                        </dt>
+                                        <dd>Thứ 2 - Thứ 7: Từ 9h - 18h</dd>
+                                        <dd>Chủ Nhật: Không hoạt động</dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h5>ĐIỆN THOẠI HỖ TRỢ</h5>
+                            <h2 class="line"></h2>
+                            <ul class="list-unstyled normal-text">
+                                <li>Mua hàng: <b>0843 969 899</b></li>
+                                <li>
+                                    Bảo hành: <b>0843 969 899 (Line: 8200)</b>
+                                </li>
+                                <li>
+                                    Kỹ thuật: <b>0843 969 899 (Line: 8345)</b>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 pr-lg-5">
+                        <h5>CHÍNH SÁCH</h5>
+                        <h2 class="line"></h2>
+                        <ul class="list-unstyled normal-text">
+                            <li>Chính sách bán hàng</li>
+                            <li>Chính sách bảo hành</li>
+                            <li>Chính sách bảo mật</li>
+                            <li>Tìm hiểu về trả góp</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3">
+                        <div>
+                            <h5>PHƯƠNG THỨC THANH TOÁN</h5>
+                            <h2 class="line"></h2>
+                            <img
+                                src="images/footer/visa.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img
+                                src="images/footer/maestro.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img
+                                src="images/footer/american-express.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img
+                                src="images/footer/jcb.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img
+                                src="images/footer/paypal.svg"
+                                width="54"
+                                class="mr-3"
+                            />
+                            <img src="images/footer/ebay.svg" width="54" />
+                        </div>
+                        <br />
+                        <br />
+                        <div>
+                            <h5>KẾT NỐI VỚI CHÚNG TÔI</h5>
+                            <h2 class="line"></h2>
+                            <img
+                                src="images/footer/facebook.svg"
+                                width="40"
+                                class="mr-3"
+                            />
+                            <img src="images/footer/youtube.svg" width="50" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="container p-0">
+                    <div class="row no-gutters">
+                        <span class="col-md-10 col-sm-9 text-right"
+                            >Powered by Team10 - 17CNTN</span
+                        >
+                        <span class="col-md-2 col-sm-3 text-right"
+                            >@Favada 2020</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer end -->
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
