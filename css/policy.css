@@ -1,0 +1,55 @@
+.navigation-bar {
+    background-color: #f5f5f5;
+    color: #7d7d7d;
+}
+
+.navigation-bar a {
+    color: #7d7d7d;
+}
+
+.main-area {
+    border: 1px solid #e5e5e5;
+    padding: 20px 0 20px 0;
+}
+
+.list-header {
+    list-style-type: decimal;
+}
+
+.list-header > li {
+    font-weight: 500;
+    font-size: 18px;
+    list-style-type: decimal;
+}
+
+.list-header > ol {
+    list-style: lower-latin;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.list-normal,
+.list-header > ol {
+    padding-left: 18px;
+    padding-right: 20px;
+}
+
+.list-normal > li {
+    font-weight: 400;
+    font-size: 16px;
+    list-style: disc;
+}
+
+/* 
+
+ol > li:not(.normal):before {
+
+}
+
+li ol > li:not(.normal) {
+    margin: 0;
+}
+
+li ol > li:not(.normal):before {
+    
+} */
