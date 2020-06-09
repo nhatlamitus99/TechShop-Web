@@ -68,19 +68,11 @@
     width: 150px;
 }
 
-.sort-filter *:not(.dropdown-menu) {
-    height: 30px;
-    border-radius: 0px;
-}
-
-.sort-filter .text {
+.sort-filter {
     width: 140px;
-    padding-top: 2px;
-}
-
-.sort-filter button {
-    border: 1px solid #d7d7d7;
-    border-left: 0;
+    border: 1px solid #a7a7a7;
+    border-radius: 0px;
+    background-color: white;
     outline: none;
 }
 
