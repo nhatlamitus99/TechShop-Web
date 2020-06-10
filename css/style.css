@@ -163,8 +163,11 @@ footer > div:nth-child(2) {
     display: block;
     line-height: 1;
     overflow: hidden;
-    margin-top: 8px;
-    margin-bottom: 5px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+.card .rating-stars {
+    margin-top: 10px;
 }
 .rating {
     margin: 0px;
@@ -175,10 +178,12 @@ footer > div:nth-child(2) {
     margin: 0;
     list-style: none;
 }
-.rating li .fa-star {
-    font-size: 16px;
+.rating li .fa-star, .rating li .fa-star-half-alt {
     color: #ffe600;
     margin-right: 5px;
+}
+.card .rating li .fa-star, .card .rating li .fa-star-half-alt {
+    font-size: 15px;
 }
 .card-product-name {
     color: #0071ce;
