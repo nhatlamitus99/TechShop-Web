@@ -1,0 +1,42 @@
+.main-area .form-control {
+    height: 55px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.is-registed {
+    font-size: 20px;
+}
+
+.is-registed a {
+    font-weight: 500;
+}
+
+.is-registed a:hover {
+    text-decoration: none;
+}
+
+input.form-control::-webkit-input-placeholder {
+    color: #C4C4C4;
+}
+
+button.finish-checkout {
+    padding: 10px 30px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.turn-back {
+    font-size: 18px;
+    color: black;
+}
+
+.turn-back:hover {
+    text-decoration: none;
+}
+
+select:invalid {
+    color: #C4C4C4;
+    /* display: none; */
+}
