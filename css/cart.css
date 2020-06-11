@@ -56,18 +56,14 @@ table.product-table,
     border-top: 0;
 }
 
-.btn-black {
-    background-color: black;
-    color: white;
-    padding: 10px 15px 10px 15px;
+.continue-shopping {
+    font-size: 20px;
     font-weight: 500;
-    border: 0;
+    color: black;
 }
 
-.btn-black:hover {
-    background-color: #ffe600;
-    color: black;
-    outline-style: none;
+.continue-shopping:hover {
+    text-decoration: none;
 }
 
 .cart-page-total {
@@ -100,6 +96,20 @@ table.product-table,
     padding: 20px 30px 20px 30px;
     outline: none;
     font-size: 18px;
+}
+
+.coupon-apply-btn {
+    background-color: black;
+    color: white;
+    padding: 10px 15px 10px 15px;
+    font-weight: 500;
+    border: 0;
+}
+
+.coupon-apply-btn:hover {
+    background-color: #ffe600;
+    color: black;
+    outline-style: none;
 }
 
 .total-cost>.total-text {
