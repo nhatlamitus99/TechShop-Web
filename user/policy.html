@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>FAVADA</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <!-- Import font Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <script src="js/fontawesome-pro.js"></script>
+    <!-- Style -->
+    <link rel="stylesheet" href="css/policy.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <!-- Begin Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="ht-list row pt-1 pb-1 justify-content-end align-items-center">
+                    <button onclick="location.href='./account.html'" type="button" class="ht-item">
+                        <i class="far fa-shopping-bag mr-2"></i>
+                        KIỂM TRA ĐƠN HÀNG
+                    </button>
+                    <button onclick="location.href='./login.html'" type="button" class="ht-item">
+                        <i class="far fa-user-circle mr-2"></i>
+                        ĐĂNG NHẬP/ĐĂNG KÝ
+                    </button>
+                    <button onclick="location.href=''" type="button" class="ht-item d-none">
+                        <i class="far fa-user-circle mr-2"></i>
+                        CAO NHƠN HƯNG
+                    </button>
+                    <div class="dropdown">
+                        <button class="ht-item d-none d-sm-block" data-toggle="dropdown">
+                            <i class="far fa-globe mr-2"></i>
+                            CHANGE LANGUAGE
+                        </button>
+                        <!-- Popup to change language -->
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">
+                                <img src="./images/header/flag-icons/vn.svg" alt="" />
+                                Tiếng Việt
+                            </a>
+                            <a class="dropdown-item">
+                                <img src="./images/header/flag-icons/uk.svg" alt="" />
+                                English
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-middle">
+            <div class="container">
+                <div class="d-md-flex flex-md-row align-items-center">
+                    <div class="logo text-center mr-md-4">
+                        <div class="py-3">
+                            <a href="./index.html">
+                                <img id="logo-img" src="images/header/logo.png" alt="logo" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-fill">
+                        <div class="input-group mr-lg-5 mr-3">
+                            <input id="search-box" class="form-control" type="search"
+                                placeholder="Tìm kiếm trên Favada" />
+                            <div class="input-group-append">
+                                <button class="btn-search btn btn-warning">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button onclick="location.href='./account.html'" type="button"
+                                class="btn-wish-list btn btn-outline-dark mr-lg-3 mr-2">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button onclick="location.href='./cart.html'" type="button"
+                                class="btn-shopping-cart btn btn-danger">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-bottom d-none d-md-block">
+            <div class="container">
+                <div class="menu-bar row">
+                    <div class="menu-item dropdown mr-4">
+                        <button data-toggle="dropdown">
+                            <i class="fas fa-list mr-1"></i>
+                            DANH MỤC SẢN PHẨM
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="./category.html">
+                                LAPTOP
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                PC - LINH KIỆN
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                MÁN HÌNH
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                BÀN PHÍM
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                CHUỘT
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                TAI NGHE
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                GHẾ GAMING
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                THIẾT BỊ ÂM THANH
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                THIẾT BỊ MẠNG
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                THIẾT BỊ VĂN PHÒNG
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                PHỤ KIỆN
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-item mr-4">
+                        <a href="./policy.html">
+                            HƯỚNG DẪN MUA HÀNG
+                        </a>
+                    </div>
+                    <div class="menu-item mr-4">
+                        <a href="./policy.html">
+                            QUY ĐỊNH BẢO HÀNH
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="./policy.html">
+                            MUA TRẢ GÓP
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Nav bar begin-->
+    <div class="breadcrumb p-1 d-none d-sm-block">
+        <div class="container">
+            <a href="./index.html">Trang chủ</a>
+            <i class="far fa-angle-right mx-2"></i>
+            <a>Chính sách bán hàng</a>
+        </div>
+    </div>
+    <!-- Nav bar end -->
+    <br />
+
+    <div class="container">
+        <div class="main-area">
+            <h4 class="text-center">CHÍNH SÁCH BÁN HÀNG</h4>
+            <ol class="list-header">
+                <li>Hàng hóa tại FAVADA</li>
+                <ul class="list-normal">
+                    <li>Tất cả sản phẩm đều là chính hãng, mới 100%.</li>
+                    <li>
+                        Hàng chính hãng được phân phối chính thức tại Việt
+                        Nam sẽ có tem/ phiếu bảo hành của nhà phân phối, có
+                        đầy đủ CO, CQ, giá đã bao gồm VAT, bảo hành tại hệ
+                        thống FAVADA, tại hãng hoặc trung tâm bảo hành ủy
+                        quyền của hãng, chính sách bảo hành theo quy định
+                        của hãng.
+                    </li>
+                    <li>
+                        Quà tặng kèm sản phẩm không được bảo hành hoặc bảo
+                        hành có điều kiện tại từng thời điểm mà FAVADA áp
+                        dụng riêng cho từng đơn hàng.
+                    </li>
+                </ul>
+
+                <li>Chính sách trả hàng tại FAVADA</li>
+                <ol>
+                    <li>Trả hàng hoàn lại tiền không mất phí</li>
+                    <ul class="list-normal">
+                        <li>
+                            FAVADA giao hàng không đúng theo đơn đặt hàng.
+                        </li>
+                        <li>
+                            FAVADA giao sản phẩm có dấu hiệu đã qua sử dụng
+                            hoặc không phải là hàng chính hãng.
+                        </li>
+                        <li>
+                            Sản phẩm còn trong thời hạn đổi mới nhưng không
+                            còn sản phẩm đổi và khách hàng không muốn đổi
+                            sang sản phẩm tương tự.
+                        </li>
+                    </ul>
+                    <li>
+                        Trả hàng hoàn lại tiền mất phí trong các trường hợp
+                        sau (chỉ áp dụng với laptop)
+                    </li>
+                    <ul class="list-normal">
+                        <li>
+                            Phí 5%/đơn giá sản phẩm trả: trong vòng 3 ngày
+                            và sản phẩm chưa qua sử dụng.
+                        </li>
+                        <li>
+                            Phí 10%/đơn giá sản phẩm trả: trong vòng 7 ngày
+                            và sản phẩm đã qua sử dụng.
+                        </li>
+                        <li>
+                            Sau khi kiểm tra: sản phẩm không bị trầy xước,
+                            còn đầy đủ chứng từ, nguyên đai, nguyên kiện như
+                            lúc nhận hàng, FAVADAsẽ hoàn tiền trong vòng 48h
+                            dưới hình thức tiền mặt hoặc chuyển khoản theo
+                            yêu cầu của khách hàng. Phí vận chuyển trả hàng
+                            sẽ do khách hàng chịu.
+                        </li>
+                    </ul>
+                    <li>Mua trả góp không được trả hàng</li>
+                    <ul class="list-normal">
+                        <li>
+                            Khách hàng không thể trả hàng sau khi đã thực
+                            hiện giao dịch trả góp online hoặc sau khi xác
+                            nhận chuyển đổi với ngân hàng khi mua trả góp
+                            trực tiếp tại cửa hàng.
+                        </li>
+                        <li>
+                            Trường hợp sản phẩm của quý khách mua trả góp bị
+                            lỗi nhưng FAVADA hết hàng đổi thì quý khách sẽ
+                            được đổi sang mã sản phẩm tương tự khác và bù
+                            trừ tiền chênh lệch (nếu có).
+                        </li>
+                    </ul>
+                </ol>
+
+                <li>Chính sách đổi mới sản phẩm bị lỗi</li>
+                <ul class="list-normal">
+                    <li>
+                        Khách hàng vui lòng kiểm tra hàng hóa trước khi
+                        thanh toán hoặc ngay khi nhận được hàng, FAVADA sẽ
+                        không chịu trách nhiệm đối với hàng hóa bị lỗi không
+                        phải do nhà sản xuất gây ra. Trong trường hợp sản
+                        phẩm của khách hàng bị hư hại trong quá trình vận
+                        chuyển, quý khách vui lòng từ chối nhận và báo ngay
+                        cho FAVADA để được đổi sản phẩm mới.
+                    </li>
+                    <li>
+                        Đổi mới hàng hóa trong vòng 7 ngày kể từ ngày giao
+                        hàng. Hàng hóa bị lỗi còn mới, nguyên vẹn (không bị
+                        trày xước, cấn, móp) , xác định là lỗi kỹ thuật do
+                        nhà sản xuất (có xác nhận của hãng), linh kiện, phụ
+                        kiện kèm theo còn mới, hộp/ thùng còn nguyên vẹn,
+                        đầy đủ chứng từ như khi FAVADA giao hàng, riêng màn
+                        hình phải từ 3 điểm chết trở lên mới được đổi mới.
+                    </li>
+                    <li>
+                        Mặt hàng áp dụng đổi mới: laptop, điện thoại, máy
+                        tính bảng, máy tính và linh kiện phụ kiện, điện máy,
+                        kỹ thuật số, ..., những mặt hàng liên quan về phần
+                        cứng.
+                    </li>
+                    <li>
+                        Những mặt hàng máy văn phòng liên quan đến mực in và
+                        các mặt hàng nằm trong danh sách không áp dụng đổi
+                        trả không được áp dụng chính sách đổi mới.
+                    </li>
+                </ul>
+
+                <li>Chính sách bảo hành</li>
+                <ul class="list-normal">
+                    <li>
+                        FAVADA bảo hành theo quy định của nhà sản xuất.
+                    </li>
+                    <li>
+                        Địa điểm bảo hành: Hệ thống FAVADA, tại hãng hoặc
+                        trung tâm bảo hành ủy quyền của hàng.
+                    </li>
+                    <li>
+                        Thời gian nhận và trả bảo hành: từ 3 đến 7 ngày hoặc
+                        lâu hơn trong từng trường hợp được hãng thông báo.
+                    </li>
+                    <li>
+                        Thời gian FAVADA tiếp nhận hàng bảo hành: sáng từ
+                        9h-12h, chiều từ 14h-17h
+                    </li>
+                </ul>
+
+                <li>Chính sách mua trả góp</li>
+                <ul class="list-normal">
+                    FAVADA trân trọng cảm ơn quý khách hàng đã ủng hộ trong
+                    suốt thời gian qua, chúng tôi sẽ cố gắng hoàn thiện mình
+                    hơn nữa, phát triển thêm nhiều ngành hàng, đa dạng sản
+                    phẩm chính hãng, để FAVADA luôn là điểm mua sắm tin cậy
+                    của mỗi gia đình. Chân thành cảm ơn! Vui lòng liên hệ
+                    0932771486 để được hỗ trợ thêm, nếu khách hàng cảm thấy
+                    không hài lòng với chính sách bán hàng của FAVADA
+                </ul>
+            </ol>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <!-- Footer begin -->
+    <footer>
+        <div class="container pt-3 pb-1">
+            <div class="row d-flex justify-content-between no-gutters">
+                <div class="col-lg-6 pr-lg-5">
+                    <div>
+                        <h5>ĐỊA ĐIỂM MUA HÀNG</h5>
+                        <h2 class="line"></h2>
+                        <ul class="list-unstyled">
+                            <li>
+                                <dl style="list-style: none;">
+                                    <dt>
+                                        <i class="fas fa-map-marker-alt mr-2"></i>227 Đường Nguyễn Văn Cừ, phường 4,
+                                        quận 5, Hồ Chí Minh
+                                    </dt>
+                                    <dd>Thứ 2 - Thứ 6: Từ 9h - 20h</dd>
+                                    <dd>
+                                        Thứ 7: Từ 9h - 18h, Chủ Nhật: Từ 9h
+                                        - 16h
+                                    </dd>
+                                    <dt>
+                                        <i class="fas fa-map-marker-alt mr-2"></i>Khu phố 6, Phường Linh Trung, Quận
+                                        Thủ Đức, Hồ Chí Minh
+                                    </dt>
+                                    <dd>Thứ 2 - Thứ 7: Từ 9h - 18h</dd>
+                                    <dd>Chủ Nhật: Không hoạt động</dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h5>ĐIỆN THOẠI HỖ TRỢ</h5>
+                        <h2 class="line"></h2>
+                        <ul class="list-unstyled normal-text">
+                            <li>Mua hàng: <b>0843 969 899</b></li>
+                            <li>
+                                Bảo hành: <b>0843 969 899 (Line: 8200)</b>
+                            </li>
+                            <li>
+                                Kỹ thuật: <b>0843 969 899 (Line: 8345)</b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 pr-lg-5">
+                    <h5>CHÍNH SÁCH</h5>
+                    <h2 class="line"></h2>
+                    <ul class="list-unstyled normal-text">
+                        <li>Chính sách bán hàng</li>
+                        <li>Chính sách bảo hành</li>
+                        <li>Chính sách bảo mật</li>
+                        <li>Tìm hiểu về trả góp</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <div>
+                        <h5>PHƯƠNG THỨC THANH TOÁN</h5>
+                        <h2 class="line"></h2>
+                        <img src="images/footer/visa.svg" width="54" class="mr-3" />
+                        <img src="images/footer/maestro.svg" width="54" class="mr-3" />
+                        <img src="images/footer/american-express.svg" width="54" class="mr-3" />
+                        <img src="images/footer/jcb.svg" width="54" class="mr-3" />
+                        <img src="images/footer/paypal.svg" width="54" class="mr-3" />
+                        <img src="images/footer/ebay.svg" width="54" />
+                    </div>
+                    <br />
+                    <br />
+                    <div>
+                        <h5>KẾT NỐI VỚI CHÚNG TÔI</h5>
+                        <h2 class="line"></h2>
+                        <img src="images/footer/facebook.svg" width="40" class="mr-3" />
+                        <img src="images/footer/youtube.svg" width="50" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="container p-0">
+                <div class="row no-gutters">
+                    <span class="col-md-10 col-sm-9 text-right">Powered by Team10 - 17CNTN</span>
+                    <span class="col-md-2 col-sm-3 text-right">@Favada 2020</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>FAVADA</title>
+    <title>FAVADA: Login or Register</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -14,21 +14,20 @@
     <!-- Font Awesome -->
     <script src="js/fontawesome-pro.js"></script>
     <!-- Style -->
-    <link rel="stylesheet" href="css/checkout.css" />
+    <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
-    <!-- Begin Header -->
     <header>
         <div class="header-top">
             <div class="container">
                 <div class="ht-list row pt-1 pb-1 justify-content-end align-items-center">
-                    <button onclick="location.href=''" type="button" class="ht-item">
+                    <button onclick="location.href='./account.html'" type="button" class="ht-item">
                         <i class="far fa-shopping-bag mr-2"></i>
                         KIỂM TRA ĐƠN HÀNG
                     </button>
-                    <button onclick="location.href='login.html'" type="button" class="ht-item">
+                    <button onclick="location.href='./login.html'" type="button" class="ht-item">
                         <i class="far fa-user-circle mr-2"></i>
                         ĐĂNG NHẬP/ĐĂNG KÝ
                     </button>
@@ -44,11 +43,11 @@
                         <!-- Popup to change language -->
                         <div class="dropdown-menu">
                             <a class="dropdown-item">
-                                <img src="images/header/flag-icons/vn.svg" alt="" />
+                                <img src="./images/header/flag-icons/vn.svg" alt="" />
                                 Tiếng Việt
                             </a>
                             <a class="dropdown-item">
-                                <img src="images/header/flag-icons/uk.svg" alt="" />
+                                <img src="./images/header/flag-icons/uk.svg" alt="" />
                                 English
                             </a>
                         </div>
@@ -62,7 +61,7 @@
                 <div class="d-md-flex flex-md-row align-items-center">
                     <div class="logo text-center mr-md-4">
                         <div class="py-3">
-                            <a href="index.html">
+                            <a href="./index.html">
                                 <img id="logo-img" src="images/header/logo.png" alt="logo" />
                             </a>
                         </div>
@@ -78,11 +77,12 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button onclick="location.href=''" type="button"
+                            <button onclick="location.href='./account.html'" type="button"
                                 class="btn-wish-list btn btn-outline-dark mr-lg-3 mr-2">
                                 <i class="far fa-heart"></i>
                             </button>
-                            <button onclick="location.href=''" type="button" class="btn-shopping-cart btn btn-danger">
+                            <button onclick="location.href='./cart.html'" type="button"
+                                class="btn-shopping-cart btn btn-danger">
                                 <i class="fas fa-shopping-cart"></i>
                             </button>
                         </div>
@@ -100,53 +100,53 @@
                             DANH MỤC SẢN PHẨM
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 LAPTOP
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 PC - LINH KIỆN
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 MÁN HÌNH
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 BÀN PHÍM
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 CHUỘT
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 TAI NGHE
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 GHẾ GAMING
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 THIẾT BỊ ÂM THANH
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 THIẾT BỊ MẠNG
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 THIẾT BỊ VĂN PHÒNG
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 PHỤ KIỆN
                             </a>
                         </div>
                     </div>
                     <div class="menu-item mr-4">
-                        <a href="#">
+                        <a href="./policy.html">
                             HƯỚNG DẪN MUA HÀNG
                         </a>
                     </div>
                     <div class="menu-item mr-4">
-                        <a href="#">
+                        <a href="./policy.html">
                             QUY ĐỊNH BẢO HÀNH
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a href="#">
+                        <a href="./policy.html">
                             MUA TRẢ GÓP
                         </a>
                     </div>
@@ -154,77 +154,86 @@
             </div>
         </div>
     </header>
-    <!-- End Header -->
 
-    <!-- Breadcrumb begin-->
-    <div class="breadcrumb p-1 d-none d-sm-block">
-        <div class="container">
-            <a href="./index.html">Trang chủ</a>
-            <i class="far fa-angle-right mx-2"></i>
-            <a href="./cart.html">Giỏ hàng</a>
-            <i class="far fa-angle-right mx-2"></i>
-            <a>Thông tin giao hàng</a>
+    <div class="container">
+        <div class="login-via">
+            <div class="login-via-title">ĐĂNG NHẬP BẰNG</div>
+            <button id="fb-login-btn" class="btn btn-primary">
+                Facebook
+            </button>
+            <br />
+            <button id="gg-login-btn" class="btn btn-danger">Google</button>
         </div>
-    </div>
-    <!-- Breadcrumb end -->
-    <br />
+        <h2><span>HOẶC</span></h2>
 
-    <div class="main-area">
-        <div class="container justify-content-center d-flex">
-            <div class="col-lg-8 col-md-12 px-0">
-                <div class="is-registed">
-                    Bạn đã có tài khoản? <a href="./login.html">Đăng nhập</a>
-                </div>
-                <form class="mt-4">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Họ và tên" required>
+        <div class="main-area row">
+            <div class="login-area col-md col-sm-12">
+                <form id="form-login">
+                    <div class="area-title">ĐĂNG NHẬP</div>
+                    <div class="input-row">
+                        <span class="icon-input">
+                            <i class="far fa-envelope"></i>
+                        </span>
+                        <input type="email" id="login-email" placeholder="Email của bạn" />
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-8">
-                            <input type="email" class="form-control" placeholder="Email" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <input type="text"" class=" form-control" placeholder="Số điện thoại" required>
-                        </div>
+                    <div class="input-row">
+                        <span class="icon-input">
+                            <i class="far fa-lock-alt"></i>
+                        </span>
+                        <input type="login-password" id="password" placeholder="Nhập mật khẩu" />
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Địa chỉ" required>
+                    <input id="btn-login" class="btn btn-outline-dark" type="submit" value="Đăng nhập" />
+                </form>
+                <a id="forget-pass" href="">Quên mật khẩu ?</a>
+            </div>
+
+            <div class="register-area col-md col-sm-12">
+                <form id="form-register">
+                    <div class="area-title">ĐĂNG KÝ</div>
+                    <div class="input-row">
+                        <span class="icon-input">
+                            <i class="far fa-user"></i>
+                        </span>
+                        <input type="text" id="fullname" placeholder="Họ và tên" />
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <select class="form-control" required>
-                                <option value="" selected hidden>Tỉnh/Thành phố</option>
-                                <option value="1">Bình Định</option>
-                                <option value="2">Phú Yên</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <select class="form-control" required>
-                                <option value="" selected hidden>Quận/Huyện</option>
-                                <option value="1">Quy Nhơn</option>
-                                <option value="2">Phù Cát</option>
-                            </select>
-                        </div>
+                    <div class="input-row">
+                        <span class="icon-input">
+                            <i class="far fa-user-circle"></i>
+                        </span>
+                        <input type="text" id="username" placeholder="User name" />
                     </div>
-                    <div class="form-row px-1 mt-3 justify-content-between align-items-center">
-                        <a class="turn-back py-2" href="./cart.html">
-                            <i class="far fa-angle-left mr-1"></i>
-                            Giỏ hàng
-                        </a>
-                        <button type="submit" class="finish-checkout btn btn-dark">
-                            Xác nhận đặt hàng
-                        </button>
+                    <div class="input-row">
+                        <span class="icon-input">
+                            <i class="far fa-envelope"></i>
+                        </span>
+                        <input type="email" id="email" placeholder="Email của bạn" />
                     </div>
+                    <div class="input-row">
+                        <span class="icon-input input-group-addon">
+                            <i class="far fa-phone-alt"></i>
+                        </span>
+                        <input type="text" id="phone" placeholder="Số điện thoại của bạn" />
+                    </div>
+                    <div class="input-row">
+                        <span class="icon-input">
+                            <i class="far fa-lock-alt"></i>
+                        </span>
+                        <input type="password" id="signup-password" placeholder="Mật khẩu" />
+                    </div>
+                    <div class="input-row">
+                        <span class="icon-input">
+                            <i class="far fa-lock-alt"></i>
+                        </span>
+                        <input type="password" id="password-again" placeholder="Nhập lại mật khẩu" />
+                    </div>
+
+                    <input id="btn-register" class="btn btn-outline-dark" type="submit" value="Đăng ký" />
                 </form>
             </div>
         </div>
     </div>
-
-
     <br />
     <br />
-    <br />
-    <!-- Footer begin -->
     <footer>
         <div class="container pt-3 pb-1">
             <div class="row d-flex justify-content-between no-gutters">
@@ -310,7 +319,6 @@
             </div>
         </div>
     </footer>
-    <!-- Footer end -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

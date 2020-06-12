@@ -24,11 +24,11 @@
         <div class="header-top">
             <div class="container">
                 <div class="ht-list row pt-1 pb-1 justify-content-end align-items-center">
-                    <button onclick="location.href=''" type="button" class="ht-item">
+                    <button onclick="location.href='./account.html'" type="button" class="ht-item">
                         <i class="far fa-shopping-bag mr-2"></i>
                         KIỂM TRA ĐƠN HÀNG
                     </button>
-                    <button onclick="location.href='login.html'" type="button" class="ht-item">
+                    <button onclick="location.href='./login.html'" type="button" class="ht-item">
                         <i class="far fa-user-circle mr-2"></i>
                         ĐĂNG NHẬP/ĐĂNG KÝ
                     </button>
@@ -44,11 +44,11 @@
                         <!-- Popup to change language -->
                         <div class="dropdown-menu">
                             <a class="dropdown-item">
-                                <img src="images/header/flag-icons/vn.svg" alt="" />
+                                <img src="./images/header/flag-icons/vn.svg" alt="" />
                                 Tiếng Việt
                             </a>
                             <a class="dropdown-item">
-                                <img src="images/header/flag-icons/uk.svg" alt="" />
+                                <img src="./images/header/flag-icons/uk.svg" alt="" />
                                 English
                             </a>
                         </div>
@@ -62,7 +62,7 @@
                 <div class="d-md-flex flex-md-row align-items-center">
                     <div class="logo text-center mr-md-4">
                         <div class="py-3">
-                            <a href="index.html">
+                            <a href="./index.html">
                                 <img id="logo-img" src="images/header/logo.png" alt="logo" />
                             </a>
                         </div>
@@ -78,11 +78,12 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button onclick="location.href=''" type="button"
+                            <button onclick="location.href='./account.html'" type="button"
                                 class="btn-wish-list btn btn-outline-dark mr-lg-3 mr-2">
                                 <i class="far fa-heart"></i>
                             </button>
-                            <button onclick="location.href=''" type="button" class="btn-shopping-cart btn btn-danger">
+                            <button onclick="location.href='./cart.html'" type="button"
+                                class="btn-shopping-cart btn btn-danger">
                                 <i class="fas fa-shopping-cart"></i>
                             </button>
                         </div>
@@ -100,53 +101,53 @@
                             DANH MỤC SẢN PHẨM
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 LAPTOP
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 PC - LINH KIỆN
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 MÁN HÌNH
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 BÀN PHÍM
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 CHUỘT
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 TAI NGHE
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 GHẾ GAMING
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 THIẾT BỊ ÂM THANH
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 THIẾT BỊ MẠNG
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 THIẾT BỊ VĂN PHÒNG
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="./category.html">
                                 PHỤ KIỆN
                             </a>
                         </div>
                     </div>
                     <div class="menu-item mr-4">
-                        <a href="#">
+                        <a href="./policy.html">
                             HƯỚNG DẪN MUA HÀNG
                         </a>
                     </div>
                     <div class="menu-item mr-4">
-                        <a href="#">
+                        <a href="./policy.html">
                             QUY ĐỊNH BẢO HÀNH
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a href="#">
+                        <a href="./policy.html">
                             MUA TRẢ GÓP
                         </a>
                     </div>
@@ -182,12 +183,12 @@
                             </span>
                         </div>
                         <a class="nav-item" id="acccount-infor-tab" data-toggle="tab" href="#account-infor" role="tab"
-                            aria-selected="true">
+                            aria-selected="false">
                             <i class="fas fa-user icon"></i>
                             Thông tin tài khoản
                         </a>
                         <a class="nav-item" id="shopping-list-tab" data-toggle="tab" href="#order-history" role="tab"
-                            aria-selected="false">
+                            aria-selected="true">
                             <i class="fas fa-list-alt icon"></i>
                             Quản lý đơn hàng
                         </a>
@@ -330,7 +331,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane fade" id="order-history" role="tabpanel">
+                        <div class="tab-pane fade active show" id="order-history" role="tabpanel">
                             <h5>Quản lý đơn hàng</h5>
                             <div class="table-responsive">
                                 <table class="order-table">
@@ -450,7 +451,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade active show" id="my-wishlist" role="tabpanel">
+                        <div class="tab-pane fade" id="my-wishlist" role="tabpanel">
                             <h5>Sản phẩm yêu thích</h5>
                             <div class="table-responsive">
                                 <table>
@@ -474,7 +475,7 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <a href="" class="card-body card-product-name">
+                                                    <a href="product.html" class="card-body card-product-name">
                                                         Tay cầm chơi game Microsoft Xbox One
                                                     </a>
                                                     <div class="card-body mt-auto d-flex align-items-end">
@@ -519,7 +520,7 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <a href="" class="card-body card-product-name">
+                                                    <a href="product.html" class="card-body card-product-name">
                                                         Tay cầm chơi game Microsoft Xbox One
                                                     </a>
                                                     <div class="card-body mt-auto d-flex align-items-end">
@@ -564,7 +565,7 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <a href="" class="card-body card-product-name">
+                                                    <a href="product.html" class="card-body card-product-name">
                                                         Tay cầm chơi game Microsoft Xbox One
                                                     </a>
                                                     <div class="card-body mt-auto d-flex align-items-end">
@@ -593,7 +594,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                         <div class="tab-pane fade" id="checkout-infor" role="tabpanel">
                             <h5>Thông tin thanh toán</h5>
@@ -603,8 +603,9 @@
                                 </div>
                                 <div class="my-3">Lưu lại thông tin thanh toán giúp bạn đặt hàng nhanh chóng và dễ dàng
                                     hơn</div>
-                                <div class="mb-3 mt-4">
-                                    <button type="submit" class="btn-continue-shopping">Tiếp tục mua sắm</button>
+                                <div class="mb-5 mt-4">
+                                    <button type="submit" class="btn-continue-shopping"
+                                        onclick="location.href='./index.html'">Tiếp tục mua sắm</button>
                                 </div>
                             </div>
                         </div>
