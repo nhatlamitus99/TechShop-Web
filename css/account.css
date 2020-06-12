@@ -1,0 +1,133 @@
+#side-bar {
+    background-color: #f8f8f8;
+}
+
+.user-name {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.nav-item {
+    padding: 10px;
+    padding-right: 2px;
+}
+
+.nav-item .icon {
+    margin-right: 5px;
+}
+
+a.nav-item .icon {
+    width: 48px;
+    color: #858585;
+}
+
+a.nav-item {
+    color: #555555;
+}
+
+a.nav-item:hover {
+    text-decoration: none;
+    background-color: #efefef;
+    color: black;
+    font-weight: 500;
+}
+
+#content h5 {
+    margin-bottom: 15px;
+}
+
+#account-infor form {
+    border: 1px solid #c4c4c4;
+    border-color: #d3d3d3;
+    padding: 20px 15px;
+}
+
+#account-infor .form-row {
+    margin-left: 0;
+}
+
+#account-infor .label {
+    margin-bottom: 1rem;
+}
+
+#account-infor .btn-send-code {
+    border: 0;
+    border-radius: 0px 5px 5px 0px;
+    outline-style: none;
+    background-color: #ffe600;
+    margin-left: -5px;
+    font-weight: 500;
+}
+
+#account-infor .btn-update {
+    margin-left: 5px;
+    font-weight: 500;
+    padding: 7px 20px;
+    border: 0;
+    border-radius: 5px;
+    outline-style: none;
+    background-color: #ffe600;
+}
+
+#account-infor .btn-send-code:hover,
+#account-infor .btn-update:hover {
+    color: white;
+    background-color: black;
+}
+
+#account-infor input.form-control {
+    color: black;
+}
+
+#account-infor input.form-control::-webkit-input-placeholder {
+    color: #C4C4C4;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.order-table td,
+.order-table th {
+    border: 1px solid #e5e5e5;
+    padding: 20px 10px;
+    text-align: center;
+}
+
+.order-table .order-product {
+    width: 330px;
+}
+
+.empty-board {
+    border: 1px solid #c4c4c4;
+}
+
+.empty-board .btn-continue-shopping {
+    margin-left: 5px;
+    font-weight: 500;
+    padding: 7px 20px;
+    border: 0;
+    outline-style: none;
+    background-color: #ffe600;
+}
+
+.empty-board .btn-continue-shopping:hover {
+    color: white;
+    background-color: black;
+}
+
+#my-wishlist tr {
+    border: 1px solid #e5e5e5;
+}
+
+#my-wishlist td.product-image {
+    width: 200px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#my-wishlist .fa-heart {
+    color: #ff0000;
+}
