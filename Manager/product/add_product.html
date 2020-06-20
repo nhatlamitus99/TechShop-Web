@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FAVADA MANAGER</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="style/button.css" >
+	<link rel="stylesheet" href="style/style.css" >
+	<link rel="icon" href="img/icon.png">
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<style>
+input[type="text"]
+{
+	width:400px;
+	margin-bottom:30px;
+}
+</style>
+
+</head>
+
+<body>
+<div style="height:100%;">
+	<div class="d_logo t_logo">
+			<img src="img/logo.png"></img>
+			</div>
+	<div id="nav" class="d_navi t_navi" >
+		<ul class="nav flex-column">
+			<li class="nav-item">
+				<img class="icon" src="img/nav_bill.png"></img>
+				<p class="nav-link active" href="#">Đơn hàng</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" style="float:left;" href="bill.html">• Đơn hàng mới</a>
+				<div class="reddot">1</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" style="float:left;" href="#">• Đơn hàng đang xử lý</a>
+				<div class="reddot">8</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="#">• Đơn hàng đã hủy</a>
+			</li>
+			
+			<div style="" class="divider"></div>
+			<!--------------------------------------------->
+			<li class="nav-item">
+				<img class="icon" src="img/nav_product.png"></img>
+				<p class="nav-link active">Hàng hóa</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="store.html">• Quản lý kho hàng</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="#">• Quản lý danh mục</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="product.html">• Quản lý hàng hóa</a>
+			</li>
+			
+			
+			<div style="" class="divider"></div>
+			<!--------------------------------------------->
+			<li class="nav-item">
+				<img class="icon" src="img/nav_stat.png"></img>
+				<p class="nav-link" href="#">Thống kê</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="report.html">• Báo cáo</a>
+			</li>
+			<li class="nav-item">
+				<img class="icon" src="img/nav_acc.png"></img>
+				<p class="nav-link" href="#">Nhân sự</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>
+			</ul>
+	</div>
+	<!--<div valign="bottom" class="footer">powered by TEAM10</div>	-->
+	<div style="height:100vh;width:500px;float:left;">
+		<div class="d_header t_header">
+			
+			<!-- Search form -->
+			<input style="top:15%;position:relative;height:70%;float:left;width:40%;margin-left:2%;" class="form-control" type="text" placeholder="Search" aria-label="Search"></input>
+			
+			<!-- button-->
+			
+			<button style="float:left;height:70%;width:10%;top:15%;position:relative;font-size:1vw;line-height:1vw;" class="btn btn-search" type="button"> Search</button>
+			
+			<div id="id">
+				<div style="font-size:15px;height:20px;top:0%;font-weight:bold;position:relative;top:0%;">Hoàng Đức</div>
+				<div style="font-size:12px;height:10px;font-weight:normal;">Nhân viên</div>
+			</div>
+	
+			<img class="t_avt d_avt" onclick="option()" style="" src="img/avt.png"></img>
+			<div id="opt" style="visibility:hidden;width:15%;background-color:#DDDDDD;float:right;clear:both;top:100%;right:0%;position:absolute;">
+				<div>tài khoản</div>
+				<div style="width:100%;border-top-style:solid;border-width:1px;"></div>
+				<div>đăng xuất</div>
+			</div>
+		</div>
+		<div class="d_content t_content" >
+			<div style="color:#4c4d4f;padding-left:30%;padding-right:30%;height:300px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:5%;clear:both;width:auto;border-color:#AAAAAA;border-width:1px;height:auto;">
+				<div>tên hàng hóa:</div><input type="text"></input>
+				<div>nhà sản xuất:</div><input type="text"></input>
+				<div>thông số kỹ thuật:</div><input type="text"></input>
+				<div>giá bán:</div><input type="text"></input>
+				<div>danh mục:</div>
+				<select style="margin-bottom:30px;width:400px;" name="cars" id="cars">
+					<option value="1">máy tính</option>
+					<option value="2">laptop</option>
+					<option value="3">điện thoại</option>
+					<option value="4">tai nghe</option>
+					<option value="5">ổ cứng</option>
+					<option value="6">thiết bị mạng</option>
+					<option value="7">ram</option>
+					<option value="8">chip</option>
+				</select>
+				<div>hình ảnh:</div><input multiple type="file"></input>
+				
+				<div style="margin-top:10px;width:100px;height:40px;border-radius:25px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);line-height:40px;text-align:center;color:white;clear:both;background-color:#06993c;" >hoàn tất</div>
+			</div>
+			</div>	
+		</div>
+</div>
+<script src="script/navigate.js"></script>
+<script>
+	
+	for (var i=0;i<5;i++){
+	var x=document.getElementById("row");
+	var cln = x.cloneNode(true);
+	x.parentElement.appendChild(cln);
+	}
+	var myvar;
+	function affect()
+	{
+		var x= document.getElementById("opt").style.opacity;
+		if (parseFloat(x)==1)
+		{
+			clearInterval(myvar);
+			return;
+		}
+		document.getElementById("opt").style.opacity= parseFloat(x)+0.1;
+	}
+	function no()
+	{
+		alert(1);
+	}
+	function option()
+	{
+		if (document.getElementById("opt").style.visibility != "hidden")
+		{
+			document.getElementById("opt").style.visibility = "hidden";
+		}else{
+			document.getElementById("opt").style.opacity=0.0;		
+			document.getElementById("opt").style.visibility = "visible";
+			myvar=setInterval(affect,50);
+		}
+	}
+</script>
+</body>	
+</html>
