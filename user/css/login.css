@@ -1,0 +1,95 @@
+.icon-input {
+    color: #757575;
+}
+
+.login-via {
+    margin-top: 60px;
+    text-align: center;
+    height: 200px;
+}
+
+.login-via-title {
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+#fb-login-btn {
+    background-color: #3b5998;
+}
+
+#gg-login-btn {
+    background-color: #db4437;
+}
+
+.login-via button.btn {
+    width: 300px;
+    height: 35px;
+    text-align: left;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+h2 {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #cacaca;
+    text-align: center;
+}
+
+h2 span {
+    font-weight: 400;
+    font-size: 16px;
+    position: absolute;
+    transform: translateX(-50%);
+    top: -10px;
+    padding: 0 15px;
+    background: #fff;
+    color: #6a6a6a;
+}
+
+.main-area {
+    margin: 0;
+}
+
+.login-area,
+.register-area {
+    text-align: center;
+}
+
+.area-title {
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.input-row {
+    border-radius: 5px;
+    border: 1px solid #b8b8b8;
+    width: 300px;
+    margin-bottom: 15px;
+    height: 40px;
+    display: inline-block;
+}
+
+.icon-input > .fa-lock-alt {
+    margin-left: 2px;
+}
+
+.main-area input:not(#btn-login):not(#btn-register) {
+    border: 0;
+    outline: none;
+    height: 100%;
+    width: 250px;
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+#btn-login,
+#btn-register {
+    height: 40px;
+    width: 300px;
+    margin-bottom: 10px;
+    margin-left: -1px;
+}

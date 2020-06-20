@@ -1,0 +1,139 @@
+table.product-table,
+.cart-page-total table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.product-table thead {
+    background-color: #f3f3f3;
+}
+
+.product-table td,
+.product-table th {
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    text-align: center;
+}
+
+.product-infor {
+    min-width: 180px;
+}
+
+.product-quantity {
+    min-width: 100px;
+}
+
+.product-remove {
+    min-width: 60px;
+}
+
+.product-remove a {
+    color: #757575;
+}
+
+.product-price,
+.product-subtotal {
+    font-weight: 500;
+}
+
+.product-quantity .cart-plus-minus-box {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #757575;
+    border-right: 0;
+    outline: none;
+}
+
+.product-quantity .qtybutton {
+    border: 1px solid #757575;
+    padding: 0 5px;
+    height: 20px;
+    outline: none;
+    background-color: inherit;
+}
+
+.product-quantity .qtybutton.dec {
+    border-top: 0;
+}
+
+.continue-shopping {
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+}
+
+.continue-shopping:hover {
+    text-decoration: none;
+}
+
+.cart-page-total {
+    min-width: 300px;
+}
+
+.cart-page-total tr {
+    border: 1px solid #e5e5e5;
+}
+
+.cart-page-total tr:not(.coupon-apply-area) td {
+    padding: 30px;
+    padding-right: 0px;
+}
+
+.cart-page-total .li-head {
+    font-size: 18px;
+}
+
+.cart-page-total .money {
+    font-weight: 700;
+    font-size: 20px;
+    width: 40%;
+}
+
+.coupon-apply-text input {
+    height: 50px;
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    padding: 20px 30px 20px 30px;
+    outline: none;
+    font-size: 18px;
+}
+
+.coupon-apply-btn {
+    background-color: black;
+    color: white;
+    padding: 10px 15px 10px 15px;
+    font-weight: 500;
+    border: 0;
+}
+
+.coupon-apply-btn:hover {
+    background-color: #ffe600;
+    color: black;
+    outline-style: none;
+}
+
+.total-cost>.total-text {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 20px 30px 20px 30px;
+}
+
+.total-cost>.total-money {
+    color: #ff0000;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 20px 30px 20px 0px;
+}
+
+.proceed-checkout-btn {
+    padding: 8px 40px 8px 40px;
+    background-color: #ffe600;
+    border: none;
+    font-weight: 500;
+}
+
+.proceed-checkout-btn:hover {
+    background-color: black;
+    color: white;
+    outline-style: none;
+}

@@ -1,0 +1,59 @@
+.slider-content {
+    position: absolute;
+    top: 20%;
+    left: 60px;
+}
+
+.slider-content .btn-shopnow {
+    background-color: #ffe600;
+    border: 0px;
+    width: 120px;
+    border-radius: 0px;
+    font-weight: 500;
+}
+
+.section-title {
+    background-color: #f5f5f5;
+}
+
+.section-title-highlight {
+    background-color: #ffe600;
+    display: inline-block;
+    padding: 10px 10px 10px 12px;
+    font-weight: 500;
+    position: relative;
+}
+
+.section-title-highlight:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: -25px;
+    border-top: 22px solid transparent;
+    border-bottom: 22px solid transparent;
+    border-left: 25px solid #ffe600;
+}
+
+.list-choice .text {
+    color: #757575;
+    font-size: 18px;
+    border-bottom: 0.5px solid #c0c0c0;
+    padding-bottom: 5px;
+}
+
+.list-choice .card * {
+    font-size: 15px;
+}
+
+.list-choice .card .fa-star {
+    font-size: 13px;
+}
+
+.list-choice .line {
+    z-index: 20;
+    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+
+.big-banner .container {
+    position: relative;
+}

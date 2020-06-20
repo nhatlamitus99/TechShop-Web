@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>FAVADA</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <!-- Import font Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <script src="js/fontawesome-pro.js"></script>
+    <!-- Style -->
+    <link rel="stylesheet" href="css/cart.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <!-- Begin Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="ht-list row pt-1 pb-1 justify-content-end align-items-center">
+                    <button onclick="location.href='./account.html'" type="button" class="ht-item">
+                        <i class="far fa-shopping-bag mr-2"></i>
+                        KIỂM TRA ĐƠN HÀNG
+                    </button>
+                    <button onclick="location.href='./login.html'" type="button" class="ht-item">
+                        <i class="far fa-user-circle mr-2"></i>
+                        ĐĂNG NHẬP/ĐĂNG KÝ
+                    </button>
+                    <button onclick="location.href=''" type="button" class="ht-item d-none">
+                        <i class="far fa-user-circle mr-2"></i>
+                        CAO NHƠN HƯNG
+                    </button>
+                    <div class="dropdown">
+                        <button class="ht-item d-none d-sm-block" data-toggle="dropdown">
+                            <i class="far fa-globe mr-2"></i>
+                            CHANGE LANGUAGE
+                        </button>
+                        <!-- Popup to change language -->
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">
+                                <img src="./images/header/flag-icons/vn.svg" alt="" />
+                                Tiếng Việt
+                            </a>
+                            <a class="dropdown-item">
+                                <img src="./images/header/flag-icons/uk.svg" alt="" />
+                                English
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-middle">
+            <div class="container">
+                <div class="d-md-flex flex-md-row align-items-center">
+                    <div class="logo text-center mr-md-4">
+                        <div class="py-3">
+                            <a href="./index.html">
+                                <img id="logo-img" src="images/header/logo.png" alt="logo" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-fill">
+                        <div class="input-group mr-lg-5 mr-3">
+                            <input id="search-box" class="form-control" type="search"
+                                placeholder="Tìm kiếm trên Favada" />
+                            <div class="input-group-append">
+                                <button class="btn-search btn btn-warning">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button onclick="location.href='./account.html'" type="button"
+                                class="btn-wish-list btn btn-outline-dark mr-lg-3 mr-2">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button onclick="location.href='./cart.html'" type="button"
+                                class="btn-shopping-cart btn btn-danger">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-bottom d-none d-md-block">
+            <div class="container">
+                <div class="menu-bar row">
+                    <div class="menu-item dropdown mr-4">
+                        <button data-toggle="dropdown">
+                            <i class="fas fa-list mr-1"></i>
+                            DANH MỤC SẢN PHẨM
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="./category.html">
+                                LAPTOP
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                PC - LINH KIỆN
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                MÁN HÌNH
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                BÀN PHÍM
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                CHUỘT
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                TAI NGHE
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                GHẾ GAMING
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                THIẾT BỊ ÂM THANH
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                THIẾT BỊ MẠNG
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                THIẾT BỊ VĂN PHÒNG
+                            </a>
+                            <a class="dropdown-item" href="./category.html">
+                                PHỤ KIỆN
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-item mr-4">
+                        <a href="./policy.html">
+                            HƯỚNG DẪN MUA HÀNG
+                        </a>
+                    </div>
+                    <div class="menu-item mr-4">
+                        <a href="./policy.html">
+                            QUY ĐỊNH BẢO HÀNH
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="./policy.html">
+                            MUA TRẢ GÓP
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Breadcrumb begin-->
+    <div class="breadcrumb p-1 d-none d-sm-block">
+        <div class="container">
+            <a href="./index.html">Trang chủ</a>
+            <i class="far fa-angle-right mx-2"></i>
+            <a>Giỏ hàng</a>
+        </div>
+    </div>
+    <!-- Breadcrumb end -->
+    <br />
+
+    <div class="shopping-cart-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 px-0">
+                    <form>
+                        <div class="table-responsive">
+                            <table class="product-table">
+                                <thead>
+                                    <tr>
+                                        <th class="product-remove">Xóa</th>
+                                        <th class="product-thumbnail">Sản phẩm</th>
+                                        <th class="product-infor">Mô tả</th>
+                                        <th class="product-price">Đơn giá</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                        <th class="product-subtotal">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="product-remove">
+                                            <a href="#"><i class="far fa-trash-alt"></i></a>
+                                        </td>
+                                        <td class="product-thumbnail">
+                                            <a href="#">
+                                                <img src="images/product/small-size/1.jpg" alt="Li's Product Image" />
+                                            </a>
+                                        </td>
+                                        <td class="product-infor">
+                                            Laptop ASUS ROG Strix G G531GD-AL034T (i7-9750H)
+                                        </td>
+                                        <td class="product-price">
+                                            22.990.000đ
+                                        </td>
+                                        <td class="product-quantity">
+                                            <div class="row justify-content-center">
+                                                <input class="cart-plus-minus-box" value="1" type="text" readonly />
+                                                <div class="">
+                                                    <div class="inc qtybutton">
+                                                        <i class="fa fa-angle-up"></i>
+                                                    </div>
+                                                    <div class="dec qtybutton">
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal">
+                                            <span class="amount">22.990.000đ</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="product-remove">
+                                            <a href="#"><i class="far fa-trash-alt"></i></a>
+                                        </td>
+                                        <td class="product-thumbnail">
+                                            <a href="#">
+                                                <img src="images/product/small-size/1.jpg" alt="Li's Product Image" />
+                                            </a>
+                                        </td>
+                                        <td class="product-infor">
+                                            Laptop ASUS ROG Strix G G531GD-AL034T (i7-9750H)
+                                        </td>
+                                        <td class="product-price">
+                                            22.990.000đ
+                                        </td>
+                                        <td class="product-quantity">
+                                            <div class="row justify-content-center">
+                                                <input class="cart-plus-minus-box" value="1" type="text" readonly />
+                                                <div class="">
+                                                    <div class="inc qtybutton">
+                                                        <i class="fa fa-angle-up"></i>
+                                                    </div>
+                                                    <div class="dec qtybutton">
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal">
+                                            <span class="amount">22.990.000đ</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="product-remove">
+                                            <a href="#"><i class="far fa-trash-alt"></i></a>
+                                        </td>
+                                        <td class="product-thumbnail">
+                                            <a href="#">
+                                                <img src="images/product/small-size/1.jpg" alt="Li's Product Image" />
+                                            </a>
+                                        </td>
+                                        <td class="product-infor">
+                                            Laptop ASUS ROG Strix G G531GD-AL034T (i7-9750H)
+                                        </td>
+                                        <td class="product-price">
+                                            22.990.000đ
+                                        </td>
+                                        <td class="product-quantity">
+                                            <div class="row justify-content-center">
+                                                <input class="cart-plus-minus-box" value="1" type="text" readonly />
+                                                <div class="">
+                                                    <div class="inc qtybutton">
+                                                        <i class="fa fa-angle-up"></i>
+                                                    </div>
+                                                    <div class="dec qtybutton">
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal">
+                                            <span class="amount">22.990.000đ</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <a class="continue-shopping py-2" href="./index.html">
+                            <i class="far fa-angle-left mr-2"></i>
+                            Tiếp tục mua sắm
+                        </a>
+                        <div class="row mt-sm-3">
+                            <div class="col-md-5 cart-page-total ml-auto px-0">
+                                <h3>Tổng đơn hàng</h3>
+                                <table>
+                                    <tr>
+                                        <td class="li-head">Tạm tính:</td>
+                                        <td class="temp-total money">68.970.000đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="li-head">Phí giao hàng</td>
+                                        <td class="shipping-cost money">21.000đ</td>
+                                    </tr>
+                                </table>
+                                <div class="coupon-apply-area row">
+                                    <div class="coupon-apply-text col-9 px-0"><input type="text"
+                                            placeholder="Nhập mã giảm giá" /></div>
+                                    <button class="coupon-apply-btn col-3 px-0">Áp dụng</button>
+                                </div>
+                                <div class="total-cost row">
+                                    <div class="total-text col-7">Tổng cộng:</div>
+                                    <div class="total-money col-5">68.991.000đ</div>
+                                </div>
+                                <button class="proceed-checkout-btn" onclick="location.href=''" type="button">
+                                    Xác nhận giỏ hàng và thanh toán
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <!-- Footer begin -->
+    <footer>
+        <div class="container pt-3 pb-1">
+            <div class="row d-flex justify-content-between no-gutters">
+                <div class="col-lg-6 pr-lg-5">
+                    <div>
+                        <h5>ĐỊA ĐIỂM MUA HÀNG</h5>
+                        <h2 class="line"></h2>
+                        <ul class="list-unstyled">
+                            <li>
+                                <dl style="list-style: none;">
+                                    <dt>
+                                        <i class="fas fa-map-marker-alt mr-2"></i>227 Đường Nguyễn Văn Cừ, phường 4,
+                                        quận 5, Hồ Chí Minh
+                                    </dt>
+                                    <dd>Thứ 2 - Thứ 6: Từ 9h - 20h</dd>
+                                    <dd>
+                                        Thứ 7: Từ 9h - 18h, Chủ Nhật: Từ 9h
+                                        - 16h
+                                    </dd>
+                                    <dt>
+                                        <i class="fas fa-map-marker-alt mr-2"></i>Khu phố 6, Phường Linh Trung, Quận
+                                        Thủ Đức, Hồ Chí Minh
+                                    </dt>
+                                    <dd>Thứ 2 - Thứ 7: Từ 9h - 18h</dd>
+                                    <dd>Chủ Nhật: Không hoạt động</dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h5>ĐIỆN THOẠI HỖ TRỢ</h5>
+                        <h2 class="line"></h2>
+                        <ul class="list-unstyled normal-text">
+                            <li>Mua hàng: <b>0843 969 899</b></li>
+                            <li>
+                                Bảo hành: <b>0843 969 899 (Line: 8200)</b>
+                            </li>
+                            <li>
+                                Kỹ thuật: <b>0843 969 899 (Line: 8345)</b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 pr-lg-5">
+                    <h5>CHÍNH SÁCH</h5>
+                    <h2 class="line"></h2>
+                    <ul class="list-unstyled normal-text">
+                        <li>Chính sách bán hàng</li>
+                        <li>Chính sách bảo hành</li>
+                        <li>Chính sách bảo mật</li>
+                        <li>Tìm hiểu về trả góp</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <div>
+                        <h5>PHƯƠNG THỨC THANH TOÁN</h5>
+                        <h2 class="line"></h2>
+                        <img src="images/footer/visa.svg" width="54" class="mr-3" />
+                        <img src="images/footer/maestro.svg" width="54" class="mr-3" />
+                        <img src="images/footer/american-express.svg" width="54" class="mr-3" />
+                        <img src="images/footer/jcb.svg" width="54" class="mr-3" />
+                        <img src="images/footer/paypal.svg" width="54" class="mr-3" />
+                        <img src="images/footer/ebay.svg" width="54" />
+                    </div>
+                    <br />
+                    <br />
+                    <div>
+                        <h5>KẾT NỐI VỚI CHÚNG TÔI</h5>
+                        <h2 class="line"></h2>
+                        <img src="images/footer/facebook.svg" width="40" class="mr-3" />
+                        <img src="images/footer/youtube.svg" width="50" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="container p-0">
+                <div class="row no-gutters">
+                    <span class="col-md-10 col-sm-9 text-right">Powered by Team10 - 17CNTN</span>
+                    <span class="col-md-2 col-sm-3 text-right">@Favada 2020</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
