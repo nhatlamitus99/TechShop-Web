@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>FAVADA MANAGER</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/button.css" >
+	<link rel="stylesheet" href="/css/stylesheet.css" >
+	<link rel="icon" href="/images/img/icon.png">
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<style>
+</style>
+
+</head>
+
+<body>
+<div style="height:100%;">
+	<div class="d_logo t_logo">
+			<img src="/images/img/logo.png"></img>
+			</div>
+	<div id="nav" class="d_navi t_navi" >
+		<ul class="nav flex-column">
+			<li class="nav-item">
+				<img class="icon" src="/images/img/nav_bill.png"></img>
+				<p class="nav-link active" href="#">Đơn hàng</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" style="float:left;" href="bill.html">• Đơn hàng mới</a>
+				<div class="reddot">1</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" style="float:left;" href="#">• Đơn hàng đang xử lý</a>
+				<div class="reddot">8</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="#">• Đơn hàng đã hủy</a>
+			</li>
+			
+			<div style="" class="divider"></div>
+			<!--------------------------------------------->
+			<li class="nav-item">
+				<img class="icon" src="/images/img/nav_product.png"></img>
+				<p class="nav-link active">Hàng hóa</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="store.html">• Quản lý kho hàng</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="#">• Quản lý danh mục</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="product.html">• Quản lý hàng hóa</a>
+			</li>
+			
+			
+			<div style="" class="divider"></div>
+			<!--------------------------------------------->
+			<li class="nav-item">
+				<img class="icon" src="/images/img/nav_stat.png"></img>
+				<p class="nav-link" href="#">Thống kê</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="report.html">• Báo cáo</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>
+			</ul>
+
+	</div>
+	<!--<div valign="bottom" class="footer">powered by TEAM10</div>	-->
+	<div style="height:100vh;width:500px;float:left;">
+		<div id="hd" class="d_header t_header">
+			<!-- Search form -->
+			<input style="top:15%;position:relative;height:70%;float:left;width:40%;margin-left:2%;" class="form-control" type="text" placeholder="Search" aria-label="Search"></input>
+			
+			<!-- button-->
+			
+			<button style="float:left;height:70%;width:10%;top:15%;position:relative;font-size:1vw;line-height:1vw;" class="btn btn-search" type="button"> Search</button>
+			
+			<div id="id">
+				<div style="font-size:15px;height:20px;top:0%;font-weight:bold;position:relative;top:0%;">Hoàng Đức</div>
+				<div style="font-size:12px;height:10px;font-weight:normal;">Nhân viên</div>
+			</div>
+	
+			<img class="t_avt d_avt" onclick="option()" style="" src="/images/img/avt.png"></img>
+			<div id="opt" style="visibility:hidden;width:15%;background-color:#DDDDDD;float:right;clear:both;top:100%;right:0%;position:absolute;">
+				<div>tài khoản</div>
+				<div style="width:100%;border-top-style:solid;border-width:1px;"></div>
+				<div>đăng xuất</div>
+			</div>
+		</div>
+		<div class="d_content t_content" >
+			<div id="opt" style="visibility:hidden;top:0px;z-index:10;width:200px;height:300px;background-color:#DDDDDD;right:0px;position:absolute;">
+				<div>tài khoản</div>
+				<div style="width:100%;border-top-style:solid;border-width:1px;"></div>
+				<div>đăng xuất</div>
+			</div>
+			<div style="width:360px;height:50px;float:left;">
+			<input  type="text" placeholder="Search" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:3px;color:#CCCCCC;float:left;width:325px;border-color:#DDDDDD;border-width:1px;height:40px;">			</input>
+			<img src="/images/img/look_up.png" style="float:left;filter: opacity(30%);width:30px;height:90%; height:70%;float:left;"></img>
+			</div>
+			<div style="float:left;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);float:left;width:30%;border-radius:10px;border-color:#CCCCCC;border-width:1px;height:40px;">
+			<img src="/images/img/sort.png" style="filter: opacity(30%);width:20px; height:20px;float:right;"></img>
+			<select style="color:#999999;height:100%;width:90%;border-color:#CCCCCC;" name="cars" id="cars">
+				<option value="volvo">Ngày tháng</option>
+				<option value="saab">Tổng giá trị</option>
+				<option value="opel">Địa điểm</option> 
+			</select>
+			</div>
+			<div style="height:300px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:5%;clear:both;width:auto;border-color:#AAAAAA;border-width:1px;overflow:auto;">
+				<div style="line-height:15px;color:white;width:100%;background-color:#8F8F80;min-height:30px;overflow:hidden;">
+					<span style="width:10%;height:30px;" class="cell">
+					mã đơn hàng
+					</span>
+					<span style="width:10%;height:30px;" class="cell">
+					ngày đặt hàng
+					</span>
+					<span class="cell">
+					địa chỉ giao hàng
+					</span>
+					<span style="width:10%;height:30px;" class="cell">
+					tổng giá trị
+					</span>
+					<span style="width:30%;height:30px;" class="cell">
+					lý do hủy
+					</span>
+				</div>
+				<div id="row" style="color:#4c4d4f;background-color:white;width:100%;float:left;height:50px;">
+					<span style="width:10%;" class="cell">
+					#872938
+					</span>
+					<span style="width:10%;" class="cell">
+					30/2/2020
+					</span>
+					<span class="cell">
+					Tân Bình, hẻm 48, Bùi Thị Xuân
+					</span>
+					<span style="width:10%;" class="cell">
+					54$
+					</span>
+					<span style="width:400px;"class="cell">
+					khách đi tù không nhận hàng
+					</span>
+					
+				</div>
+				
+			</div>
+			
+			<div style="background-color:white;line-height:40px;padding:3px;font-weight:bold;height:300px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:5%;clear:both;width:auto;border-color:#AAAAAA;border-width:1px;overflow:auto;">
+				<span>chi tiết đơn hàng #123456</span>
+				</br>
+				<span>địa chỉ giao hàng:Tân Bình, hẻm 48, Bùi Thị Xuân </span>
+				</br>
+				<span>sđt nhận hàng: 0934728394 </span>
+				</br>
+				<span>ghi chú: giao hàng chiều thứ 7 </span>
+				</br>
+				<span class="t_detail_bill_row">mã sp</span>
+				<span class="t_detail_bill_row">tên sp</span>
+				<span class="t_detail_bill_row">số lượng</span>
+				<span class="t_detail_bill_row">kho chứa</span>
+				<span class="t_detail_bill_row">ghi chú</span>
+				</br>
+				<span class="t_detail_bill_row">#1243</span>
+				<span class="t_detail_bill_row">Asus vivobook A902</span>
+				<span class="t_detail_bill_row">1</span>
+				<span class="t_detail_bill_row">1,4,6</span>
+				<span class="t_detail_bill_row">none</span>
+				</br>
+				<span class="t_detail_bill_row">#1243</span>
+				<span class="t_detail_bill_row">Asus vivobook A902</span>
+				<span class="t_detail_bill_row">1</span>
+				<span class="t_detail_bill_row">1,4,6</span>
+				<span class="t_detail_bill_row">none</span>
+				</br>
+				<div class="btnrow" style="display:block;margin-left:calc(50% - 50px);background-color:#3955e3;">xử lý</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/script/navigate.js"></script>
+<script>
+	
+	for (var i=0;i<5;i++){
+	var x=document.getElementById("row");
+	var cln = x.cloneNode(true);
+	x.parentElement.appendChild(cln);
+	}
+	
+	
+	
+	
+</script>
+</body>	
+</html>
