@@ -1,7 +1,7 @@
 const sequelize = require('sequelize')
 
 const db = new sequelize({
-    database: "PTUDW",
+    database: "Project",
     username: "postgres",
     password: "991999",
     host: "localhost",
@@ -14,3 +14,4 @@ const db = new sequelize({
 // .catch(err=> console.log(err))
 
 module.exports = db
+

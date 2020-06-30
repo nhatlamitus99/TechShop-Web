@@ -8,7 +8,7 @@ const Brand = db.define("Brand", {
 
 Brand.associate = function(models) {
     Brand.hasMany(models.Product, {foreignKey: 'id'})
-  };
+};
 
 // db.sync()
 // .then(()=>{

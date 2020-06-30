@@ -8,8 +8,24 @@ const User = db.define("User", {
     email: sequelize.STRING, 
     phone: sequelize.STRING,
     password: sequelize.STRING,
-    //type: sequelize.BOOLEAN
+    address: sequelize.STRING,
+    token: sequelize.STRING,
+    type: sequelize.BOOLEAN
 })
+
+User.associate = function(models) {
+    User.hasMany(models.Order, {foreignKey: 'id'})
+};
+
+User.associate = function(models) {
+    User.hasMany(models.Cart, {foreignKey: 'id'})
+};
+
+User.associate = function(models) {
+    User.hasMany(models.Like, {foreignKey: 'id'})
+};
+
+
 
 // db.sync()
 // .then(()=>{

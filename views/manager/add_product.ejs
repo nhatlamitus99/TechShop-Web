@@ -104,7 +104,7 @@ input[type="text"]
 		</div>
 		<div class="d_content t_content" >
 			<div style="color:#4c4d4f;padding-left:30%;padding-right:30%;height:300px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:5%;clear:both;width:auto;border-color:#AAAAAA;border-width:1px;height:auto;">
-				
+			<form action="/product" enctype="multipart/form-data" method="POST">	
 				<div>tên hàng hóa:</div><input type="text" id="name"></input>
 				<div>nhà sản xuất:</div><input type="text" id="brand_name"></input>
 				<div>thông số kỹ thuật:</div><input type="text" id="info"></input>
@@ -120,11 +120,12 @@ input[type="text"]
 					<option value="7">ram</option>
 					<option value="8">chip</option>
 				</select>
-				<div>hình ảnh:</div><input multiple type="file" id="file"></input>
+				<div>hình ảnh:</div><input multiple type="file" id="file" accept="image/*"></input>
 				
 				<div style="margin-top:10px;width:100px;height:40px;border-radius:25px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);line-height:40px;text-align:center;color:white;clear:both;background-color:#06993c;"> 
 					<input type="submit">Hoàn tất</input> 
 				</div>
+			</form>	
 			</div>
 			</div>	
 		</div>

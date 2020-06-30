@@ -170,13 +170,13 @@
 
         <div class="main-area row">
             <div class="login-area col-md col-sm-12">
-                <form id="form-login">
+                <form id="form-login" action="/login" method="POST">
                     <div class="area-title">ĐĂNG NHẬP</div>
                     <div class="input-row">
                         <span class="icon-input">
                             <i class="far fa-envelope"></i>
                         </span>
-                        <input type="email" id="login-email" placeholder="Email của bạn" />
+                        <input type="email" id="email" placeholder="Email của bạn" />
                     </div>
                     <div class="input-row">
                         <span class="icon-input">
@@ -190,7 +190,7 @@
             </div>
 
             <div class="register-area col-md col-sm-12">
-                <form id="form-register" action="/signup">
+                <form id="form-register" action="/signup" method="POST">
                     <div class="area-title">ĐĂNG KÝ</div>
                     <div class="input-row">
                         <span class="icon-input">
