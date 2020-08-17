@@ -41,9 +41,9 @@ Product.associate = function(models) {
     Product.hasMany(models.Like, {foreignKey: 'id'})
 };
 
-// db.sync()
-// .then(()=>{
-//     console.log("Create Product successfully...")
-// })
+ db.sync()
+ .then(()=>{
+     console.log("Create Product successfully...")
+	})
 
 module.exports = Product

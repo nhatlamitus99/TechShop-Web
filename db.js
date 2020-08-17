@@ -1,16 +1,17 @@
 const sequelize = require('sequelize')
 
 const db = new sequelize({
-    database: "Project",
+    database: "favada",
     username: "postgres",
-    password: "991999",
+    password: "123456",
     host: "localhost",
     port: 5432,
-    dialect: "postgres"
+    dialect: "postgres",
+	
 })
 
-// db.authenticate()
-// .then(() => console.log('Connect database successfully'))
+//db.authenticate()
+//.then(() => console.log('Connect database successfully'))
 // .catch(err=> console.log(err))
 
 module.exports = db

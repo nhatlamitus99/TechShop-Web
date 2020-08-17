@@ -7,7 +7,7 @@ xhttp2.onreadystatechange = function() {
        document.getElementById("hd").innerHTML = xhttp2.responseText;
     }
 };
-xhttp2.open("GET", "/Manager/template/header.txt", true);
+xhttp2.open("GET", "/template/header.txt", true);
 xhttp2.send();
 
 
@@ -18,7 +18,7 @@ xhttp.onreadystatechange = function() {
        document.getElementById("nav").innerHTML = xhttp.responseText;
     }
 };
-xhttp.open("GET", "/Manager/template/navi.txt", true);
+xhttp.open("GET", "/template/navi.txt", true);
 xhttp.send();
 
 var myvar;

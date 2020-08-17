@@ -1,0 +1,51 @@
+<ul class="nav flex-column">
+			<li class="nav-item">
+				<img class="icon" src="/images/img/nav_bill.png"></img>
+				<p class="nav-link active" href="#">Đơn hàng</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" style="float:left;" href="/manager/bill">• Đơn hàng mới</a>
+				<div class="reddot">1</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" style="float:left;" href="/manager/pending">• Đang xử lý</a>
+				<div class="reddot">8</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="/manager/cancelled">• Đơn hàng đã hủy</a>
+			</li>
+			
+			<div style="" class="divider"></div>
+			<!--------------------------------------------->
+			<li class="nav-item">
+				<img class="icon" src="/images/img/nav_product.png"></img>
+				<p class="nav-link active">Hàng hóa</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="/manager/store">• Quản lý kho hàng</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="/manager/catalogy">• Quản lý danh mục</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="/manager/product">• Quản lý hàng hóa</a>
+			</li>
+			
+			
+			<div style="" class="divider"></div>
+			<!--------------------------------------------->
+			<li class="nav-item">
+				<img class="icon" src="/images/img/nav_stat.png"></img>
+				<p class="nav-link" href="#">Thống kê</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="/manager/report">• Báo cáo</a>
+			</li>
+			<li class="nav-item">
+				<img class="icon" src="/images/img/nav_acc.png"></img>
+				<p class="nav-link" href="/manager/account">Nhân sự</p>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>
+			</ul>

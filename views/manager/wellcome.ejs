@@ -11,6 +11,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
 </style>
@@ -74,23 +75,6 @@
 	<!--<div valign="bottom" class="footer">powered by TEAM10</div>	-->
 	<div style="height:100vh;width:500px;float:left;">
 		<div id="hd" class="d_header t_header">
-			<input style="top:15%;position:relative;height:70%;float:left;width:40%;margin-left:2%;" class="form-control" type="text" placeholder="Search" aria-label="Search"></input>
-			
-			<!-- button-->
-			
-			<button style="float:left;height:70%;width:10%;top:15%;position:relative;font-size:1vw;line-height:1vw;" class="btn btn-search" type="button"> Search</button>
-			
-			<div id="id">
-				<div style="font-size:15px;height:20px;top:0%;font-weight:bold;position:relative;top:0%;">Hoàng Đức</div>
-				<div style="font-size:12px;height:10px;font-weight:normal;">Nhân viên</div>
-			</div>
-	
-			<img class="t_avt d_avt" onclick="option()" style="" src="/images/img/avt.png"></img>
-			<div id="opt" style="visibility:hidden;width:15%;background-color:#DDDDDD;float:right;clear:both;top:100%;right:0%;position:absolute;">
-				<div>tài khoản</div>
-				<div style="width:100%;border-top-style:solid;border-width:1px;"></div>
-				<div>đăng xuất</div>
-			</div>
 		</div>
 		<div class="d_content t_content" >
 			<div id="opt" style="visibility:hidden;width:15%;background-color:#DDDDDD;float:right;clear:both;top:0%;right:0%;position:absolute;">
@@ -104,6 +88,24 @@
 </div>
 <script src="/script/navigate.js"></script>
 <script>
+var token=localStorage.getItem("token");
+
+document.getElementById("username_").innerHTML=localStorage.getItem("user");
+
+$.ajax({
+  url: "http://localhost:3000/api/user",
+  type: "GET",
+  headers: {
+    "token": token
+  },
+  
+  success: function(result){
+    console.log(result);
+  },
+  error: function(result){console.log(result);}
+});
+
+	
 	
 	for (var i=0;i<5;i++){
 	var x=document.getElementById("row");
@@ -127,6 +129,8 @@
 			myvar=setInterval(affect,50);
 		}
 	}
+	
+	
 </script>
 </body>	
 </html>
