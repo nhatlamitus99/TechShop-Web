@@ -15,9 +15,7 @@ Like.associate = function(models) {
     Like.belongsTo(models.Product, {foreignKey: 'productID'})
 };
 
-// db.sync()
-// .then(()=>{
-//     console.log("Create Like successfully...")
-// })
+
+// db.sync().then(() => {console.log("Create Like successfully...")});
 
 module.exports = Like

@@ -6,7 +6,7 @@ const { INTEGER } = require('sequelize');
 const Product = db.define("Product", {
     name: sequelize.STRING,
     brandID: sequelize.INTEGER,
-    rating: sequelize.INTEGER,
+    rating: sequelize.FLOAT,
     price: sequelize.INTEGER,
     info: sequelize.STRING,
     detail: sequelize.STRING,
@@ -41,9 +41,7 @@ Product.associate = function(models) {
     Product.hasMany(models.Like, {foreignKey: 'id'})
 };
 
- db.sync()
- .then(()=>{
-     console.log("Create Product successfully...")
-	})
+
+// db.sync().then(() => {console.log("Create Product successfully...")});
 
 module.exports = Product

@@ -10,7 +10,7 @@ const User = db.define("User", {
     password: sequelize.STRING,
     address: sequelize.STRING,
     token: sequelize.STRING,
-    type: sequelize.BOOLEAN
+    type: sequelize.BOOLEAN // true: Admin, false: Normal user
 })
 
 User.associate = function(models) {
@@ -26,10 +26,6 @@ User.associate = function(models) {
 };
 
 
-
-// db.sync()
-// .then(()=>{
-//     console.log("Create User successfully...")
-// })
+// db.sync().then(() => {console.log("Create User successfully...")});
 
 module.exports = User

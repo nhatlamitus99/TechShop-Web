@@ -7,12 +7,10 @@ const db = new sequelize({
     host: "localhost",
     port: 5432,
     dialect: "postgres",
-	
 })
 
-//db.authenticate()
-//.then(() => console.log('Connect database successfully'))
-// .catch(err=> console.log(err))
+db.authenticate()
+    .then(() => console.log('Database connected successfully! ...'))
+    .catch(err => console.log('Error: ' + err));
 
 module.exports = db
-

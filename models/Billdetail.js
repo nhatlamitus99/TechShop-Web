@@ -15,9 +15,8 @@ Billdetail.associate = function(models) {
 Billdetail.associate = function(models) {
     Billdetail.belongsTo(models.Product, {foreignKey: 'idProduct'})
 };
-db.sync()
- .then(()=>{
-     console.log("Create Billdetail successfully...")
-})
+
+
+// db.sync().then(() => {console.log("Create Billdetail successfully...")});
 
 module.exports = Billdetail;

@@ -8,12 +8,9 @@ const Category = db.define("Category", {
 
 Category.associate = function(models) {
     Category.hasMany(models.Product, {foreignKey: 'id'})
-  };
+};
 
 
-// db.sync()
-// .then(()=>{
-//     console.log("Create Category successfully...")
-// })
+// db.sync().then(() => {console.log("Create Category successfully...")});
 
 module.exports = Category

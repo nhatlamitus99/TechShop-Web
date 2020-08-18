@@ -11,9 +11,7 @@ Storage.associate = function(models) {
     Storage.hasMany(models.Product, {foreignKey: 'id'})
 };
 
-// db.sync()
-// .then(()=>{
-//     console.log("Create Storage successfully...")
-// })
+
+// db.sync().then(() => {console.log("Create Storage successfully...")});
 
 module.exports = Storage

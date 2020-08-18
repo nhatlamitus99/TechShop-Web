@@ -24,7 +24,7 @@ app.set('view engine', 'ejs')
 
 app.use(cookieParser()); //Parse cookie
 app.use(bodyParser.urlencoded({ extended: false })); //Parse body để get data
-app.use(session({ secret: 'keyboard cat', key: 'sid', resave: true,saveUninitialized: true}));  //Save user login
+app.use(session({ secret: 'keyboard cat', key: 'sid', resave: true, saveUninitialized: true}));  //Save user login
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
@@ -155,4 +155,4 @@ app.use(passport.initialize());
 
 
 var PORT = process.env.PORT || 3000
-app.listen(PORT)
+app.listen(PORT, console.log('Server listening on port ' + PORT + ' ...'))

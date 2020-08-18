@@ -4,7 +4,7 @@ const sequelize = require('sequelize');
 const Order = db.define("Order", {
 	userID: sequelize.INTEGER,
     date: sequelize.DATE,
-    status: sequelize.STRING,
+    status: sequelize.SMALLINT, // 0: Đang đóng gói, 2: Đang vận chuyển, 3: Giao thành công
 	address: sequelize.STRING,
 	rec_phone: sequelize.STRING
 })
@@ -17,9 +17,7 @@ Order.associate = function(models) {
     Order.hasMany(models.Billdetail, {foreignKey: 'id'})
 };
 
-// db.sync()
-// .then(()=>{
-//     console.log("Create Order successfully...")
-// })
+
+// db.sync().then(() => {console.log("Create Order successfully...")});
 
 module.exports = Order

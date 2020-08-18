@@ -10,9 +10,7 @@ Brand.associate = function(models) {
     Brand.hasMany(models.Product, {foreignKey: 'id'})
 };
 
-// db.sync()
-// .then(()=>{
-//     console.log("Create Brand successfully...")
-// })
+
+// db.sync().then(() => {console.log("Create Brand successfully...")});
 
 module.exports = Brand
