@@ -13,6 +13,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 <style>
+	.inp{
+	position:absolute;
+	height:25px;
+	float:right;
+	right:50%;
+	width:300px;
+	}
 </style>
 
 </head>
@@ -35,32 +42,27 @@
 			<div style="padding:10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);width:90%;height:auto;overflow:auto;">
 			<div>
 			mã sản phẩm:
-				<span id="prid" style="font-weight:bold;">#1249</span>
+				<span type="text" id="prid" style="font-weight:bold;"></span>
 				
 			</div>
 			<div>tên sản phẩm:
-				<span id="prname" style="font-weight:bold;">SSD 128GB Kingston</span>
+				<input class="inp" type="text" id="prname" style="font-weight:bold;"></input>
 				
 			</div>
-			<div>số lượng còn lại:
-				<span id="prrm" style="font-weight:bold;">50</span>
-			</div>
-			<div>các kho đang chứa:
-				<span style="font-weight:bold;">1A,1B</span>
-			</div>
+			
 			<div>đơn giá:
-				<span id="prprice" style="font-weight:bold;">#1249</span>
+				<input class="inp" type="text" id="prprice" style="font-weight:bold;"></input>
 			</div>
 			<div>nhà sản xuất:
-				<span style="font-weight:bold;">Kingston</span>
+				<select class="inp" type="text" style="font-weight:bold;"></select>
 			</div>
 			<div>thông số kỹ thuật:
-				<span style="font-weight:bold;">128GB, tuổi thọ trung bình 1 triệu giờ, tần số: 2.7</span>
+				<input class="inp" type="select" style="font-weight:bold;"></input>
 			</div>
 			<div>hình ảnh</div>
 			<img style="float:left;width:200px;height:200px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="/images/240g.jpg"></img>
 			<img style="float:left;width:200px;height:200px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="/images/123.jpg"></img>
-			<div class="btnrow" style="display:block;margin-left:calc(50% - 50px);background-color:#3955e3;clear:both;opacity:30%;">update</div>
+			<div class="btnrow" style="display:block;margin-left:calc(50% - 50px);background-color:#3955e3;clear:both;" onclick="update()">update</div>
 			</div>
 			
 			</div>
@@ -71,6 +73,7 @@
 <script>
 	
 	var id= <%-id%>;
+	
 	
 	$.ajax({
     url: "http://localhost:3000/api/product/"+id,
@@ -87,6 +90,23 @@
 			}
 	});
 	
+	
+	function update()
+	{
+			
+		$.ajax({
+		url: "http://localhost:3000/product/",
+		type: 'POST',
+		headers: {token : localStorage.getItem("token")},
+		data:{
+			name: ,
+			
+		},
+		success: function(data) {
+			console.log(data);	
+			}
+		});
+	}
 	
 	var myvar;
 	function affect()

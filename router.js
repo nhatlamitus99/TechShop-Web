@@ -316,11 +316,10 @@ router.get('/api/product/:id', (req, res)=>{
     }).catch(err=> console.log(err)) 
 })
 
-router.post('/product', uploadFile.single('file'), passport.authenticate('jwt', { session: false }), (req, res)=>{
+router.post('/product', uploadFile.single('file'),passport.authenticate('jwt', { session: false }), (req, res)=>{
     if (req.user.dataValues.type !== true) {
         return res.sendStatus(403);
     }
-
     var _name = req.body.name
     var _brand = req.body.brand_name
     var _info = req.body.info
@@ -330,7 +329,9 @@ router.post('/product', uploadFile.single('file'), passport.authenticate('jwt', 
 
     if(!req.file)
         res.json({'message': 'Empty image'})
-
+	
+	
+	
     brand.findOne({
         where:{
             name: _brand
@@ -737,6 +738,12 @@ router.get('/manager/detail_product',(req, res)=>{
 })
 router.get('/manager/bill',(req, res)=>{
         res.render('manager/bill')   
+})
+router.get('/manager/new_product',(req, res)=>{
+        res.render('manager/new_product')   
+})
+router.get('/manager/edit_product/:id',(req, res)=>{
+        res.render('manager/edit_product',{'id':req.params.id})   
 })
 
 router.get('/manager/detail_product/:id',(req, res)=>{

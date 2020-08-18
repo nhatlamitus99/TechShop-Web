@@ -105,6 +105,8 @@
 				var cln = itm.cloneNode(true);
 				cln.childNodes[1].innerHTML=data.data[i].id;
 				cln.childNodes[3].innerHTML=data.data[i].name;
+				cln.childNodes[5].innerHTML=data.data[i].number-data.data[i].number_sell;
+				cln.childNodes[9].innerHTML=data.data[i].price;
 				cln.style.height="80px";
 				cln.style.visibility="visible";
 				document.getElementById("row").parentElement.appendChild(cln);
