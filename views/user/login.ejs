@@ -158,31 +158,29 @@
     <div class="container">
         <div class="login-via">
             <div class="login-via-title">ĐĂNG NHẬP BẰNG</div>
-            <button id="fb-login-btn" class="btn btn-primary">
-                <a href="/auth/facebook">Facebook</a>
-            </button>
+            <a href="/auth/facebook" id="fb-login-btn" class="btn btn-primary" >Facebook</a>
             <br />
-            <button id="gg-login-btn" class="btn btn-danger">
-                <a href="/auth/google">Google</a>
-            </button>
+            <a href="/auth/google" id="gg-login-btn" class="btn btn-danger">Google</a>
         </div>
         <h2><span>HOẶC</span></h2>
 
         <div class="main-area row">
             <div class="login-area col-md col-sm-12">
-                <form id="form-login" action="/login" method="POST">
+                <form id="form-login" onsubmit="return validateLogin()" method="POST">
                     <div class="area-title">ĐĂNG NHẬP</div>
                     <div class="input-row">
                         <span class="icon-input">
                             <i class="far fa-envelope"></i>
                         </span>
-                        <input type="email" name="email" id="email" placeholder="Email của bạn" />
+                        <input id="login-email" name="email" type="email" placeholder="Email của bạn" />
+                        <div class="form-message"></div>
                     </div>
                     <div class="input-row">
                         <span class="icon-input">
                             <i class="far fa-lock-alt"></i>
                         </span>
-                        <input name="password" type="login-password" id="password" placeholder="Nhập mật khẩu" />
+                        <input id="login-password" name="password" type="password" placeholder="Nhập mật khẩu" />
+                        <div class="form-message"></div>
                     </div>
                     <input id="btn-login" class="btn btn-outline-dark" type="submit" value="Đăng nhập" />
                 </form>
@@ -190,43 +188,49 @@
             </div>
 
             <div class="register-area col-md col-sm-12">
-                <form id="form-register" action="/signup" method="POST">
+                <form id="form-register" onsubmit="return validateRegister()" action="/register" method="POST">
                     <div class="area-title">ĐĂNG KÝ</div>
                     <div class="input-row">
                         <span class="icon-input">
                             <i class="far fa-user"></i>
                         </span>
                         <input name="fullname" type="text" id="fullname" placeholder="Họ và tên" />
+                        <div class="form-message"></div>
                     </div>
                     <div class="input-row">
                         <span class="icon-input">
                             <i class="far fa-user-circle"></i>
                         </span>
                         <input type="text" name="username" id="username" placeholder="User name" />
+                        <div class="form-message"></div>
                     </div>
                     <div class="input-row">
                         <span class="icon-input">
                             <i class="far fa-envelope"></i>
                         </span>
-                        <input name="email_signup" type="email" id="email" placeholder="Email của bạn" />
+                        <input name="email_register" type="email" id="register-email" placeholder="Email của bạn" />
+                        <div class="form-message"></div>
                     </div>
                     <div class="input-row">
                         <span class="icon-input input-group-addon">
                             <i class="far fa-phone-alt"></i>
                         </span>
                         <input name="phone" type="text" id="phone" placeholder="Số điện thoại của bạn" />
+                        <div class="form-message"></div>
                     </div>
                     <div class="input-row">
                         <span class="icon-input">
                             <i class="far fa-lock-alt"></i>
                         </span>
-                        <input name="password_signup" type="password" id="signup-password" placeholder="Mật khẩu" />
+                        <input name="password_register" type="password" id="register-password" placeholder="Mật khẩu" />
+                        <div class="form-message"></div>
                     </div>
                     <div class="input-row">
                         <span class="icon-input">
                             <i class="far fa-lock-alt"></i>
                         </span>
                         <input name="password_again" type="password" id="password-again" placeholder="Nhập lại mật khẩu" />
+                        <div class="form-message"></div>
                     </div>
 
                     <input id="btn-register" class="btn btn-outline-dark" type="submit" value="Đăng ký" />
@@ -234,6 +238,7 @@
             </div>
         </div>
     </div>
+    <br />
     <br />
     <br />
     <footer>
@@ -323,6 +328,7 @@
     </footer>
 
     <!-- Optional JavaScript -->
+    <script src="/script/validator.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

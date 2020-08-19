@@ -1,134 +1,129 @@
-const app = require('express')
-const ejs = require('ejs')
-const bcrypt = require('bcrypt')
-const bodyParser = require('body-parser')
-const multer = require('multer')
-const router = app.Router()
-const upload = multer({ dest: './uploads/' })
-const passport = require('passport')
-const path = require('path')
-const jwt = require('jsonwebtoken')
+const app = require('express');
+const ejs = require('ejs');
+const bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const router = app.Router();
+const upload = multer({ dest: './uploads/' });
+const passport = require('passport');
+const path = require('path');
+const jwt = require('jsonwebtoken');
+const HASH_KEY = 10;
 
-var user = require('./models/User')
-var product = require('./models/Product')
-var brand = require('./models/Brand')
-var category = require('./models/Category')
-var order = require('./models/Order')
-var store = require('./models/Storage')
-var like = require('./models/Like')
-var cart = require('./models/Cart')
-var billdt= require('./models/Billdetail')
-const { access } = require('fs')
+var user = require('./models/User');
+var product = require('./models/Product');
+var brand = require('./models/Brand');
+var category = require('./models/Category');
+var order = require('./models/Order');
+var store = require('./models/Storage');
+var like = require('./models/Like');
+var cart = require('./models/Cart');
+var billdt = require('./models/Billdetail');
+const { access } = require('fs');
 
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/upload/images')
+        cb(null, 'public/upload/images');
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname)
+        cb(null, file.originalname);
     }
-  })
+});
    
-var uploadFile = multer({ storage: storage })
+var uploadFile = multer({ storage: storage });
 
 
 // HOME PAGE
 
 router.get('/', (req, res) => {
     product.findAll()
-    .then(products=>{
-        category.findAll()
-        .then(categories=>{
-            brand.findAll()
-            .then(brands=>{
-                res.render('user/index', {'product': products, 'category': categories, 'brand': brands})
-            })
-            .catch(err=> console.log(err))
+        .then(products => {
+            category.findAll()
+                .then(categories => {
+                    brand.findAll()
+                        .then(brands => {
+                            res.render('user/index', { 'product': products, 'category': categories, 'brand': brands })
+                        })
+                        .catch(err => console.log(err))
+                })
+                .catch(err => console.log(err))
         })
-        .catch(err=> console.log(err))       
-    } )
-    .catch(err=> console.log(err))  
-})
+        .catch(err => console.log(err))
+});
 
 
 // SIGN UP & LOG IN 
 
-router.get('/login', (req, res)=>{
-    res.render('user/login')
-})
+router.get('/login', (req, res) => {
+    res.render('user/login');
+});
 
+router.post('/login', urlencodedParser, (req, res) => {
+    var _email = req.body.email;
+    var _password = req.body.password;
 
-
-router.post('/login', urlencodedParser, (req, res)=>{
-    var _email = req.body.email
-    var _password = req.body.password
-	
-    if(!_email || !_password)
-        res.json({'message': 'Empty email or password'})
-    const hash = bcrypt.hashSync(_password, 10);
     user.findOne({
-        where:{
+        where: {
             email: _email
         }
-    }).then( (result) =>{
-        if(result) {
-            if(bcrypt.compareSync(_password, result.password)){
+    }).then((result) => {
+        if (result) {
+            if (bcrypt.compareSync(_password, result.password)) {
                 var payload = { id: result.id, type: result.type }
                 accessToken = jwt.sign(payload, 'secret')
-                //if(result.type==true)
-                    res.render('manager/saveToken', {token: accessToken, user: result.username})
-                // else
-                //     res.render('user/index', {token: token_id})
+                if (result.type == true)
+                    res.render('manager/saveToken', { token: accessToken, user: result.username })
+                else
+                    res.render('user/index', { token: accessToken })
                 //res.status(200).json({token : accessToken})
             }
-            else 
-                res.json({'message': 'password is incorrect'})
+            else
+                res.json({ 'message': 'password is incorrect' })
         }
-        else{
-            res.json({'message': 'email is incorrect'})
+        else {
+            res.json({ 'message': 'email is incorrect' })
         }
     })
-    .catch(err=> {
-        console.log(err)
-        res.redirect('/login')
-    })
-})
+        .catch(err => {
+            console.log(err)
+            res.redirect('/login')
+        })
+});
 
-router.post('/signup', urlencodedParser, (req, res)=>{
+router.post('/register', urlencodedParser, (req, res) => {
     var _username = req.body.username
-    var _email = req.body.email_signup
+    var _email = req.body.email_register
     var _phone = req.body.phone
-    var _password = req.body.password_signup
+    var _password = req.body.password_register
     var _re_password = req.body.password_again
     var _address = req.body.address
 	
-    if((!_email || !_password))
-        res.json({'message': 'Empty email or password'})
-    if(!req.body.type)
+    if ((!_email || !_password))
+        res.json({ 'message': 'Empty email or password' })
+    if (!req.body.type)
         var _type = false;
-    else 
+    else
         var _type = req.body.type
-    if(!req.body.fullname)
+    if (!req.body.fullname)
         var _fullname = req.body.username
 
-    if(_password==_re_password){
+    if (_password == _re_password) {
         user.findOne({
-            where:{
+            where: {
                 email: _email
             }
-        }).then(result =>{ 
-            if(result)          
-                res.json({'message':'email is used'})
-            else{
+        }).then(result => {
+            if (result)
+                res.json({ 'message': 'email is used' })
+            else {
                 var hash = bcrypt.hashSync(_password, 10);
                 user.create({
                     fullname: _fullname,
                     username: _username,
-                    email: _email, 
+                    email: _email,
                     phone: _phone,
                     password: hash,
                     type: _type,
@@ -137,16 +132,16 @@ router.post('/signup', urlencodedParser, (req, res)=>{
                 res.render('user/index')
             }
         })
-        .catch(err=> {
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err)
+            })
         
     }
-    else res.json({'message':'re-password is not correct'})
-})
+    else res.json({ 'message': 're-password is not correct' })
+});
 
 
-// Signup via Facebook
+// Register via Facebook
 
 router.get('/auth/facebook', passport.authenticate('facebook',{scope:'email'}));
 
@@ -160,7 +155,7 @@ router.get('/auth/facebook/callback',
       res.redirect('/');
 });
 
-// Sign up via Google
+// Register via Google
 
 router.get('/auth/google',  passport.authenticate('google', { scope: ['email']}));
 

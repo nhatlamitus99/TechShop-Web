@@ -12,6 +12,12 @@
 }
 
 /* ========== Header ========== */
+/* header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+} */
 .header-top {
     color: #757575;
     background-color: #f8f8f8;

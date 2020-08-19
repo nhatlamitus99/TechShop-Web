@@ -19,8 +19,8 @@ var ExtractJWT = passportJWT.ExtractJwt;
 var JWTStrategy = passportJWT.Strategy;
 
 
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
-app.set('view engine', 'ejs')
 
 app.use(cookieParser()); //Parse cookie
 app.use(bodyParser.urlencoded({ extended: false })); //Parse body để get data
@@ -41,7 +41,7 @@ passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
   
-  // Sử dụng Facebook Strategy cùng Passport.
+// Sử dụng Facebook Strategy cùng Passport.
 passport.use(new FacebookStrategy({
       clientID: config.facebook_key,
       clientSecret:config.facebook_secret ,
@@ -71,7 +71,7 @@ passport.use(new FacebookStrategy({
     }
 ));
 
-  // Sử dụng Google Strategy cùng Passport.
+// Sử dụng Google Strategy cùng Passport.
 passport.use(new GoogleStrategy({
     clientID: config.google_key,
     clientSecret: config.google_secret,
