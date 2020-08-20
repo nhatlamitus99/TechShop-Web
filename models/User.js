@@ -10,7 +10,9 @@ const User = db.define("User", {
     password: sequelize.STRING,
     address: sequelize.STRING,
     token: sequelize.STRING,
-    type: sequelize.BOOLEAN // true: Admin, false: Normal user
+    isAdmin: sequelize.BOOLEAN,
+    sex: sequelize.BOOLEAN,
+    dob: sequelize.DATE
 })
 
 User.associate = function(models) {

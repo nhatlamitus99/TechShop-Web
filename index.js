@@ -13,6 +13,7 @@ const bcrypt = require('bcrypt')
 const path = require('path')
 const jwt = require('jsonwebtoken');
 const passportJWT = require('passport-jwt');
+var flash = require('connect-flash');
 
 
 var ExtractJWT = passportJWT.ExtractJwt;
@@ -29,6 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
+app.use(flash());
 
 app.use('/', router)
 
@@ -62,7 +64,7 @@ passport.use(new FacebookStrategy({
               username: profile._json.name,
               email: profile._json.email, 
               password: hash,
-              type: false
+              isAdmin: false
           })
           }
         }).catch(err=> console.log(err))
@@ -91,7 +93,7 @@ passport.use(new GoogleStrategy({
             username: profile._json.email,
             email: profile._json.email, 
             password: hash,
-            type: false
+            isAdmin: false
         })
         
         }
@@ -100,31 +102,6 @@ passport.use(new GoogleStrategy({
     });
   }
 ));
-
-  // Sử dụng JWT Strategy cùng Passport.
-// passport.use(new JWTStrategy({
-//     //jwtFromRequest : ExtractJWT.fromUrlQueryParameter('token'),
-//     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken('Authorization'),
-//     secretOrKey   : 'secret'
-//   }, function (jwtPayload, cb) {
-//     return user.findOne({
-//         where:{
-//             id: jwtPayload.id
-//         }
-//     })
-//     .then(result=>{
-//         if (result) {
-//           cb(null, result);
-            
-//         } else {
-//             cb(null, false);
-//         }
-//     })
-//     .catch(err=>{
-//       cb(err)
-//     })
-//   }
-// ));
 
 passport.use(new JWTStrategy(
   {
@@ -139,8 +116,7 @@ passport.use(new JWTStrategy(
           })
           .then(result=>{
               if (result) {
-                cb(null, result);
-                  
+                cb(null, result); 
               } else {
                   cb(null, false);
               }

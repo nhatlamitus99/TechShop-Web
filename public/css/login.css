@@ -82,7 +82,10 @@ h2 span {
 .form-message {
     color: red;
     margin-top: 5px;
+    margin-bottom: 55px;
+    margin-left: 12px;
     font-size: 13px;
+    text-align: left;
 }
 
 .input-row.invalid {

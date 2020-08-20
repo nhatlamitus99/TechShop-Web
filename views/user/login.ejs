@@ -23,17 +23,9 @@
         <div class="header-top">
             <div class="container">
                 <div class="ht-list row pt-1 pb-1 justify-content-end align-items-center">
-                    <button onclick="location.href='./account.html'" type="button" class="ht-item">
-                        <i class="far fa-shopping-bag mr-2"></i>
-                        KIỂM TRA ĐƠN HÀNG
-                    </button>
-                    <button onclick="location.href='./login.html'" type="button" class="ht-item">
+                    <button onclick="location.href='/login'" type="button" class="ht-item">
                         <i class="far fa-user-circle mr-2"></i>
                         ĐĂNG NHẬP/ĐĂNG KÝ
-                    </button>
-                    <button onclick="location.href=''" type="button" class="ht-item d-none">
-                        <i class="far fa-user-circle mr-2"></i>
-                        CAO NHƠN HƯNG
                     </button>
                     <div class="dropdown">
                         <button class="ht-item d-none d-sm-block" data-toggle="dropdown">
@@ -166,21 +158,37 @@
 
         <div class="main-area row">
             <div class="login-area col-md col-sm-12">
-                <form id="form-login" onsubmit="return validateLogin()" method="POST">
+                <form id="form-login" onsubmit="return validateLogin();" method="POST">
                     <div class="area-title">ĐĂNG NHẬP</div>
+                    <% if (type == 1 && field == 0) { %>
+                    <div class="input-row invalid">
+                    <% } else { %>
                     <div class="input-row">
+                    <% } %>
                         <span class="icon-input">
                             <i class="far fa-envelope"></i>
                         </span>
                         <input id="login-email" name="email" type="email" placeholder="Email của bạn" />
-                        <div class="form-message"></div>
+                        <div class="form-message">
+                            <% if (type == 1 && field == 0) { %>
+                            <%= message %>
+                            <% } %>
+                        </div>
                     </div>
+                    <% if (type == 1 && field == 1) { %>
+                    <div class="input-row invalid">
+                    <% } else { %>
                     <div class="input-row">
+                    <% } %>
                         <span class="icon-input">
                             <i class="far fa-lock-alt"></i>
                         </span>
                         <input id="login-password" name="password" type="password" placeholder="Nhập mật khẩu" />
-                        <div class="form-message"></div>
+                        <div class="form-message">
+                            <% if (type == 1 && field == 1) { %>
+                            <%= message %>
+                            <% } %>
+                        </div>
                     </div>
                     <input id="btn-login" class="btn btn-outline-dark" type="submit" value="Đăng nhập" />
                 </form>
@@ -204,12 +212,20 @@
                         <input type="text" name="username" id="username" placeholder="User name" />
                         <div class="form-message"></div>
                     </div>
+                    <% if (type == 2 && field == 2) { %>
+                    <div class="input-row invalid">
+                    <% } else { %>
                     <div class="input-row">
+                    <% } %>
                         <span class="icon-input">
                             <i class="far fa-envelope"></i>
                         </span>
                         <input name="email_register" type="email" id="register-email" placeholder="Email của bạn" />
-                        <div class="form-message"></div>
+                        <div class="form-message">
+                            <% if (type == 2 && field == 2) { %>
+                            <%= message %>
+                            <% } %>
+                        </div>
                     </div>
                     <div class="input-row">
                         <span class="icon-input input-group-addon">

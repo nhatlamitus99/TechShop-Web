@@ -8,7 +8,7 @@ const upload = multer({ dest: './uploads/' });
 const passport = require('passport');
 const path = require('path');
 const jwt = require('jsonwebtoken');
-const HASH_KEY = 10;
+const HASH_KEY_SYNC = 10;
 
 var user = require('./models/User');
 var product = require('./models/Product');
@@ -45,7 +45,7 @@ router.get('/', (req, res) => {
                 .then(categories => {
                     brand.findAll()
                         .then(brands => {
-                            res.render('user/index', { 'product': products, 'category': categories, 'brand': brands })
+                            res.render('user/index', { 'product': products, 'category': categories, 'brand': brands });
                         })
                         .catch(err => console.log(err))
                 })
@@ -57,12 +57,14 @@ router.get('/', (req, res) => {
 
 // SIGN UP & LOG IN 
 
+// render type: 1 = login, type: 2 = register, type: 0 = do nothing
+
 router.get('/login', (req, res) => {
-    res.render('user/login');
+    res.render('user/login', { type: 0, message: '', field: -1});
 });
 
 router.post('/login', urlencodedParser, (req, res) => {
-    var _email = req.body.email;
+    var _email = req.body.email.trim();
     var _password = req.body.password;
 
     user.findOne({
@@ -72,25 +74,26 @@ router.post('/login', urlencodedParser, (req, res) => {
     }).then((result) => {
         if (result) {
             if (bcrypt.compareSync(_password, result.password)) {
-                var payload = { id: result.id, type: result.type }
-                accessToken = jwt.sign(payload, 'secret')
-                if (result.type == true)
-                    res.render('manager/saveToken', { token: accessToken, user: result.username })
-                else
-                    res.render('user/index', { token: accessToken })
-                //res.status(200).json({token : accessToken})
+                var payload = { id: result.id, isAdmin: result.isAdmin };
+                var accessToken = jwt.sign(payload, 'secret');
+                if (result.isAdmin == true)
+                    res.render('manager/saveToken', { token: accessToken, user: result.username });
+                else {
+                    res.render('user/saveToken', { token: accessToken });
+                }
+                    
             }
             else
-                res.json({ 'message': 'password is incorrect' })
+                res.render('user/login', { type: 1, message: 'Mật khẩu không chính xác', field: 1 });
         }
         else {
-            res.json({ 'message': 'email is incorrect' })
+            res.render('user/login', { type: 1, message: 'Email không chính xác', field: 0 });
         }
     })
         .catch(err => {
-            console.log(err)
-            res.redirect('/login')
-        })
+            console.log(err);
+            res.redirect('/login');
+        });
 });
 
 router.post('/register', urlencodedParser, (req, res) => {
@@ -98,46 +101,35 @@ router.post('/register', urlencodedParser, (req, res) => {
     var _email = req.body.email_register
     var _phone = req.body.phone
     var _password = req.body.password_register
-    var _re_password = req.body.password_again
     var _address = req.body.address
-	
-    if ((!_email || !_password))
-        res.json({ 'message': 'Empty email or password' })
-    if (!req.body.type)
-        var _type = false;
-    else
-        var _type = req.body.type
-    if (!req.body.fullname)
-        var _fullname = req.body.username
+    var _fullname = req.body.fullname;
 
-    if (_password == _re_password) {
-        user.findOne({
-            where: {
-                email: _email
-            }
-        }).then(result => {
-            if (result)
-                res.json({ 'message': 'email is used' })
-            else {
-                var hash = bcrypt.hashSync(_password, 10);
-                user.create({
-                    fullname: _fullname,
-                    username: _username,
-                    email: _email,
-                    phone: _phone,
-                    password: hash,
-                    type: _type,
-                    address: _address
-                })
-                res.render('user/index')
-            }
-        })
-            .catch(err => {
-                console.log(err)
+    user.findOne({
+        where: {
+            email: _email
+        }
+    }).then(result => {
+        if (result)
+            res.render('user/login', { type: 2, message: 'Email đã tồn tại', field: 2 });
+        else {
+            var hash = bcrypt.hashSync(_password, HASH_KEY_SYNC);
+            user.create({
+                fullname: _fullname,
+                username: _username,
+                email: _email,
+                phone: _phone,
+                password: hash,
+                type: false,
+                address: _address
             })
+            res.redirect('/login');
+        }
+    })
+        .catch(err => {
+            console.log(err)
+            res.redirect('/login');
+        });
         
-    }
-    else res.json({ 'message': 're-password is not correct' })
 });
 
 
@@ -152,8 +144,9 @@ router.get('/auth/facebook/callback',
         // var payload = { id: result.id, type: result.type }
         // accessToken = jwt.sign(payload, 'secret')
         // res.status(200).json({token : accessToken})
-      res.redirect('/');
-});
+        res.redirect('/');
+    }
+);
 
 // Register via Google
 
@@ -163,15 +156,17 @@ router.get('/auth/google/callback',
   passport.authenticate('google', { successRedirect : '/', failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
-  });
+    }
+);
 
 
   // USER api
 
-router.get('/api/user', passport.authenticate('jwt', { session: false }), (req, res)=>{
+router.get('/api/user', passport.authenticate('jwt', { session: false }), (req, res) => {
     if (req.user.dataValues.type !== true) {
         return res.sendStatus(403);
     }
+
     user.findAll({
         where:{
             type: false
