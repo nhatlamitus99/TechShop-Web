@@ -14,6 +14,7 @@ const path = require('path')
 const jwt = require('jsonwebtoken');
 const passportJWT = require('passport-jwt');
 
+
 var ExtractJWT = passportJWT.ExtractJwt;
 var JWTStrategy = passportJWT.Strategy;
 
@@ -23,7 +24,7 @@ app.set('view engine', 'ejs')
 
 app.use(cookieParser()); //Parse cookie
 app.use(bodyParser.urlencoded({ extended: false })); //Parse body để get data
-app.use(session({ secret: 'keyboard cat', key: 'sid'}));  //Save user login
+app.use(session({ secret: 'keyboard cat', key: 'sid', resave: true,saveUninitialized: true}));  //Save user login
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));

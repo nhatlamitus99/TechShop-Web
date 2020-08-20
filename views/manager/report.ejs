@@ -10,8 +10,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
+
 <style>
 </style>
 
@@ -29,60 +28,50 @@
 	<div style="height:100vh;width:500px;float:left;">
 		<div id="hd" class="d_header t_header">
 			
-		
 		</div>
-		
-		<div class="d_content t_content" >
-			<div class="btnrow" style="background-color:#f02e41;clear:both;">Thêm</div>	
-			<table class="table" style="">
-			<thead>
-			<tr>
-				<th scope="col">Tên kho</th>
-				<th scope="col">Địa chỉ</th>
-				<th scope="col">Thao tác</th>
-			</tr>
-			</thead>
-			<tbody>
-				<tr disabled="disabled" id="row" style="visibility:hidden;height:0%;overflow:hidden;">
-					<th scope="row">1</th>
-					<td></td>
-					
-					<td><div class="btnrow" style="background-color:#3955e3;">Xóa</div>
-					<div class="btnrow" style="background-color:#f02e41;">Sửa</div>
-					<div class="btnrow" style="background-color:#06993c;">Nhập hàng</div>
-					</td>
-				</tr>
-    
-			</tbody>
-			</table>
+		<div  class="d_content t_content" >
 			
+			<div style="float:left;overflow:auto;width:500px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+				<div style="background-color:#8F8F80;color:white;text-align:center;">Top Bán chạy</div>
 				
+				<div style="width:100%;overflow:auto;background-color:#8F8F80;color:white;">
+					<div class="cell">Tên hàng hóa</div>
+					<div class="cell">số lượng bán</div>
+				</div>
+				<div style="clear:both;">
+					<div class="cell">Casio FX 570</div>
+					<div class="cell">30</div>
+				</div>
+				<div style="clear:both;">
+					<div class="cell">Casio FX 570</div>
+					<div class="cell">30</div>
+				</div>
+				<div style="clear:both;">
+					<div class="cell">Casio FX 570</div>
+					<div class="cell">30</div>
+				</div>
+			</div>
+			<div style="margin-top:10px;width:500px;height:400px;float:right;">
+				<div id="chartContainer1" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);height: 400px; width: 400px;"></div>
+			</div>
+			<div style="float:left;margin-top:10px;width:50%;height:500px;">
+				<div id="chartContainer" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);height: 500px; width: 100%;"></div>
+				<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+			</div>
+			
+			
 		</div>
 	</div>
-</div>
 <script src="/script/navigate.js"></script>
+<script src="/script/chart.js"></script>
 <script>
-	$.ajax({
-    url: "http://localhost:3000/api/storage",
-    type: 'GET',
-	headers: {token : localStorage.getItem("token")}
-	,
-    success: function(data) {
-				var itm = document.getElementById("row");
-				for (var i = 0 ; i < data.data.length; i++)
-				{
-				
-				var cln = itm.cloneNode(true);
-				cln.childNodes[1].innerHTML=data.data[i].name;
-				cln.childNodes[3].innerHTML=data.data[i].position;
-				cln.style.height="50px";
-				cln.style.visibility="visible";
-				document.getElementById("row").parentElement.appendChild(cln);
-				}
-				itm.parentElement.removeChild(itm.parentElement.childNodes[1]);
-				
-			}
-	});
+	
+	for (var i=0;i<5;i++){
+	var x=document.getElementById("row");
+	var cln = x.cloneNode(true);
+	x.parentElement.appendChild(cln);
+	}
 	var myvar;
 	function affect()
 	{
@@ -93,6 +82,10 @@
 			return;
 		}
 		document.getElementById("opt").style.opacity= parseFloat(x)+0.1;
+	}
+	function no()
+	{
+		alert(1);
 	}
 	function option()
 	{

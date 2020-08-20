@@ -14,7 +14,8 @@ const Product = db.define("Product", {
     categoryID: sequelize.INTEGER,
     number: sequelize.INTEGER,
     number_sell: sequelize.INTEGER,
-    storageID: sequelize.INTEGER 
+    storageID: sequelize.INTEGER,
+	promotion: sequelize.INTEGER
 })
 
 Product.associate = function(models) {
@@ -41,9 +42,9 @@ Product.associate = function(models) {
     Product.hasMany(models.Like, {foreignKey: 'id'})
 };
 
-// db.sync()
-// .then(()=>{
-//     console.log("Create Product successfully...")
-// })
+ db.sync()
+ .then(()=>{
+     console.log("Create Product successfully...")
+	})
 
 module.exports = Product

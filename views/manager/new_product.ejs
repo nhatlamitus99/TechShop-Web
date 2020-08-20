@@ -13,6 +13,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 <style>
+	.inp{
+	position:absolute;
+	height:25px;
+	float:right;
+	right:50%;
+	width:300px;
+	}
 </style>
 
 </head>
@@ -31,37 +38,45 @@
 			
 		</div>
 		<div class="d_content t_content" style="line-height:40px;">
-			<img src="/images/img/edit.png" style="width:20px;height:20px;opacity:50%;"></img>
-			<div style="padding:10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);width:90%;height:auto;overflow:auto;">
-			<div>
-			mã sản phẩm:
-				<span id="prid" style="font-weight:bold;">#1249</span>
+			
+			
+			
+			<div style="width:60%;font-family:Arial;position:relative;left:20%;">
+				<div class="form-group">
+					<label for="prname">Tên sản phẩm</label>
+					<input type="text" class="form-control" id="prname" >
+				</div>
+				<div class="form-group">
+					<label for="prprice">Đơn giá</label>
+					<input type="text" class="form-control" id="prprice" >
+				</div>
 				
-			</div>
-			<div>tên sản phẩm:
-				<span id="prname" style="font-weight:bold;">SSD 128GB Kingston</span>
+				<div class="form-group">
+					<label for="prprd">Nhà sản xuất</label>
+					<select class="form-control" id="prprd">
+						<option>Sam Sung</option>
+						<option>Sony</option>
+					</select>
+				</div>
 				
+				
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Thông tin giới thiệu sản phẩm</label>
+					<textarea class="form-control" id="prinfo" rows="3"></textarea>
+				</div>
+				
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Thông số kỹ thuật</label>
+					<textarea class="form-control" id="prdetail" rows="3"></textarea>
+				</div>
+				
+				<div class="form-group">
+					<label for="file">Hình ảnh minh họa</label>
+					<input type="file" class="form-control-file" id="file">
+				</div>
+				<button onclick="update()" class="btn btn-primary">Submit</button>
 			</div>
-			<div>số lượng còn lại:
-				<span id="prrm" style="font-weight:bold;">50</span>
-			</div>
-			<div>các kho đang chứa:
-				<span style="font-weight:bold;">1A,1B</span>
-			</div>
-			<div>đơn giá:
-				<span id="prprice" style="font-weight:bold;">#1249</span>
-			</div>
-			<div>nhà sản xuất:
-				<span style="font-weight:bold;">Kingston</span>
-			</div>
-			<div>thông số kỹ thuật:
-				<span style="font-weight:bold;">128GB, tuổi thọ trung bình 1 triệu giờ, tần số: 2.7</span>
-			</div>
-			<div>hình ảnh</div>
-			<img style="float:left;width:200px;height:200px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="/images/240g.jpg"></img>
-			<img style="float:left;width:200px;height:200px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="/images/123.jpg"></img>
-			<div class="btnrow" style="display:block;margin-left:calc(50% - 50px);background-color:#3955e3;clear:both;opacity:30%;">update</div>
-			</div>
+			
 			
 			</div>
 	</div>
@@ -69,23 +84,36 @@
 <script src="/script/navigate.js"></script>
 
 <script>
+	var formData = new FormData();
 	
-	var id= <%-id%>;
 	
-	$.ajax({
-    url: "http://localhost:3000/api/product/"+id,
-    type: 'GET',
-	headers: {token : localStorage.getItem("token")}
-	,
-    success: function(data) {
-				console.log(data);
-				document.getElementById("prname").innerHTML=data.data.name;
-				document.getElementById("prid").innerHTML=data.data.id;
-				document.getElementById("prprice").innerHTML=data.data.price;
-				document.getElementById("prrm").innerHTML=data.data.number-data.data.number_sell;
-				
+	function update()
+	{
+	
+		formData.append('file', $('#file')[0].files[0]);
+		formData.append('name',document.getElementById("prname").value);
+		formData.append('brand_name','Sam Sung');
+		formData.append('info',document.getElementById("prinfo").value);
+		formData.append('price',parseInt(document.getElementById("prprice").value));
+		formData.append('category',"Ổ cứng");
+		formData.append('number',0);
+		formData.append('detail',document.getElementById("prdetail").value);
+		formData.append('position',"");
+		console.log(formData);
+		$.ajax({
+		url: "http://localhost:3000/product/",
+		type: 'POST',
+		headers: {token : localStorage.getItem("token")},
+		data:formData
+		,
+		processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+		success: function(data) {
+			window.location.href="/manager/product/";
 			}
-	});
+		});
+	}
+	
 	
 	
 	var myvar;

@@ -19,9 +19,9 @@ Cart.associate = function(models) {
 
 
 
-// db.sync()
-// .then(()=>{
-//     console.log("Create Cart successfully...")
-// })
+db.sync()
+ .then(()=>{
+     console.log("Create Cart successfully...")
+ })
 
 module.exports = Cart

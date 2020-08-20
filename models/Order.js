@@ -2,11 +2,11 @@ const db = require('../db')
 const sequelize = require('sequelize');
 
 const Order = db.define("Order", {
-    userID: sequelize.INTEGER,
+	userID: sequelize.INTEGER,
     date: sequelize.DATE,
-    productID: sequelize.INTEGER,
-    number: sequelize.INTEGER,
-    status: sequelize.STRING
+    status: sequelize.STRING,
+	address: sequelize.STRING,
+	rec_phone: sequelize.STRING
 })
 
 Order.associate = function(models) {
@@ -14,7 +14,7 @@ Order.associate = function(models) {
 };
 
 Order.associate = function(models) {
-    Order.belongsTo(models.Product, {foreignKey: 'productID'})
+    Order.hasMany(models.Billdetail, {foreignKey: 'id'})
 };
 
 // db.sync()

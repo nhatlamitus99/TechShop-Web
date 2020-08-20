@@ -17,6 +17,7 @@ var order = require('./models/Order')
 var store = require('./models/Storage')
 var like = require('./models/Like')
 var cart = require('./models/Cart')
+var billdt= require('./models/Billdetail')
 const { access } = require('fs')
 
 
@@ -60,9 +61,12 @@ router.get('/login', (req, res)=>{
     res.render('user/login')
 })
 
+
+
 router.post('/login', urlencodedParser, (req, res)=>{
     var _email = req.body.email
     var _password = req.body.password
+	
     if(!_email || !_password)
         res.json({'message': 'Empty email or password'})
     const hash = bcrypt.hashSync(_password, 10);
@@ -70,16 +74,16 @@ router.post('/login', urlencodedParser, (req, res)=>{
         where:{
             email: _email
         }
-    }).then(result =>{
-        if(result){
+    }).then( (result) =>{
+        if(result) {
             if(bcrypt.compareSync(_password, result.password)){
                 var payload = { id: result.id, type: result.type }
                 accessToken = jwt.sign(payload, 'secret')
-                // if(result.type==true)
-                //     res.render('manager/wellcome', {token: token_id})
-                // else
-                //     res.render('user/index', {token: token_id})
-                res.status(200).json({token : accessToken})
+                if(result.type==true)
+                    res.render('manager/saveToken', {token: accessToken, user: result.username})
+                else
+                    res.render('user/index', {token: accessToken })
+                //res.status(200).json({token : accessToken})
             }
             else 
                 res.json({'message': 'password is incorrect'})
@@ -101,6 +105,7 @@ router.post('/signup', urlencodedParser, (req, res)=>{
     var _password = req.body.password_signup
     var _re_password = req.body.password_again
     var _address = req.body.address
+	
     if((!_email || !_password))
         res.json({'message': 'Empty email or password'})
     if(!req.body.type)
@@ -311,11 +316,10 @@ router.get('/api/product/:id', (req, res)=>{
     }).catch(err=> console.log(err)) 
 })
 
-router.post('/product', uploadFile.single('file'), passport.authenticate('jwt', { session: false }), (req, res)=>{
+router.post('/product', uploadFile.single('file'),passport.authenticate('jwt', { session: false }), (req, res)=>{
     if (req.user.dataValues.type !== true) {
         return res.sendStatus(403);
     }
-
     var _name = req.body.name
     var _brand = req.body.brand_name
     var _info = req.body.info
@@ -325,7 +329,9 @@ router.post('/product', uploadFile.single('file'), passport.authenticate('jwt', 
 
     if(!req.file)
         res.json({'message': 'Empty image'})
-
+	
+	
+	
     brand.findOne({
         where:{
             name: _brand
@@ -339,13 +345,10 @@ router.post('/product', uploadFile.single('file'), passport.authenticate('jwt', 
                 }
             }).then(result2=>{
                 if(result2){
-                    _categoryID = result2.dataValues.id
-                    store.findOne({
-                        where:{
-                            position: _position
-                        }
-                    }).then(result3=>{
-                        _storageID = result3.dataValues.id
+						_categoryID = result2.dataValues.id
+						console.log(_price)
+						
+						
                         product.create({
                             name: _name,
                             brandID : _brandID,
@@ -355,16 +358,16 @@ router.post('/product', uploadFile.single('file'), passport.authenticate('jwt', 
                             detail: req.body.detail,
                             image: req.file.destination+"/"+req.file.filename,
                             categoryID: _categoryID,
-                            storageID: _storageID,
+                            storageID: 0,
                             number: req.body.number,
                             number_sell: 0
                         })
-                    })
+                    
                 }     
             }).catch(err=>console.log(err))
         }
     }).catch(err=>console.log(err))
-    res.render('manager/product')
+    return res.sendStatus(200)
 })
 
 router.put('/product/:id', uploadFile.single('file'), passport.authenticate('jwt', { session: false }), (req, res)=>{
@@ -699,6 +702,81 @@ router.get('/manager/order', passport.authenticate('jwt', { session: false }),(r
     .catch(err=> console.log(err))
 })
 
+
+router.get('/manager/template/header/header.txt',(req, res)=>{
+        res.render('manager/template/header')   
+})
+router.get('/manager/template/navi.txt',(req, res)=>{
+        res.render('manager/template/navi')   
+})
+router.get('/manager/wellcome',(req, res)=>{
+        res.render('manager/wellcome')   
+})
+router.get('/manager/store',(req, res)=>{
+        res.render('manager/store')   
+})
+router.get('/manager/pending',(req, res)=>{
+        res.render('manager/pending')   
+})
+router.get('/manager/catalogy',(req, res)=>{
+        res.render('manager/catalogy')   
+})
+router.get('/manager/account',(req, res)=>{
+        res.render('manager/account')   
+})
+router.get('/manager/product',(req, res)=>{
+        res.render('manager/product')   
+})
+router.get('/manager/report',(req, res)=>{
+        res.render('manager/report')   
+})
+router.get('/manager/detail_product',(req, res)=>{
+        res.render('manager/detail_product')   
+})
+router.get('/manager/bill',(req, res)=>{
+        res.render('manager/bill')   
+})
+router.get('/manager/detail_bill/:id',(req, res)=>{
+        res.render('manager/detail_bill',{'id':req.params.id})   
+})
+router.get('/manager/new_product',(req, res)=>{
+        res.render('manager/new_product')   
+})
+router.get('/manager/edit_product/:id',(req, res)=>{
+        res.render('manager/edit_product',{'id':req.params.id})   
+})
+
+router.get('/manager/detail_product/:id',(req, res)=>{
+ 	res.render('manager/detail_product',{'id' : req.params.id});
+})
+
+
+
+router.get('/manager/api/detailbill/:id',passport.authenticate('jwt', { session: false }),(req, res)=>{
+    if (req.user.dataValues.type !== true) {
+        return res.sendStatus(403);
+    }
+    billdt.findAll({
+        where:{
+            id: req.params.id
+        }
+    })
+    .then(results=>{
+        res.json({'data': results})
+    })
+    .catch(err=> console.log(err))
+})
+
+
+router.get('/api/promotion',(req, res)=>{
+    promotion.findAll()
+    .then(results=>{
+        res.json({'data': results})
+    })
+    .catch(err=> console.log(err))
+})
+
+
 router.get('/manager/api/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
     if (req.user.dataValues.type !== true) {
         return res.sendStatus(403);
@@ -739,6 +817,8 @@ router.get('/manager/api/order/new', passport.authenticate('jwt', { session: fal
     })
     .catch(err=> console.log(err))
 })
+
+
 
 router.get('/manager/order/new/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
     if (req.user.dataValues.type !== true) {
@@ -782,7 +862,7 @@ router.get('/manager/order/pending', passport.authenticate('jwt', { session: fal
         }
     })
     .then(results=>{
-        res.render('manager/pending', {'data': results})
+        res.json({'data': results})
     })
     .catch(err=> console.log(err))
 })
@@ -806,7 +886,7 @@ router.get('/manager/order/pending/:id', passport.authenticate('jwt', { session:
     if (req.user.dataValues.type !== true) {
         return res.sendStatus(403);
     }
-    order.findAll({
+    billdt.findAll({
         where:{
             status: "pending",
             id: req.params.id
@@ -1092,6 +1172,7 @@ router.delete('/storage/:id', passport.authenticate('jwt', { session: false }),(
     })
     res.render('manager/store')
 })
+
 
 
 module.exports = router
