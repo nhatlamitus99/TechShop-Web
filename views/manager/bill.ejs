@@ -37,78 +37,39 @@
 				<div style="width:100%;border-top-style:solid;border-width:1px;"></div>
 				<div>đăng xuất</div>
 			</div>
-			<div style="width:360px;height:50px;float:left;">
-			<input  type="text" placeholder="Search" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:3px;color:#CCCCCC;float:left;width:325px;border-color:#DDDDDD;border-width:1px;height:40px;">			</input>
-			<img src="/images/img/look_up.png" style="float:left;filter: opacity(30%);width:30px;height:90%; height:70%;float:left;"></img>
-			</div>
-			<div style="float:left;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);float:left;width:30%;border-radius:10px;border-color:#CCCCCC;border-width:1px;height:40px;">
-			<img src="/images/img/sort.png" style="filter: opacity(30%);width:20px; height:20px;float:right;"></img>
-			<select style="color:#999999;height:100%;width:90%;border-color:#CCCCCC;" name="cars" id="cars">
+			<div style="float:left;float:left;border-color:#CCCCCC;border-width:1px;height:40px;">
+			Sắp xếp:
+			<select style="color:#999999;height:100%;color:black;"  id="sortby">
 				<option value="volvo">Ngày tháng</option>
 				<option value="saab">Tổng giá trị</option>
 				<option value="opel">Địa điểm</option> 
 			</select>
 			</div>
-			<div style="height:300px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:5%;clear:both;width:auto;border-color:#AAAAAA;border-width:1px;overflow:auto;">
-				<div style="line-height:15px;color:white;width:100%;background-color:#8F8F80;min-height:30px;overflow:hidden;">
-					<span style="width:10%;height:30px;" class="cell">
-					mã đơn hàng
-					</span>
-					<span style="width:10%;height:30px;" class="cell">
-					ngày đặt hàng
-					</span>
-					<span class="cell">
-					địa chỉ giao hàng
-					</span>
-					<span style="width:10%;height:30px;" class="cell">
-					tổng giá trị
-					</span>
-				</div>
-				<div id="row" style="visibility:hidden;color:#4c4d4f;background-color:white;width:100%;float:left;height:0px;">
-					<span style="width:10%;" class="cell">
-					#872938
-					</span>
-					<span style="width:10%;" class="cell">
-					30/2/2020
-					</span>
-					<span class="cell">
-					Tân Bình, hẻm 48, Bùi Thị Xuân
-					</span>
-					<span style="width:10%;" class="cell">
-					54$
-					</span>
-					<span style="width:400px;"class="cell">
-					<div class="btnrow" style="background-color:#f02e41;">xử lý</div>
-					<div class="btnrow" style="background-color:#06993c;" onclick="detail(this)")>chi tiết</div>
-					</span>
-				</div>
-				
-			</div>
 			
-			<div style="background-color:white;line-height:40px;padding:3px;font-weight:bold;height:300px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:5%;clear:both;width:auto;border-color:#AAAAAA;border-width:1px;overflow:auto;">
-				<span>chi tiết đơn hàng 
-				<span id="idbill" style="color:#5555FF;"></span></span>
-				</br>
-				<span>địa chỉ giao hàng:<span id="addr" style="color:#5555FF;"></span> </span>
-				</br>
-				<span>sđt nhận hàng:<span id="rec_phone" style="color:#5555FF;"></span>  </span>
-				</br>
-				<span>ghi chú: <span id="note" style="color:#5555FF;"></span> </span>
-				</br>
-				<span class="t_detail_bill_row">mã sp</span>
-				<span class="t_detail_bill_row">tên sp</span>
-				<span class="t_detail_bill_row">số lượng</span>
-				<span class="t_detail_bill_row">kho chứa</span>
-				<span class="t_detail_bill_row">ghi chú</span>
-				</br>
-				<span class="t_detail_bill_row">#1243</span>
-				<span class="t_detail_bill_row">Asus vivobook A902</span>
-				<span class="t_detail_bill_row">1</span>
-				<span class="t_detail_bill_row">1,4,6</span>
-				<span class="t_detail_bill_row">none</span>
-				</br>
-				<div class="btnrow" style="display:block;margin-left:calc(50% - 50px);background-color:#3955e3;">xử lý</div>
-			</div>
+			<table class="table" style="">
+			<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Ngày đặt hàng</th>
+				<th scope="col">Địa chỉ</th>
+				<th scope="col">Tổng giá trị</th>
+				<th scope="col">thao tác</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr  id="row" style="visibility:hidden;height:0%;overflow:hidden;">
+					<th scope="row">1</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<div class="btnrow" style="background-color:#f02e41;">xử lý</div>
+						<div class="btnrow" style="background-color:#06993c;" onclick="detail(this)")>chi tiết</div>
+					</td>
+				</tr>
+			</tbody>
+			</table>
+			
 		</div>
 	</div>
 </div>
@@ -127,6 +88,7 @@
 	,
     success: function(data) {
 			console.log(data);	
+			var itm = document.getElementById("row");
 			for (var i=0;i < data.data.length ;i++)
 				{
 				$.ajax({
@@ -149,7 +111,7 @@
 				});
 				
 				
-				var itm = document.getElementById("row");
+				
 				var cln = itm.cloneNode(true);
 				cln.childNodes[1].innerHTML=data.data[i].id;
 				var t=new Date(data.data[i].date);
@@ -161,6 +123,7 @@
 				cln.style.height="50px";
 				document.getElementById("row").parentElement.appendChild(cln);
 				}
+			itm.parentElement.removeChild(itm.parentElement.childNodes[1]);
 			}
 	});
 	
@@ -178,6 +141,7 @@
 	}
 	function detail(e)
 	{
+		window.location.replace("/manager/detail_bill/"+e.parentElement.parentElement.childNodes[1].innerHTML);
 		$.ajax({
 		url: "http://localhost:3000/manager/api/order/new/"+e.parentElement.parentElement.childNodes[1].innerHTML,
 		type: 'GET',

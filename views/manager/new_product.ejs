@@ -38,32 +38,45 @@
 			
 		</div>
 		<div class="d_content t_content" style="line-height:40px;">
-			<img src="/images/img/edit.png" style="width:20px;height:20px;opacity:50%;"></img>
-			<div style="padding:10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);width:90%;height:auto;overflow:auto;">
-			<form action="http://localhost:3000/product/" method="POST" >
-			<div>tên sản phẩm:
-				<input class="inp" type="text" id="prname" style="font-weight:bold;"></input>
+			
+			
+			
+			<div style="width:60%;font-family:Arial;position:relative;left:20%;">
+				<div class="form-group">
+					<label for="prname">Tên sản phẩm</label>
+					<input type="text" class="form-control" id="prname" >
+				</div>
+				<div class="form-group">
+					<label for="prprice">Đơn giá</label>
+					<input type="text" class="form-control" id="prprice" >
+				</div>
 				
+				<div class="form-group">
+					<label for="prprd">Nhà sản xuất</label>
+					<select class="form-control" id="prprd">
+						<option>Sam Sung</option>
+						<option>Sony</option>
+					</select>
+				</div>
+				
+				
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Thông tin giới thiệu sản phẩm</label>
+					<textarea class="form-control" id="prinfo" rows="3"></textarea>
+				</div>
+				
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Thông số kỹ thuật</label>
+					<textarea class="form-control" id="prdetail" rows="3"></textarea>
+				</div>
+				
+				<div class="form-group">
+					<label for="file">Hình ảnh minh họa</label>
+					<input type="file" class="form-control-file" id="file">
+				</div>
+				<button onclick="update()" class="btn btn-primary">Submit</button>
 			</div>
 			
-			<div>đơn giá:
-				<input class="inp" type="text" id="prprice" style="font-weight:bold;"></input>
-			</div>
-			<div>nhà sản xuất:
-				<select class="inp" type="text" style="font-weight:bold;"></select>
-			</div>
-			<div>thông số kỹ thuật:
-				<input class="inp" type="select" style="font-weight:bold;"></input>
-			</div>
-			<div>kho hàng:
-				<select class="inp" type="text" style="font-weight:bold;"></select>
-			</div>
-			<div>hình ảnh</div>
-			<input id="file" class="inp" style="height:50px" type="file"></input></br>
-			<input id="tk" name="token" type="hidden" />
-			<div class="btnrow" onclick="update()" style="display:block;margin-left:calc(50% - 50px);background-color:#3955e3;clear:both;">update</div>
-			</form>
-			</div>
 			
 			</div>
 	</div>
@@ -76,16 +89,17 @@
 	
 	function update()
 	{
-		
+	
 		formData.append('file', $('#file')[0].files[0]);
-		formData.append('name',"Duc");
-		formData.append('brand_name',"Sam Sung");
-		formData.append('info',"lololololol");
-		formData.append('price',523423);
+		formData.append('name',document.getElementById("prname").value);
+		formData.append('brand_name','Sam Sung');
+		formData.append('info',document.getElementById("prinfo").value);
+		formData.append('price',parseInt(document.getElementById("prprice").value));
 		formData.append('category',"Ổ cứng");
-		formData.append('number',5);
-		formData.append('detail',"câccacacacacac");
-		formData.append('position',"Nguyễn Tri Phương, Q 10, HCM");
+		formData.append('number',0);
+		formData.append('detail',document.getElementById("prdetail").value);
+		formData.append('position',"");
+		console.log(formData);
 		$.ajax({
 		url: "http://localhost:3000/product/",
 		type: 'POST',
@@ -93,9 +107,9 @@
 		data:formData
 		,
 		processData: false,  // tell jQuery not to process the data
-       contentType: false,  // tell jQuery not to set contentType
+        contentType: false,  // tell jQuery not to set contentType
 		success: function(data) {
-			console.log(data);	
+			window.location.href="/manager/product/";
 			}
 		});
 	}

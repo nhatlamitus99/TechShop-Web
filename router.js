@@ -79,10 +79,10 @@ router.post('/login', urlencodedParser, (req, res)=>{
             if(bcrypt.compareSync(_password, result.password)){
                 var payload = { id: result.id, type: result.type }
                 accessToken = jwt.sign(payload, 'secret')
-                //if(result.type==true)
+                if(result.type==true)
                     res.render('manager/saveToken', {token: accessToken, user: result.username})
-                // else
-                //     res.render('user/index', {token: token_id})
+                else
+                    res.render('user/index', {token: accessToken })
                 //res.status(200).json({token : accessToken})
             }
             else 
@@ -345,13 +345,10 @@ router.post('/product', uploadFile.single('file'),passport.authenticate('jwt', {
                 }
             }).then(result2=>{
                 if(result2){
-                    _categoryID = result2.dataValues.id
-                    store.findOne({
-                        where:{
-                            position: _position
-                        }
-                    }).then(result3=>{
-                        _storageID = result3.dataValues.id
+						_categoryID = result2.dataValues.id
+						console.log(_price)
+						
+						
                         product.create({
                             name: _name,
                             brandID : _brandID,
@@ -361,16 +358,16 @@ router.post('/product', uploadFile.single('file'),passport.authenticate('jwt', {
                             detail: req.body.detail,
                             image: req.file.destination+"/"+req.file.filename,
                             categoryID: _categoryID,
-                            storageID: _storageID,
+                            storageID: 0,
                             number: req.body.number,
                             number_sell: 0
                         })
-                    })
+                    
                 }     
             }).catch(err=>console.log(err))
         }
     }).catch(err=>console.log(err))
-    res.render('manager/product')
+    return res.sendStatus(200)
 })
 
 router.put('/product/:id', uploadFile.single('file'), passport.authenticate('jwt', { session: false }), (req, res)=>{
@@ -739,6 +736,9 @@ router.get('/manager/detail_product',(req, res)=>{
 router.get('/manager/bill',(req, res)=>{
         res.render('manager/bill')   
 })
+router.get('/manager/detail_bill/:id',(req, res)=>{
+        res.render('manager/detail_bill',{'id':req.params.id})   
+})
 router.get('/manager/new_product',(req, res)=>{
         res.render('manager/new_product')   
 })
@@ -761,6 +761,15 @@ router.get('/manager/api/detailbill/:id',passport.authenticate('jwt', { session:
             id: req.params.id
         }
     })
+    .then(results=>{
+        res.json({'data': results})
+    })
+    .catch(err=> console.log(err))
+})
+
+
+router.get('/api/promotion',(req, res)=>{
+    promotion.findAll()
     .then(results=>{
         res.json({'data': results})
     })

@@ -14,7 +14,8 @@ const Product = db.define("Product", {
     categoryID: sequelize.INTEGER,
     number: sequelize.INTEGER,
     number_sell: sequelize.INTEGER,
-    storageID: sequelize.INTEGER 
+    storageID: sequelize.INTEGER,
+	promotion: sequelize.INTEGER
 })
 
 Product.associate = function(models) {

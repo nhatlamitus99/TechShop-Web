@@ -31,27 +31,31 @@
 			
 		
 		</div>
+		
 		<div class="d_content t_content" >
-			<div>danh sách kho</div>
-			<div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);width:90%;height:auto;overflow:auto;">
-				<div style="background-color:#8F8F80;overflow:auto;">
-					<div class="cell" style="width:10%;float:left;">tên kho</div>
-					<div class="cell" style="width:40%;float:left;">vị trí</div>
-					<div class="cell" style="width:50%;float:left;">thao tác</div>
-				</div>
-				<div id="row" style="clear:both;height:0px;overflow:hidden;visibility:hidden;">
-					<div class="cell" style="width:10%;float:left;">1A</div>
-					<div class="cell" style="width:40%;float:left;">123 Nguyễn Tri Phương Q5</div>
-					<div class="cell" style="width:50%;float:left;">
-						<div class="btnrow" style="background-color:#06993c;">xóa</div>
-						<div class="btnrow" style="background-color:#3955e3;">sửa</div>
-					</div>
-						
-				</div>
-				
-			</div>
+			<div class="btnrow" style="background-color:#f02e41;clear:both;">Thêm</div>	
+			<table class="table" style="">
+			<thead>
+			<tr>
+				<th scope="col">Tên kho</th>
+				<th scope="col">Địa chỉ</th>
+				<th scope="col">Thao tác</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr disabled="disabled" id="row" style="visibility:hidden;height:0%;overflow:hidden;">
+					<th scope="row">1</th>
+					<td></td>
+					
+					<td><div class="btnrow" style="background-color:#3955e3;">Xóa</div>
+					<div class="btnrow" style="background-color:#f02e41;">Sửa</div>
+					<div class="btnrow" style="background-color:#06993c;">Nhập hàng</div>
+					</td>
+				</tr>
+    
+			</tbody>
+			</table>
 			
-			<div class="btnrow" style="background-color:#f02e41;clear:both;">thêm</div>	
 				
 		</div>
 	</div>
@@ -64,9 +68,10 @@
 	headers: {token : localStorage.getItem("token")}
 	,
     success: function(data) {
+				var itm = document.getElementById("row");
 				for (var i = 0 ; i < data.data.length; i++)
 				{
-				var itm = document.getElementById("row");
+				
 				var cln = itm.cloneNode(true);
 				cln.childNodes[1].innerHTML=data.data[i].name;
 				cln.childNodes[3].innerHTML=data.data[i].position;
@@ -74,7 +79,7 @@
 				cln.style.visibility="visible";
 				document.getElementById("row").parentElement.appendChild(cln);
 				}
-				
+				itm.parentElement.removeChild(itm.parentElement.childNodes[1]);
 				
 			}
 	});
