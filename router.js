@@ -20,8 +20,9 @@ var cart = require('./models/Cart')
 var billdt= require('./models/Billdetail')
 const { access } = require('fs')
 
+const sequelize = require('sequelize')
 
-
+const Op = sequelize.Op;
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var storage = multer.diskStorage({
@@ -769,7 +770,12 @@ router.get('/manager/api/detailbill/:id',passport.authenticate('jwt', { session:
 
 
 router.get('/api/promotion',(req, res)=>{
-    promotion.findAll()
+    product.findAll({
+		where:{
+				promotion:{[Op.gt]:0}
+			
+		}
+	})
     .then(results=>{
         res.json({'data': results})
     })
