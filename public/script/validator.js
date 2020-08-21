@@ -112,3 +112,9 @@ document.querySelector('#form-register').querySelectorAll('.form-message').forEa
         element.parentElement.classList.remove('invalid');
     }
 });
+
+// Skip to home if token found
+var jwtToken = localStorage.getItem('token');
+if (jwtToken && jwtToken.length) {
+    window.location.replace('/');
+}

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>FAVADA</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <!-- Import font Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <script src="/script/fontawesome-pro.js"></script>
+    <!-- Style -->
+    <link rel="stylesheet" href="/css/account.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+    <!-- Begin Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="ht-list row pt-1 pb-1 justify-content-end align-items-center">
+                    <button onclick="location.href='/account.html'" type="button" class="ht-item">
+                        <i class="far fa-shopping-bag mr-2"></i>
+                        KIỂM TRA ĐƠN HÀNG
+                    </button>
+                    <button onclick="location.href='/login.html'" type="button" class="ht-item">
+                        <i class="far fa-user-circle mr-2"></i>
+                        ĐĂNG NHẬP/ĐĂNG KÝ
+                    </button>
+                    <button onclick="location.href=''" type="button" class="ht-item d-none">
+                        <i class="far fa-user-circle mr-2"></i>
+                        CAO NHƠN HƯNG
+                    </button>
+                    <div class="dropdown">
+                        <button class="ht-item d-none d-sm-block" data-toggle="dropdown">
+                            <i class="far fa-globe mr-2"></i>
+                            CHANGE LANGUAGE
+                        </button>
+                        <!-- Popup to change language -->
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">
+                                <img src="/images/header/flag-icons/vn.svg" alt="" />
+                                Tiếng Việt
+                            </a>
+                            <a class="dropdown-item">
+                                <img src="/images/header/flag-icons/uk.svg" alt="" />
+                                English
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-middle">
+            <div class="container">
+                <div class="d-md-flex flex-md-row align-items-center">
+                    <div class="logo text-center mr-md-4">
+                        <div class="py-3">
+                            <a href="/index.html">
+                                <img id="logo-img" src="images/header/logo.png" alt="logo" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-fill">
+                        <div class="input-group mr-lg-5 mr-3">
+                            <input id="search-box" class="form-control" type="search"
+                                placeholder="Tìm kiếm trên Favada" />
+                            <div class="input-group-append">
+                                <button class="btn-search btn btn-warning">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button onclick="location.href='/account.html'" type="button"
+                                class="btn-wish-list btn btn-outline-dark mr-lg-3 mr-2">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button onclick="location.href='/cart.html'" type="button"
+                                class="btn-shopping-cart btn btn-danger">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-bottom d-none d-md-block">
+            <div class="container">
+                <div class="menu-bar row">
+                    <div class="menu-item dropdown mr-4">
+                        <button data-toggle="dropdown">
+                            <i class="fas fa-list mr-1"></i>
+                            DANH MỤC SẢN PHẨM
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/category.html">
+                                LAPTOP
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                PC - LINH KIỆN
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                MÁN HÌNH
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                BÀN PHÍM
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                CHUỘT
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                TAI NGHE
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                GHẾ GAMING
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                THIẾT BỊ ÂM THANH
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                THIẾT BỊ MẠNG
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                THIẾT BỊ VĂN PHÒNG
+                            </a>
+                            <a class="dropdown-item" href="/category.html">
+                                PHỤ KIỆN
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-item mr-4">
+                        <a href="/policy.html">
+                            HƯỚNG DẪN MUA HÀNG
+                        </a>
+                    </div>
+                    <div class="menu-item mr-4">
+                        <a href="/policy.html">
+                            QUY ĐỊNH BẢO HÀNH
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="/policy.html">
+                            MUA TRẢ GÓP
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Breadcrumb begin-->
+    <div class="breadcrumb p-1 d-none d-sm-block">
+        <div class="container">
+            <a href="/">Trang chủ</a>
+            <i class="far fa-angle-right mx-2"></i>
+            <a>Tài khoản của tôi</a>
+        </div>
+    </div>
+    <!-- Breadcrumb end -->
+    <br />
+
+    <div class="main-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-3 pl-0 pr-4 d-none d-lg-block">
+                    <div class="nav flex-column" id="side-bar" role="tablist">
+                        <div class="nav-item d-flex my-2">
+                            <span class="icon">
+                                <img src="/images/cute_Naeun.jpg" class="rounded-circle" alt="Avatar" width="48">
+                            </span>
+                            <span class="ml-1">
+                                <div>Tài khoản của</div>
+                                <div class="user-name">Cao Nhơn Hưng</div>
+                            </span>
+                        </div>
+                        <a class="nav-item" id="acccount-infor-tab" data-toggle="tab" href="#account-infor" role="tab"
+                            aria-selected="false">
+                            <i class="fas fa-user icon"></i>
+                            Thông tin tài khoản
+                        </a>
+                        <a class="nav-item" id="shopping-list-tab" data-toggle="tab" href="#order-history" role="tab"
+                            aria-selected="true">
+                            <i class="fas fa-list-alt icon"></i>
+                            Quản lý đơn hàng
+                        </a>
+                        <a class="nav-item" id="wishlist-tab" data-toggle="tab" href="#my-wishlist" role="tab"
+                            aria-selected="false">
+                            <i class="fas fa-heart icon"></i>
+                            Sản phẩm yêu thích
+                        </a>
+                        <a class="nav-item" id="checkout-infor-tab" data-toggle="tab" href="#checkout-infor" role="tab"
+                            aria-selected="false">
+                            <i class="far fa-credit-card icon"></i>
+                            Thông tin thanh toán
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-12 px-0">
+                    <div class="tab-content" id="content">
+                        <div class="tab-pane fade" id="account-infor" role="tabpanel">
+                            <h5>Thông tin tài khoản</h5>
+                            <form>
+                                <div class="form-row">
+                                    <div class="label col-md-2 col-4 d-flex align-items-center">
+                                        Họ và tên
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text" class="form-control" value="Cao Nhơn Hưng" required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="label col-md-2 col-4 d-flex align-items-center">
+                                        Số điện thoại
+                                    </div>
+                                    <div class="form-group col-md-8 row pr-0">
+                                        <input id="phone" type="text" class="form-control col-9"
+                                            placeholder="Hãy nhập SĐT để trải nghiệm tốt hơn" required />
+                                        <button class="btn-send-code col-3 px-0">Gửi mã</button>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="label col-md-2 col-4 d-flex align-items-center">
+                                        Mã xác thực
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text" class="form-control"
+                                            placeholder="Nhập mã xác thực gửi tới SĐT trên" required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="label col-md-2 col-4 d-flex align-items-center">Email</div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text" class="form-control" value="cnhonhung@gmail.com" readonly />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="label col-md-2 col-4 d-flex align-items-center">
+                                        Giới tính
+                                    </div>
+                                    <div class="form-group col-8">
+                                        <label class="radio-inline"><input type="radio" name="optradio" checked /> Nam
+                                        </label>
+                                        <label class="radio-inline"><input type="radio" name="optradio" /> Nữ</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="label col-md-2 col-4 d-flex align-items-center">
+                                        <div>Ngày sinh</div>
+                                    </div>
+                                    <div class="form-group form-row col-md-8">
+                                        <select id="dob-day" class="form-control col-3 mr-3">
+                                            <option value="" selected hidden>Ngày</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">...</option>
+                                        </select>
+                                        <select id="dob-month" class="form-control col-3 mr-3">
+                                            <option value="" selected hidden>Tháng</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">...</option>
+                                        </select>
+                                        <select id="dob-year" class="form-control col-3">
+                                            <option value="" selected hidden>Năm</option>
+                                            <option value="1">1999</option>
+                                            <option value="2">2000</option>
+                                            <option value="3">2001</option>
+                                            <option value="4">2002</option>
+                                            <option value="5">2003</option>
+                                            <option value="6">...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-2"> </div>
+                                    <div class="form-group col-8">
+                                        <input class="" type="checkbox" value="" id="defaultCheck1" />
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            Thay đổi mật khẩu
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="label col-md-2 col-4 d-flex align-items-center">
+                                        Mật khẩu cũ
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text" class="form-control" placeholder="Nhập mật khẩu cũ"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="label col-md-2 col-4 d-flex align-items-center">
+                                        Mật khẩu mới
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text" class="form-control"
+                                            placeholder="Nhập mật khẩu từ 6 đến 32 ký tự" required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="label col-md-2 col-4 d-flex align-items-center">
+                                        Nhập lại
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text" class="form-control" placeholder="Nhập lại mật khẩu mới"
+                                            required />
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-2"></div>
+                                    <button type="submit" class="btn-update">
+                                        Cập nhật
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade active show" id="order-history" role="tabpanel">
+                            <h5>Quản lý đơn hàng</h5>
+                            <div class="table-responsive">
+                                <table class="order-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="order-code">Mã đơn hàng</th>
+                                            <th class="order-date">Ngày mua</th>
+                                            <th class="order-product">Sản phẩm</th>
+                                            <th class="order-cost">Tổng tiền</th>
+                                            <th class="order-state">Trạng thái đơn hàng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="order-code">
+                                                <a href="#">36339157</a>
+                                            </td>
+                                            <td class="order-date">
+                                                12/09/2020
+                                            </td>
+                                            <td class="order-product">
+                                                Laptop ASUS ROG Strix G G531GD-AL034T
+                                            </td>
+                                            <td class="order-cost">
+                                                22.990.000đ
+                                            </td>
+                                            <td class="order-state">
+                                                Đang vận chuyển
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="order-code">
+                                                <a href="#">36339157</a>
+                                            </td>
+                                            <td class="order-date">
+                                                12/09/2020
+                                            </td>
+                                            <td class="order-product">
+                                                Laptop ASUS ROG Strix G G531GD-AL034T
+                                            </td>
+                                            <td class="order-cost">
+                                                22.990.000đ
+                                            </td>
+                                            <td class="order-state">
+                                                Đang vận chuyển
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="order-code">
+                                                <a href="#">36339157</a>
+                                            </td>
+                                            <td class="order-date">
+                                                12/09/2020
+                                            </td>
+                                            <td class="order-product">
+                                                Laptop ASUS ROG Strix G G531GD-AL034T
+                                            </td>
+                                            <td class="order-cost">
+                                                22.990.000đ
+                                            </td>
+                                            <td class="order-state">
+                                                Đang vận chuyển
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="order-code">
+                                                <a href="#">36339157</a>
+                                            </td>
+                                            <td class="order-date">
+                                                12/09/2020
+                                            </td>
+                                            <td class="order-product">
+                                                Laptop ASUS ROG Strix G G531GD-AL034T
+                                            </td>
+                                            <td class="order-cost">
+                                                22.990.000đ
+                                            </td>
+                                            <td class="order-state">
+                                                Đang đóng gói sản phẩm
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="order-code">
+                                                <a href="#">36339157</a>
+                                            </td>
+                                            <td class="order-date">
+                                                12/09/2020
+                                            </td>
+                                            <td class="order-product">
+                                                Laptop ASUS ROG Strix G G531GD-AL034T
+                                            </td>
+                                            <td class="order-cost">
+                                                22.990.000đ
+                                            </td>
+                                            <td class="order-state">
+                                                Giao hàng thành công
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="order-code">
+                                                <a href="#">36339157</a>
+                                            </td>
+                                            <td class="order-date">
+                                                12/09/2020
+                                            </td>
+                                            <td class="order-product">
+                                                Laptop ASUS ROG Strix G G531GD-AL034T
+                                            </td>
+                                            <td class="order-cost">
+                                                22.990.000đ
+                                            </td>
+                                            <td class="order-state">
+                                                Giao hàng thành công
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="my-wishlist" role="tabpanel">
+                            <h5>Sản phẩm yêu thích</h5>
+                            <div class="table-responsive">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="product-image">
+                                                <img class="w-100" src="/images/product/small-size/3.jpg"
+                                                    alt="Card image cap" />
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column pr-3 py-2">
+                                                    <div class="d-flex mb-1">
+                                                        <div class="category border-0">Phụ kiện</div>
+                                                        <div class="rating-box flex-fill d-flex justify-content-end">
+                                                            <ul class="rating">
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="far fa-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a href="product.html" class="card-body card-product-name">
+                                                        Tay cầm chơi game Microsoft Xbox One
+                                                    </a>
+                                                    <div class="card-body mt-auto d-flex align-items-end">
+                                                        <div class="price-box">
+                                                            <span class="card-price">
+                                                                780.000đ
+                                                            </span>
+                                                            <span class="card-old-price">
+                                                                980.000đ
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill d-flex justify-content-end">
+                                                            <button onclick="location.href=''" type="button"
+                                                                class="card-btn-wish">
+                                                                <i class="fas fa-heart"></i>
+                                                            </button>
+                                                            <button onclick="location.href=''" type="button"
+                                                                class="card-btn-cart">
+                                                                <i class="fal fa-shopping-cart"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="product-image">
+                                                <img class="w-100" src="/images/product/small-size/3.jpg"
+                                                    alt="Card image cap" />
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column pr-3 py-2">
+                                                    <div class="d-flex mb-1">
+                                                        <div class="category border-0">Phụ kiện</div>
+                                                        <div class="rating-box flex-fill d-flex justify-content-end">
+                                                            <ul class="rating">
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="far fa-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a href="product.html" class="card-body card-product-name">
+                                                        Tay cầm chơi game Microsoft Xbox One
+                                                    </a>
+                                                    <div class="card-body mt-auto d-flex align-items-end">
+                                                        <div class="price-box">
+                                                            <span class="card-price">
+                                                                780.000đ
+                                                            </span>
+                                                            <span class="card-old-price">
+                                                                980.000đ
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill d-flex justify-content-end">
+                                                            <button onclick="location.href=''" type="button"
+                                                                class="card-btn-wish">
+                                                                <i class="fas fa-heart"></i>
+                                                            </button>
+                                                            <button onclick="location.href=''" type="button"
+                                                                class="card-btn-cart">
+                                                                <i class="fal fa-shopping-cart"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="product-image">
+                                                <img class="w-100" src="/images/product/small-size/3.jpg"
+                                                    alt="Card image cap" />
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column pr-3 py-2">
+                                                    <div class="d-flex mb-1">
+                                                        <div class="category border-0">Phụ kiện</div>
+                                                        <div class="rating-box flex-fill d-flex justify-content-end">
+                                                            <ul class="rating">
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="far fa-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a href="product.html" class="card-body card-product-name">
+                                                        Tay cầm chơi game Microsoft Xbox One
+                                                    </a>
+                                                    <div class="card-body mt-auto d-flex align-items-end">
+                                                        <div class="price-box">
+                                                            <span class="card-price">
+                                                                780.000đ
+                                                            </span>
+                                                            <span class="card-old-price">
+                                                                980.000đ
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-fill d-flex justify-content-end">
+                                                            <button onclick="location.href=''" type="button"
+                                                                class="card-btn-wish">
+                                                                <i class="fas fa-heart"></i>
+                                                            </button>
+                                                            <button onclick="location.href=''" type="button"
+                                                                class="card-btn-cart">
+                                                                <i class="fal fa-shopping-cart"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="checkout-infor" role="tabpanel">
+                            <h5>Thông tin thanh toán</h5>
+                            <div class="empty-board text-center">
+                                <div class="my-5">
+                                    <img src="/images/empty.jpg" alt="Empty">
+                                </div>
+                                <div class="my-3">Lưu lại thông tin thanh toán giúp bạn đặt hàng nhanh chóng và dễ dàng
+                                    hơn</div>
+                                <div class="mb-5 mt-4">
+                                    <button type="submit" class="btn-continue-shopping"
+                                        onclick="location.href='/index.html'">Tiếp tục mua sắm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <!-- Footer begin -->
+    <footer>
+        <div class="container pt-3 pb-1">
+            <div class="row d-flex justify-content-between no-gutters">
+                <div class="col-lg-6 pr-lg-5">
+                    <div>
+                        <h5>ĐỊA ĐIỂM MUA HÀNG</h5>
+                        <h2 class="line"></h2>
+                        <ul class="list-unstyled">
+                            <li>
+                                <dl style="list-style: none;">
+                                    <dt>
+                                        <i class="fas fa-map-marker-alt mr-2"></i>227 Đường Nguyễn Văn Cừ, phường 4,
+                                        quận 5, Hồ Chí Minh
+                                    </dt>
+                                    <dd>Thứ 2 - Thứ 6: Từ 9h - 20h</dd>
+                                    <dd>
+                                        Thứ 7: Từ 9h - 18h, Chủ Nhật: Từ 9h
+                                        - 16h
+                                    </dd>
+                                    <dt>
+                                        <i class="fas fa-map-marker-alt mr-2"></i>Khu phố 6, Phường Linh Trung, Quận
+                                        Thủ Đức, Hồ Chí Minh
+                                    </dt>
+                                    <dd>Thứ 2 - Thứ 7: Từ 9h - 18h</dd>
+                                    <dd>Chủ Nhật: Không hoạt động</dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h5>ĐIỆN THOẠI HỖ TRỢ</h5>
+                        <h2 class="line"></h2>
+                        <ul class="list-unstyled normal-text">
+                            <li>Mua hàng: <b>0843 969 899</b></li>
+                            <li>
+                                Bảo hành: <b>0843 969 899 (Line: 8200)</b>
+                            </li>
+                            <li>
+                                Kỹ thuật: <b>0843 969 899 (Line: 8345)</b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 pr-lg-5">
+                    <h5>CHÍNH SÁCH</h5>
+                    <h2 class="line"></h2>
+                    <ul class="list-unstyled normal-text">
+                        <li>Chính sách bán hàng</li>
+                        <li>Chính sách bảo hành</li>
+                        <li>Chính sách bảo mật</li>
+                        <li>Tìm hiểu về trả góp</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <div>
+                        <h5>PHƯƠNG THỨC THANH TOÁN</h5>
+                        <h2 class="line"></h2>
+                        <img src="images/footer/visa.svg" width="54" class="mr-3" />
+                        <img src="images/footer/maestro.svg" width="54" class="mr-3" />
+                        <img src="images/footer/american-express.svg" width="54" class="mr-3" />
+                        <img src="images/footer/jcb.svg" width="54" class="mr-3" />
+                        <img src="images/footer/paypal.svg" width="54" class="mr-3" />
+                        <img src="images/footer/ebay.svg" width="54" />
+                    </div>
+                    <br />
+                    <br />
+                    <div>
+                        <h5>KẾT NỐI VỚI CHÚNG TÔI</h5>
+                        <h2 class="line"></h2>
+                        <img src="images/footer/facebook.svg" width="40" class="mr-3" />
+                        <img src="images/footer/youtube.svg" width="50" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="container p-0">
+                <div class="row no-gutters">
+                    <span class="col-md-10 col-sm-9 text-right">Powered by Team10 - 17CNTN</span>
+                    <span class="col-md-2 col-sm-3 text-right">@Favada 2020</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

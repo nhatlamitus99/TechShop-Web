@@ -8,6 +8,7 @@ const upload = multer({ dest: './uploads/' });
 const passport = require('passport');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const authenticateUser = require('./middlewares/auth');
 const HASH_KEY_SYNC = 10;
 
 var user = require('./models/User');
@@ -55,6 +56,14 @@ router.get('/', (req, res) => {
 });
 
 
+// SEARCH BOX
+router.get('/search', (req, res) => {
+    var query = req.query.q;
+    console.log(query);
+    res.sendStatus(200);
+});
+
+
 // SIGN UP & LOG IN 
 
 // render type: 1 = login, type: 2 = register, type: 0 = do nothing
@@ -74,14 +83,19 @@ router.post('/login', urlencodedParser, (req, res) => {
     }).then((result) => {
         if (result) {
             if (bcrypt.compareSync(_password, result.password)) {
-                var payload = { id: result.id, isAdmin: result.isAdmin };
+                // Session based authentication
+                req.session.isAuth = true;
+                req.session.userID = result.id;
+
+                // Token based authentication
+                var payload = { id: result.id, role: result.role };
                 var accessToken = jwt.sign(payload, 'secret');
-                if (result.isAdmin == true)
+                
+                if (result.role === 0) {
+                    res.render('user/saveToken', { token: accessToken, name: result.fullname });
+                } else {
                     res.render('manager/saveToken', { token: accessToken, user: result.username });
-                else {
-                    res.render('user/saveToken', { token: accessToken });
-                }
-                    
+                }                    
             }
             else
                 res.render('user/login', { type: 1, message: 'Mật khẩu không chính xác', field: 1 });
@@ -94,6 +108,12 @@ router.post('/login', urlencodedParser, (req, res) => {
             console.log(err);
             res.redirect('/login');
         });
+});
+
+router.get('/logout', authenticateUser, (req, res) => {
+    req.session.isAuth = false;
+    req.session.userID = 0;
+    res.redirect('/');
 });
 
 router.post('/register', urlencodedParser, (req, res) => {
@@ -119,7 +139,7 @@ router.post('/register', urlencodedParser, (req, res) => {
                 email: _email,
                 phone: _phone,
                 password: hash,
-                type: false,
+                role: 0,
                 address: _address
             })
             res.redirect('/login');
@@ -129,7 +149,6 @@ router.post('/register', urlencodedParser, (req, res) => {
             console.log(err)
             res.redirect('/login');
         });
-        
 });
 
 
@@ -160,16 +179,24 @@ router.get('/auth/google/callback',
 );
 
 
-  // USER api
+// USER ACCOUNT PAGE
+
+router.get('/account/:tab', authenticateUser, (req, res) => {
+    var tab = parseInt(req.params.tab);
+    res.render('user/account', { tab: tab });
+});
+
+
+// USER api
 
 router.get('/api/user', passport.authenticate('jwt', { session: false }), (req, res) => {
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role !== 2) {
         return res.sendStatus(403);
     }
 
     user.findAll({
         where:{
-            type: false
+            role: { [Op.or]: [0, 1] }
         }
     })
     .then(result=>{
@@ -179,12 +206,12 @@ router.get('/api/user', passport.authenticate('jwt', { session: false }), (req, 
 })
 
 router.get('/api/user/:id', passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role !== 2) {
         return res.sendStatus(403);
     }
     user.findAll({
         where:{
-            type: false,
+            role: { [Op.or]: [0, 1] },
             id: req.params.id
         }
     })
@@ -197,7 +224,7 @@ router.get('/api/user/:id', passport.authenticate('jwt', { session: false }), (r
 // CHECKOUT route & api
 
 router.get('/checkout', passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type === true) {
+    if (req.user.dataValues.role !== 0) {
         return res.sendStatus(403);
     }
     user.findOne({
@@ -214,7 +241,7 @@ router.get('/checkout', passport.authenticate('jwt', { session: false }), (req, 
 })
 
 router.post('/checkout', passport.authenticate('jwt', { session: false }), (req, res)=>{   
-    if (req.user.dataValues.type === true) {
+    if (req.user.dataValues.role !== 0) {
         return res.sendStatus(403);
     }
     user.update({
@@ -262,8 +289,9 @@ router.get('/purchase', (req, res)=>{
 
 // PRODUCT route & api
 
-router.get('/product', (req, res)=>{
-    if (req.user.dataValues.type === true) {
+// for customer only
+router.get('/product', (req, res) => {
+    if (req.user.dataValues.role !== 0) {
         return res.sendStatus(403);
     }
     product.findAll()
@@ -282,7 +310,7 @@ router.get('/api/product', (req, res)=>{
 })
 
 router.get('/product/:id', (req, res)=>{
-    if (req.user.dataValues.type === true) {
+    if (req.user.dataValues.role !== 0) {
         return res.sendStatus(403);
     } 
     var _id = req.params.id 
@@ -307,7 +335,7 @@ router.get('/api/product/:id', (req, res)=>{
 })
 
 router.post('/product', uploadFile.single('file'),passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     var _name = req.body.name
@@ -364,7 +392,7 @@ router.post('/product', uploadFile.single('file'),passport.authenticate('jwt', {
 })
 
 router.put('/product/:id', uploadFile.single('file'), passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     
@@ -387,7 +415,7 @@ router.put('/product/:id', uploadFile.single('file'), passport.authenticate('jwt
 })
 
 router.delete('/product/:id', passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     product.findOne({
@@ -417,7 +445,7 @@ router.delete('/product/:id', passport.authenticate('jwt', { session: false }), 
 // BRAND route & api
 
 router.post('/brand', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     var _name = req.body.name
@@ -457,7 +485,7 @@ router.get('/api/brand/:id', (req, res)=>{
 })
 
 router.put('/brand/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     brand.update({
@@ -473,7 +501,7 @@ router.put('/brand/:id', passport.authenticate('jwt', { session: false }),(req, 
 })
 
 router.delete('/brand/:id', passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     brand.findOne({
@@ -497,7 +525,7 @@ router.delete('/brand/:id', passport.authenticate('jwt', { session: false }), (r
 // CATEGORY route & api
 
 router.post('/category', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     var _name = req.body.name
@@ -537,7 +565,7 @@ router.get('/api/category/:id', (req, res)=>{
 })
 
 router.put('/category/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     category.update({
@@ -553,7 +581,7 @@ router.put('/category/:id', passport.authenticate('jwt', { session: false }),(re
 })
 
 router.delete('/category/:id', passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     category.findOne({
@@ -578,26 +606,40 @@ router.delete('/category/:id', passport.authenticate('jwt', { session: false }),
 
 // CART route & api
 
-router.post('/cart', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type === true) {
+// Get to cart page of user account
+router.get('/cart', authenticateUser, (req, res) => {
+    
+    cart.findOne({
+        where: {
+            userID: req.session.userID
+        }
+    })
+        .then(result => {
+            res.render('user/cart', { 'data': result })
+        })
+        .catch(err => console.log(err))
+});
+
+router.post('/cart', passport.authenticate('jwt', { session: false }), (req, res) => {
+    if (req.user.dataValues.role !== 0) {
         return res.sendStatus(403);
     }
     
-    if(!req.body.productID)
-        res.json({'message': 'Empty product'})
+    if (!req.body.productID)
+        res.json({ 'message': 'Empty product' })
 
-    if(!req.body.number)
-        res.json({'message': 'Empty number of items'})
+    if (!req.body.number)
+        res.json({ 'message': 'Empty number of items' })
 
     cart.create({
         userID: req.user.dataValues.id,
         productID: req.body.productID,
         number: req.body.number
     })
-    .then(result=>{
-        res.json({'data': result})
-    })
-})
+        .then(result => {
+            res.json({ 'data': result })
+        })
+});
 
 router.get('/api/cart', passport.authenticate('jwt', { session: false }), (req, res)=>{
     
@@ -608,19 +650,6 @@ router.get('/api/cart', passport.authenticate('jwt', { session: false }), (req, 
     })
     .then(result=>{
         res.json({'data': result})
-    })
-    .catch(err=> console.log(err))
-})
-
-router.get('/cart', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    
-    cart.findOne({
-        where:{
-            userID: req.user.dataValues.id
-        }
-    })
-    .then(result=>{
-        res.render('user/cart',{'data': result})
     })
     .catch(err=> console.log(err))
 })
@@ -655,7 +684,7 @@ router.delete('/cart/:id', passport.authenticate('jwt', { session: false }),(req
 // ORDER route & api
 
 router.get('/user/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type === true) {
+    if (req.user.dataValues.role !== 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -669,23 +698,9 @@ router.get('/user/order', passport.authenticate('jwt', { session: false }),(req,
     .catch(err=> console.log(err))        
 })
 
-router.get('/user/api/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type === true) {
-        return res.sendStatus(403);
-    }
-    order.findAll({
-        where:{
-            userID: req.user.dataValues.id
-        }
-    })
-    .then(results=>{
-        res.json({'data': results})
-    })
-    .catch(err=> console.log(err))   
-})
 
 router.get('/manager/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll()
@@ -743,7 +758,7 @@ router.get('/manager/detail_product/:id',(req, res)=>{
 
 
 router.get('/manager/api/detailbill/:id',passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     billdt.findAll({
@@ -759,7 +774,7 @@ router.get('/manager/api/detailbill/:id',passport.authenticate('jwt', { session:
 
 
 router.get('/manager/api/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll()
@@ -770,7 +785,7 @@ router.get('/manager/api/order', passport.authenticate('jwt', { session: false }
 })
 
 router.get('/manager/order/new', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -785,7 +800,7 @@ router.get('/manager/order/new', passport.authenticate('jwt', { session: false }
 })
 
 router.get('/manager/api/order/new', passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -802,7 +817,7 @@ router.get('/manager/api/order/new', passport.authenticate('jwt', { session: fal
 
 
 router.get('/manager/order/new/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -818,7 +833,7 @@ router.get('/manager/order/new/:id', passport.authenticate('jwt', { session: fal
 })
 
 router.get('/manager/api/order/new/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -834,7 +849,7 @@ router.get('/manager/api/order/new/:id', passport.authenticate('jwt', { session:
 })
 
 router.get('/manager/order/pending', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -849,7 +864,7 @@ router.get('/manager/order/pending', passport.authenticate('jwt', { session: fal
 })
 
 router.get('/manager/api/order/pending',passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -864,7 +879,7 @@ router.get('/manager/api/order/pending',passport.authenticate('jwt', { session: 
 })
 
 router.get('/manager/order/pending/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     billdt.findAll({
@@ -880,7 +895,7 @@ router.get('/manager/order/pending/:id', passport.authenticate('jwt', { session:
 })
 
 router.get('/manager/api/order/pending/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -896,7 +911,7 @@ router.get('/manager/api/order/pending/:id', passport.authenticate('jwt', { sess
 })
 
 router.get('/manager/order/cancelled', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -911,7 +926,7 @@ router.get('/manager/order/cancelled', passport.authenticate('jwt', { session: f
 })
 
 router.get('/manager/api/order/cancelled', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -926,7 +941,7 @@ router.get('/manager/api/order/cancelled', passport.authenticate('jwt', { sessio
 })
 
 router.get('/manager/order/cancelled/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -942,7 +957,7 @@ router.get('/manager/order/cancelled/:id', passport.authenticate('jwt', { sessio
 })
 
 router.get('/manager/api/order/cancelled/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     order.findAll({
@@ -1096,7 +1111,7 @@ router.get('/api/storage/:id', passport.authenticate('jwt', { session: false }),
 })
 
 router.post('/storage', passport.authenticate('jwt', { session: false }), (req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     if(!req.body.name || !req.body.position)
@@ -1119,7 +1134,7 @@ router.post('/storage', passport.authenticate('jwt', { session: false }), (req, 
 })
 
 router.put('/storage/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     store.update({
@@ -1133,7 +1148,7 @@ router.put('/storage/:id', passport.authenticate('jwt', { session: false }),(req
 })
 
 router.delete('/storage/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.type !== true) {
+    if (req.user.dataValues.role === 0) {
         return res.sendStatus(403);
     }
     store.findOne({

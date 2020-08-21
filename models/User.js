@@ -9,8 +9,7 @@ const User = db.define("User", {
     phone: sequelize.STRING,
     password: sequelize.STRING,
     address: sequelize.STRING,
-    token: sequelize.STRING,
-    isAdmin: sequelize.BOOLEAN,
+    role: sequelize.SMALLINT,
     sex: sequelize.BOOLEAN,
     dob: sequelize.DATE
 })

@@ -24,17 +24,16 @@
         <div class="header-top">
             <div class="container">
                 <div class="ht-list row pt-1 pb-1 justify-content-end align-items-center">
-                    <button onclick="" type="button" class="ht-item">
+                    <button id="ht-check-order" onclick="location.href='/account/1'" type="button" class="ht-item">
                         <i class="far fa-shopping-bag mr-2"></i>
                         KIỂM TRA ĐƠN HÀNG
                     </button>
-                    <button onclick="location.href='/login'" type="button" class="ht-item">
+                    <button id="ht-login" onclick="location.href='/login'" type="button" class="ht-item">
                         <i class="far fa-user-circle mr-2"></i>
                         ĐĂNG NHẬP/ĐĂNG KÝ
                     </button>
-                    <button onclick="location.href='/account'" type="button" class="ht-item d-none">
+                    <button id="ht-account" onclick="location.href='/account/0'" type="button" class="ht-item">
                         <i class="far fa-user-circle mr-2"></i>
-                        CAO NHƠN HƯNG
                     </button>
                     <div class="dropdown">
                         <button class="ht-item d-none d-sm-block" data-toggle="dropdown">
@@ -53,6 +52,10 @@
                             </a>
                         </div>
                     </div>
+                    <button id="ht-logout" onclick="return logout()" type="button" class="ht-item">
+                        <i class="fas fa-sign-out mr-2"></i>
+                        ĐĂNG XUẤT
+                    </button>
                 </div>
             </div>
         </div>
@@ -62,7 +65,7 @@
                 <div class="d-md-flex flex-md-row align-items-center">
                     <div class="logo text-center mr-md-4">
                         <div class="py-3">
-                            <a href="/index">
+                            <a href="/">
                                 <img id="logo-img" src="/images/header/logo.png" alt="logo" />
                             </a>
                         </div>
@@ -72,13 +75,13 @@
                             <input id="search-box" class="form-control" type="search"
                                 placeholder="Tìm kiếm trên Favada" />
                             <div class="input-group-append">
-                                <button class="btn-search btn btn-warning">
+                                <button class="btn-search btn btn-warning" onclick="searchBox()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button onclick="location.href='/account'" type="button"
+                            <button onclick="location.href='/account/2'" type="button"
                                 class="btn-wish-list btn btn-outline-dark mr-lg-3 mr-2">
                                 <i class="far fa-heart"></i>
                             </button>
@@ -1678,24 +1681,7 @@
     <!-- Footer end -->
 
     <!-- Optional JavaScript -->
-    <script>
-        // function makeRequest(url) {
-        //     console.log('do make request ....');
-
-        //     var jwtToken = localStorage.getItem('token');
-        //     var headers = {}
-
-        //     if (jwtToken) {
-        //         headers['token'] = jwtToken;
-        //     }
-
-        //     return fetch(url, {
-        //         method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        //         mode: 'cors',
-        //         headers: headers
-        //     })
-        // }
-    </script>
+    <script src="/script/header.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
