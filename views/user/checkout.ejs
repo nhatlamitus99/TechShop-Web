@@ -20,141 +20,7 @@
 
 <body>
     <!-- Begin Header -->
-    <header>
-        <div class="header-top">
-            <div class="container">
-                <div class="ht-list row pt-1 pb-1 justify-content-end align-items-center">
-                    <button onclick="location.href='./account.html'" type="button" class="ht-item">
-                        <i class="far fa-shopping-bag mr-2"></i>
-                        KIỂM TRA ĐƠN HÀNG
-                    </button>
-                    <button onclick="location.href='./login.html'" type="button" class="ht-item">
-                        <i class="far fa-user-circle mr-2"></i>
-                        ĐĂNG NHẬP/ĐĂNG KÝ
-                    </button>
-                    <button onclick="location.href=''" type="button" class="ht-item d-none">
-                        <i class="far fa-user-circle mr-2"></i>
-                        CAO NHƠN HƯNG
-                    </button>
-                    <div class="dropdown">
-                        <button class="ht-item d-none d-sm-block" data-toggle="dropdown">
-                            <i class="far fa-globe mr-2"></i>
-                            CHANGE LANGUAGE
-                        </button>
-                        <!-- Popup to change language -->
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item">
-                                <img src="/images/header/flag-icons/vn.svg" alt="" />
-                                Tiếng Việt
-                            </a>
-                            <a class="dropdown-item">
-                                <img src="/images/header/flag-icons/uk.svg" alt="" />
-                                English
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="header-middle">
-            <div class="container">
-                <div class="d-md-flex flex-md-row align-items-center">
-                    <div class="logo text-center mr-md-4">
-                        <div class="py-3">
-                            <a href="./index.html">
-                                <img id="logo-img" src="/images/header/logo.png" alt="logo" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-fill">
-                        <div class="input-group mr-lg-5 mr-3">
-                            <input id="search-box" class="form-control" type="search"
-                                placeholder="Tìm kiếm trên Favada" />
-                            <div class="input-group-append">
-                                <button class="btn-search btn btn-warning">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <button onclick="location.href='./account.html'" type="button"
-                                class="btn-wish-list btn btn-outline-dark mr-lg-3 mr-2">
-                                <i class="far fa-heart"></i>
-                            </button>
-                            <button onclick="location.href='./cart.html'" type="button"
-                                class="btn-shopping-cart btn btn-danger">
-                                <i class="fas fa-shopping-cart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="header-bottom d-none d-md-block">
-            <div class="container">
-                <div class="menu-bar row">
-                    <div class="menu-item dropdown mr-4">
-                        <button data-toggle="dropdown">
-                            <i class="fas fa-list mr-1"></i>
-                            DANH MỤC SẢN PHẨM
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="./category.html">
-                                LAPTOP
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                PC - LINH KIỆN
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                MÁN HÌNH
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                BÀN PHÍM
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                CHUỘT
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                TAI NGHE
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                GHẾ GAMING
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                THIẾT BỊ ÂM THANH
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                THIẾT BỊ MẠNG
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                THIẾT BỊ VĂN PHÒNG
-                            </a>
-                            <a class="dropdown-item" href="./category.html">
-                                PHỤ KIỆN
-                            </a>
-                        </div>
-                    </div>
-                    <div class="menu-item mr-4">
-                        <a href="./policy.html">
-                            HƯỚNG DẪN MUA HÀNG
-                        </a>
-                    </div>
-                    <div class="menu-item mr-4">
-                        <a href="./policy.html">
-                            QUY ĐỊNH BẢO HÀNH
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="./policy.html">
-                            MUA TRẢ GÓP
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <%- include('header.ejs') %>
     <!-- End Header -->
 
     <!-- Breadcrumb begin-->
@@ -314,6 +180,7 @@
     <!-- Footer end -->
 
     <!-- Optional JavaScript -->
+    <script src="/script/header.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

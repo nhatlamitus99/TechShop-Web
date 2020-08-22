@@ -2,6 +2,7 @@
     position: absolute;
     top: 20%;
     left: 60px;
+    max-width: 270px;
 }
 
 .slider-content .btn-shopnow {

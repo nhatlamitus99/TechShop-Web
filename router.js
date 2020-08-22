@@ -39,20 +39,12 @@ var uploadFile = multer({ storage: storage });
 
 // HOME PAGE
 
-router.get('/', (req, res) => {
-    product.findAll()
-        .then(products => {
-            category.findAll()
-                .then(categories => {
-                    brand.findAll()
-                        .then(brands => {
-                            res.render('user/index', { 'product': products, 'category': categories, 'brand': brands });
-                        })
-                        .catch(err => console.log(err))
-                })
-                .catch(err => console.log(err))
-        })
-        .catch(err => console.log(err))
+router.get('/', async (req, res) => {
+    var topPromo = await product.findAll({
+        order: [['promo', 'DESC']],
+        limit: 4
+    });
+    res.render('user/index', {topPromo: topPromo});
 });
 
 
@@ -60,7 +52,8 @@ router.get('/', (req, res) => {
 router.get('/search', (req, res) => {
     var query = req.query.q;
     console.log(query);
-    res.sendStatus(200);
+    // res.sendStatus(200);
+    res.redirect('/');
 });
 
 
@@ -86,6 +79,7 @@ router.post('/login', urlencodedParser, (req, res) => {
                 // Session based authentication
                 req.session.isAuth = true;
                 req.session.userID = result.id;
+                req.session.role = result.role;
 
                 // Token based authentication
                 var payload = { id: result.id, role: result.role };
@@ -112,7 +106,8 @@ router.post('/login', urlencodedParser, (req, res) => {
 
 router.get('/logout', authenticateUser, (req, res) => {
     req.session.isAuth = false;
-    req.session.userID = 0;
+    req.session.userID = null;
+    req.session.role = null;
     res.redirect('/');
 });
 
@@ -157,12 +152,8 @@ router.post('/register', urlencodedParser, (req, res) => {
 router.get('/auth/facebook', passport.authenticate('facebook',{scope:'email'}));
 
 router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { successRedirect : '/', failureRedirect: '/login' }),
-    function(req, res) {
-        console.log(req.user)
-        // var payload = { id: result.id, type: result.type }
-        // accessToken = jwt.sign(payload, 'secret')
-        // res.status(200).json({token : accessToken})
+    passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }),
+    function (req, res) {
         res.redirect('/');
     }
 );
@@ -171,10 +162,10 @@ router.get('/auth/facebook/callback',
 
 router.get('/auth/google',  passport.authenticate('google', { scope: ['email']}));
 
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { successRedirect : '/', failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
+router.get('/auth/google/callback',
+    passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }),
+    function (req, res) {
+        res.redirect('/');
     }
 );
 
@@ -187,7 +178,7 @@ router.get('/account/:tab', authenticateUser, (req, res) => {
 });
 
 
-// USER api
+// USER API
 
 router.get('/api/user', passport.authenticate('jwt', { session: false }), (req, res) => {
     if (req.user.dataValues.role !== 2) {
@@ -295,11 +286,23 @@ router.get('/product', (req, res) => {
         return res.sendStatus(403);
     }
     product.findAll()
-    .then(results =>{
-        res.render('user/product', {'data': results})
-    })
-    .catch(err=> console.log(err))
-})
+        .then(results => {
+            res.render('user/product', { 'data': results })
+        })
+        .catch(err => console.log(err))
+});
+router.get('/product/:id', async (req, res) => {
+    var _id = parseInt(req.params.id);
+    var data = await product.findByPk(_id);
+    var dataProduct = data;
+    if (data) {
+        var row_category = await category.findByPk(data.categoryID);
+        var row_brand = await brand.findByPk(data.brandID);
+        dataProduct['brand'] = row_brand.name;
+        dataProduct['category'] = row_category.name;
+    }
+    res.render('user/product', { 'dataProduct': dataProduct });
+});
 
 router.get('/api/product', (req, res)=>{
     product.findAll()
@@ -307,20 +310,6 @@ router.get('/api/product', (req, res)=>{
         res.json({'data': results})
     })
     .catch(err=> console.log(err))
-})
-
-router.get('/product/:id', (req, res)=>{
-    if (req.user.dataValues.role !== 0) {
-        return res.sendStatus(403);
-    } 
-    var _id = req.params.id 
-    product.findOne({
-        where:{
-            id: _id
-        }
-    }).then(result=>{
-        res.render('user/product', {'data': result})
-    }).catch(err=> console.log(err)) 
 })
 
 router.get('/api/product/:id', (req, res)=>{ 

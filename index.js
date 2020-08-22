@@ -12,6 +12,7 @@ const bcrypt = require('bcrypt')
 const path = require('path')
 const jwt = require('jsonwebtoken');
 const passportJWT = require('passport-jwt');
+const prepare = require('./middlewares/prepare');
 
 
 var ExtractJWT = passportJWT.ExtractJwt;
@@ -27,12 +28,13 @@ app.use(session({
   key: 'sid',
   resave: false,
   saveUninitialized: true,
-  cookie: { httpOnly: false, maxAge: 60000 }
+  cookie: { httpOnly: false}
 }));  //Save user login
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
+app.use(prepare);
 
 app.use('/', router);
 
