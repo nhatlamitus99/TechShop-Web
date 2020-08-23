@@ -152,6 +152,7 @@ footer > div:nth-child(2) {
 }
 .card {
     border: 0;
+    /* max-width: 291px; */
 }
 .card:hover {
     z-index: 10;
@@ -159,7 +160,7 @@ footer > div:nth-child(2) {
 }
 .card-category {
     color: #a7a7a7;
-    padding-top: 5px;
+    padding-top: 10px;
     padding-bottom: 5px;
     border-bottom: 1px solid #d7d7d7;
     font-size: 16px;

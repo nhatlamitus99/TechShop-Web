@@ -130,12 +130,12 @@
                     <div class="col-lg-4 pr-0">
                         <div class="d-none d-lg-block">
                             <div style="margin-bottom: 14px;">
-                                <a href="product.html">
+                                <a>
                                     <img src="/images/banner/1_1.jpg" alt="" style="width: 100%;" />
                                 </a>
                             </div>
                             <div>
-                                <a href="product.html">
+                                <a>
                                     <img src="/images/banner/1_2.jpg" alt="" style="width: 100%;" />
                                 </a>
                             </div>
@@ -163,17 +163,31 @@
                         <% } else { %>
                         <div class="card col-lg d-none d-lg-block">
                         <% } %>
-                            <img class="card-img-top" src="/images/product/large-size/<%= topPromo[i].image %>" alt="Card image cap" />
+                            <img class="card-img-top" src="<%= topPromo[i].image %>" alt="Card image cap" />
                             <div class="card-body card-category">
-                                Phụ kiện chơi game
+                                <% var ctg = 'Danh mục';
+                                if (locals.lcCategories) {
+                                    for (var c of lcCategories) {
+                                        if (c.id === topPromo[i].categoryID){
+                                            ctg = c.name;
+                                            break;
+                                        }
+                                    }
+                                } %>
+                                <%= ctg %>
                             </div>
                             <div class="card-body rating-stars">
                                 <ul class="rating">
-                                    <li><i class="fas fa-star"></i></li>
-                                    <li><i class="fas fa-star"></i></li>
-                                    <li><i class="fas fa-star"></i></li>
-                                    <li><i class="fas fa-star"></i></li>
-                                    <li><i class="far fa-star"></i></li>
+                                    <% var rateInt = parseInt(topPromo[i].rating); %>
+                                    <% for (var j = 0; j < rateInt; ++j) { %>
+                                        <li><i class="fas fa-star"></i></li>
+                                    <% } %>
+                                    <% if (topPromo[i].rating > rateInt) { ++rateInt; %>
+                                        <li><i class="fas fa-star-half-alt"></i></li>
+                                    <% } %>        
+                                    <% while (rateInt < 5) { ++rateInt; %>
+                                        <li><i class="far fa-star"></i></li>
+                                    <% } %>                       
                                 </ul>
                             </div>
                             <a href="/product/<%= topPromo[i].id %>" class="card-body card-product-name">
@@ -182,12 +196,14 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-end">
                                     <div class="price-box">
-                                        <span class="card-price">780.000đ</span>
-                                        <span class="card-old-price">980.000đ</span>
+                                        <span class="card-price"><%= (topPromo[i].price*(100-topPromo[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %></span>
+                                        <% if (topPromo[i].promo !== 0) { %>
+                                        <span class="card-old-price"><%= topPromo[i].price.toLocaleString('vi',{style:'currency',currency:'VND'}) %></span>
+                                        <% } %>
                                     </div>
                                     <div class="flex-fill d-flex justify-content-end">
-                                        <button type="button" class="card-btn-wish in-wish-list">
-                                            <i class="fas fa-heart"></i>
+                                        <button type="button" class="card-btn-wish" name="btn-like-<%= topPromo[i].id %>">
+                                            <i class="fal fa-heart"></i>
                                         </button>
                                         <button onclick="location.href=''" type="button" class="card-btn-cart">
                                             <i class="fal fa-shopping-cart"></i>
@@ -212,133 +228,54 @@
                 </div>
                 <!-- Card List begin -->
                 <div class="mt-3 row justify-content-between">
+                <% if (topSold) { for (var i = 0; i < topSold.length; ++i) { 
+                    if (i < 2) { %>
                     <div class="card col-lg col-md-4 col-6">
-                        <img class="card-img-top" src="/images/featured-product/4.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product.html" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button type="button" class="card-btn-wish in-wish-list">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-lg col-md-4 col-6">
-                        <img class="card-img-top" src="/images/featured-product/3.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product.html" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% } else if (i == 2) { %>
                     <div class="card col-lg col-md-4 d-none d-md-block">
-                        <img class="card-img-top" src="/images/featured-product/5.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product.html" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% } else { %>
                     <div class="card col-lg d-none d-lg-block">
-                        <img class="card-img-top" src="/images/featured-product/6.jpg" alt="Card image cap" />
+                    <% } %>
+                        <img class="card-img-top" src="<%= topSold[i].image %>" alt="Card image cap" />
                         <div class="card-body card-category">
-                            Phụ kiện chơi game
+                            <% var ctg = 'Danh mục';
+                            if (locals.lcCategories) {
+                                for (var c of lcCategories) {
+                                    if (c.id === topSold[i].categoryID){
+                                        ctg = c.name;
+                                        break;
+                                    }
+                                }
+                            } %>
+                            <%= ctg %>
                         </div>
                         <div class="card-body rating-stars">
                             <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
+                                <% var rateInt = parseInt(topSold[i].rating); %>
+                                <% for (var j = 0; j < rateInt; ++j) { %>
+                                    <li><i class="fas fa-star"></i></li>
+                                <% } %>
+                                <% if (topSold[i].rating > rateInt) { ++rateInt; %>
+                                    <li><i class="fas fa-star-half-alt"></i></li>
+                                <% } %>        
+                                <% while (rateInt < 5) { ++rateInt; %>
+                                    <li><i class="far fa-star"></i></li>
+                                <% } %>                       
                             </ul>
                         </div>
-                        <a href="product.html" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
+                        <a href="/product/<%= topSold[i].id %>" class="card-body card-product-name">
+                            <%= topSold[i].name %>
                         </a>
                         <div class="card-body">
                             <div class="d-flex align-items-end">
                                 <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
+                                    <span class="card-price"><%= (topSold[i].price*(100-topSold[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %></span>
+                                    <% if (topSold[i].promo !== 0) { %>
+                                        <span class="card-old-price"><%= topSold[i].price.toLocaleString('vi',{style:'currency',currency:'VND'}) %></span>
+                                    <% } %>
                                 </div>
                                 <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
+                                    <button type="button" class="card-btn-wish" name="btn-like-<%= topSold[i].id %>">
                                         <i class="fal fa-heart"></i>
                                     </button>
                                     <button onclick="location.href=''" type="button" class="card-btn-cart">
@@ -348,8 +285,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Card List end -->
+                <% }} %>
+            </div>
+            <!-- Card List end -->
             </div>
         </div>
         <br />
@@ -359,7 +297,7 @@
                     <!-- Begin Single Banner Area -->
                     <div class="col-lg-4 col-md-4 text-center py-md-3">
                         <div class="single-banner">
-                            <a href="product.html">
+                            <a>
                                 <img src="/images/banner/1_2.jpg" alt="Static Banner" style="width: 100%;" />
                             </a>
                         </div>
@@ -368,7 +306,7 @@
                     <!-- Begin Single Banner Area -->
                     <div class="col-lg-4 col-md-4 text-center py-md-3">
                         <div class="single-banner">
-                            <a href="product.html">
+                            <a>
                                 <img src="/images/banner/1_1.jpg" alt="Static Banner" style="width: 100%;" />
                             </a>
                         </div>
@@ -377,7 +315,7 @@
                     <!-- Begin Single Banner Area -->
                     <div class="col-lg-4 col-md-4 text-center py-md-3">
                         <div class="single-banner">
-                            <a href="product.html">
+                            <a>
                                 <img src="/images/banner/1_3.jpg" alt="Static Banner" style="width: 100%;" />
                             </a>
                         </div>
@@ -401,149 +339,58 @@
                             <img class="w-100" src="/images/banner/2_1.jpg" alt="" />
                         </div>
 
-                        <div class="mt-3 row">
-                            <!-- Card begin-->
+                        <div class="mt-3 row">   
+                        <!-- Card begin-->
+                            <% if (topSoldLaptop) { for (var i = 5; i < 8; ++i) { 
+                            if (i < 7) { %>
                             <div class="card col-lg col-md-4 col-6">
-                                <img class="card-img-top" src="/images/featured-product/4.jpg" alt="Card image cap" />
-                                <div class="card-body card-category">
-                                    Phụ kiện chơi game
-                                </div>
-                                <div class="card-body rating-stars">
-                                    <ul class="rating">
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="far fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="product.html" class="card-body card-product-name">
-                                    Tay cầm chơi game Microsoft Xboxe One
-                                </a>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
-
-                            <!-- Card begin-->
-                            <div class="card col-lg col-md-4 col-6">
-                                <img class="card-img-top" src="/images/featured-product/4.jpg" alt="Card image cap" />
-                                <div class="card-body card-category">
-                                    Phụ kiện chơi game
-                                </div>
-                                <div class="card-body rating-stars">
-                                    <ul class="rating">
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="far fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="product.html" class="card-body card-product-name">
-                                    Tay cầm chơi game Microsoft Xboxe One
-                                </a>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
-
-                            <!-- Card begin-->
+                            <% } else { %>
                             <div class="card col-lg col-md-4 d-none d-md-block">
-                                <img class="card-img-top" src="/images/featured-product/4.jpg" alt="Card image cap" />
+                            <% } %>
+                                <img class="card-img-top" src="<%= topSoldLaptop[i].image %>" alt="Card image cap" />
                                 <div class="card-body card-category">
-                                    Phụ kiện chơi game
+                                    <% var ctg = 'Danh mục';
+                                    if (locals.lcCategories) {
+                                        for (var c of lcCategories) {
+                                            if (c.id === topSoldLaptop[i].categoryID){
+                                                ctg = c.name;
+                                                break;
+                                            }
+                                        }
+                                    } %>
+                                    <%= ctg %>
                                 </div>
                                 <div class="card-body rating-stars">
                                     <ul class="rating">
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="far fa-star"></i>
-                                        </li>
+                                        <% var rateInt = parseInt(topSoldLaptop[i].rating); %>
+                                        <% for (var j = 0; j < rateInt; ++j) { %>
+                                            <li><i class="fas fa-star"></i></li>
+                                        <% } %>
+                                        <% if (topSoldLaptop[i].rating > rateInt) { ++rateInt; %>
+                                            <li><i class="fas fa-star-half-alt"></i></li>
+                                        <% } %>        
+                                        <% while (rateInt < 5) { ++rateInt; %>
+                                            <li><i class="far fa-star"></i></li>
+                                        <% } %>                       
                                     </ul>
                                 </div>
-                                <a href="product.html" class="card-body card-product-name">
-                                    Tay cầm chơi game Microsoft Xboxe One
+                                <a href="/product/<%= topSoldLaptop[i].id %>" class="card-body card-product-name">
+                                    <%= topSoldLaptop[i].name %>
                                 </a>
                                 <div class="card-body">
                                     <div class="d-flex align-items-end">
                                         <div class="price-box">
                                             <span class="card-price">
-                                                780.000đ
+                                                <%= (topSoldLaptop[i].price*(100-topSoldLaptop[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %>
                                             </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
+                                            <% if (topSoldLaptop[i].promo !== 0) { %>
+                                                <span class="card-old-price">
+                                                    <%= topSoldLaptop[i].price.toLocaleString('vi',{style:'currency',currency:'VND'}) %>
+                                                </span>
+                                            <% } %>
                                         </div>
                                         <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
+                                            <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldLaptop[i].id %>">
                                                 <i class="fal fa-heart"></i>
                                             </button>
                                             <button onclick="location.href=''" type="button" class="card-btn-cart">
@@ -553,7 +400,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Card end -->
+                            <% }} %>
+                        <!-- Card end -->
                         </div>
                     </div>
                     <div class="list-choice col-lg-4 pl-1 pr-0 d-none d-lg-block">
@@ -562,53 +410,59 @@
                         </div>
 
                         <div class="d-flex flex-column">
+                        <% if (topSoldLaptop) { 
+                            for (var i = 0; i < 5; ++i) { %>
                             <!-- Card begin-->
                             <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
+                                <img class="col-lg-4 px-0 w-100" src="<%= topSoldLaptop[i].image %>" alt="Card image cap" />
                                 <div class="d-flex flex-column pr-0 py-2">
                                     <div class="d-flex mb-1">
                                         <div class="category border-0">
-                                            Laptop
+                                            <% var ctg = 'Danh mục';
+                                            if (locals.lcCategories) {
+                                                for (var c of lcCategories) {
+                                                    if (c.id === topSoldLaptop[i].categoryID){
+                                                        ctg = c.name;
+                                                        break;
+                                                    }
+                                                }
+                                            } %>
+                                            <%= ctg %>
                                         </div>
 
                                         <div class="rating-box flex-fill d-flex justify-content-end">
                                             <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
+                                                <% var rateInt = parseInt(topSoldLaptop[i].rating); %>
+                                                <% for (var j = 0; j < rateInt; ++j) { %>
+                                                    <li><i class="fas fa-star"></i></li>
+                                                <% } %>
+                                                <% if (topSoldLaptop[i].rating > rateInt) { ++rateInt; %>
+                                                    <li><i class="fas fa-star-half-alt"></i></li>
+                                                <% } %>        
+                                                <% while (rateInt < 5) { ++rateInt; %>
+                                                    <li><i class="far fa-star"></i></li>
+                                                <% } %>     
                                             </ul>
                                         </div>
                                     </div>
 
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
+                                    <a href="/product/<%= topSoldLaptop[i].id %>" class="card-body card-product-name">
+                                        <%= topSoldLaptop[i].name %>
                                     </a>
 
                                     <div class="card-body mt-auto d-flex align-items-end">
                                         <div class="price-box">
                                             <span class="card-price">
-                                                780.000đ
+                                                <%= (topSoldLaptop[i].price*(100-topSoldLaptop[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %>
                                             </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
+                                            <% if (topSoldLaptop[i].promo !== 0) { %>
+                                                <span class="card-old-price">
+                                                    <%= topSoldLaptop[i].price.toLocaleString('vi',{style:'currency',currency:'VND'}) %>
+                                                </span>
+                                            <% } %>
                                         </div>
                                         <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
+                                            <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldLaptop[i].id %>">
                                                 <i class="fal fa-heart"></i>
                                             </button>
                                             <button onclick="location.href=''" type="button" class="card-btn-cart">
@@ -619,238 +473,10 @@
                                 </div>
                             </div>
                             <!-- Card end -->
-                            <div class="line"></div>
-                            <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
-                                <div class="d-flex flex-column pr-0 py-2">
-                                    <div class="d-flex mb-1">
-                                        <div class="category border-0">
-                                            Laptop
-                                        </div>
-
-                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                            <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
-                                    </a>
-
-                                    <div class="card-body mt-auto d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
-                            <div class="line"></div>
-                            <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
-                                <div class="d-flex flex-column pr-0 py-2">
-                                    <div class="d-flex mb-1">
-                                        <div class="category border-0">
-                                            Laptop
-                                        </div>
-
-                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                            <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
-                                    </a>
-
-                                    <div class="card-body mt-auto d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
-                            <div class="line"></div>
-                            <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
-                                <div class="d-flex flex-column pr-0 py-2">
-                                    <div class="d-flex mb-1">
-                                        <div class="category border-0">
-                                            Laptop
-                                        </div>
-
-                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                            <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
-                                    </a>
-
-                                    <div class="card-body mt-auto d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
-                            <div class="line"></div>
-                            <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
-                                <div class="d-flex flex-column pr-0 py-2">
-                                    <div class="d-flex mb-1">
-                                        <div class="category border-0">
-                                            Laptop
-                                        </div>
-
-                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                            <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
-                                    </a>
-
-                                    <div class="card-body mt-auto d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
+                            <% if (i < 4) { %>
+                                <div class="line"></div>
+                            <% } %>
+                        <% }} %>
                         </div>
                     </div>
                 </div>
@@ -888,7 +514,7 @@
             <div class="container">
                 <div class="section-title">
                     <div class="section-title-highlight">
-                        PC Gaming
+                        Màn hình siêu thực
                     </div>
                     <span class="triangle"></span>
                 </div>
@@ -899,53 +525,59 @@
                         </div>
 
                         <div class="d-flex flex-column">
+                        <% if (topSoldManHinh) { 
+                            for (var i = 0; i < 5; ++i) { %>
                             <!-- Card begin-->
                             <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
+                                <img class="col-lg-4 px-0 w-100" src="<%= topSoldManHinh[i].image %>" alt="Card image cap" />
                                 <div class="d-flex flex-column pr-0 py-2">
                                     <div class="d-flex mb-1">
                                         <div class="category border-0">
-                                            Laptop
+                                            <% var ctg = 'Danh mục';
+                                            if (locals.lcCategories) {
+                                                for (var c of lcCategories) {
+                                                    if (c.id === topSoldManHinh[i].categoryID){
+                                                        ctg = c.name;
+                                                        break;
+                                                    }
+                                                }
+                                            } %>
+                                            <%= ctg %>
                                         </div>
 
                                         <div class="rating-box flex-fill d-flex justify-content-end">
                                             <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
+                                                <% var rateInt = parseInt(topSoldManHinh[i].rating); %>
+                                                <% for (var j = 0; j < rateInt; ++j) { %>
+                                                    <li><i class="fas fa-star"></i></li>
+                                                <% } %>
+                                                <% if (topSoldManHinh[i].rating > rateInt) { ++rateInt; %>
+                                                    <li><i class="fas fa-star-half-alt"></i></li>
+                                                <% } %>        
+                                                <% while (rateInt < 5) { ++rateInt; %>
+                                                    <li><i class="far fa-star"></i></li>
+                                                <% } %>     
                                             </ul>
                                         </div>
                                     </div>
 
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
+                                    <a href="/product/<%= topSoldManHinh[i].id %>" class="card-body card-product-name">
+                                        <%= topSoldManHinh[i].name %>
                                     </a>
 
                                     <div class="card-body mt-auto d-flex align-items-end">
                                         <div class="price-box">
                                             <span class="card-price">
-                                                780.000đ
+                                                <%= (topSoldManHinh[i].price*(100-topSoldManHinh[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %>
                                             </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
+                                            <% if (topSoldManHinh[i].promo !== 0) { %>
+                                                <span class="card-old-price">
+                                                    <%= topSoldManHinh[i].price.toLocaleString('vi',{style:'currency',currency:'VND'}) %>
+                                                </span>
+                                            <% } %>
                                         </div>
                                         <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
+                                            <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldManHinh[i].id %>">
                                                 <i class="fal fa-heart"></i>
                                             </button>
                                             <button onclick="location.href=''" type="button" class="card-btn-cart">
@@ -956,238 +588,10 @@
                                 </div>
                             </div>
                             <!-- Card end -->
-                            <div class="line"></div>
-                            <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
-                                <div class="d-flex flex-column pr-0 py-2">
-                                    <div class="d-flex mb-1">
-                                        <div class="category border-0">
-                                            Laptop
-                                        </div>
-
-                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                            <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
-                                    </a>
-
-                                    <div class="card-body mt-auto d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
-                            <div class="line"></div>
-                            <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
-                                <div class="d-flex flex-column pr-0 py-2">
-                                    <div class="d-flex mb-1">
-                                        <div class="category border-0">
-                                            Laptop
-                                        </div>
-
-                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                            <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
-                                    </a>
-
-                                    <div class="card-body mt-auto d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
-                            <div class="line"></div>
-                            <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
-                                <div class="d-flex flex-column pr-0 py-2">
-                                    <div class="d-flex mb-1">
-                                        <div class="category border-0">
-                                            Laptop
-                                        </div>
-
-                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                            <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
-                                    </a>
-
-                                    <div class="card-body mt-auto d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
-                            <div class="line"></div>
-                            <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
-                                <img class="col-lg-4 px-0 w-100" src="/images/product/small-size/4.jpg"
-                                    alt="Card image cap" />
-
-                                <div class="d-flex flex-column pr-0 py-2">
-                                    <div class="d-flex mb-1">
-                                        <div class="category border-0">
-                                            Laptop
-                                        </div>
-
-                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                            <ul class="rating">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-star"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="product.html" class="card-body card-product-name">
-                                        Tay cầm chơi game Microsoft Xbox One
-                                    </a>
-
-                                    <div class="card-body mt-auto d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
+                            <% if (i < 4) { %>
+                                <div class="line"></div>
+                            <% } %>
+                        <% }} %>
                         </div>
                     </div>
                     <div class="col-lg-8 px-0">
@@ -1197,156 +601,62 @@
 
                         <div class="mt-3 row">
                             <!-- Card begin-->
-                            <div class="card col-lg col-md-4 col-6">
-                                <img class="card-img-top" src="/images/featured-product/4.jpg" alt="Card image cap" />
-                                <div class="card-body card-category">
-                                    Phụ kiện chơi game
-                                </div>
-                                <div class="card-body rating-stars">
-                                    <ul class="rating">
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="far fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="product.html" class="card-body card-product-name">
-                                    Tay cầm chơi game Microsoft Xboxe One
-                                </a>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
+                            <% if (topSoldManHinh) { for (var i = 5; i < 8; ++i) { %>
+                                <div class="card col-lg col-md-4 col-6">
+                                    <img class="card-img-top" src="<%= topSoldManHinh[i].image %>" alt="Card image cap" />
+                                    <div class="card-body card-category">
+                                        <% var ctg = 'Danh mục';
+                                        if (locals.lcCategories) {
+                                            for (var c of lcCategories) {
+                                                if (c.id === topSoldManHinh[i].categoryID){
+                                                    ctg = c.name;
+                                                    break;
+                                                }
+                                            }
+                                        } %>
+                                        <%= ctg %>
+                                    </div>
+                                    <div class="card-body rating-stars">
+                                        <ul class="rating">
+                                            <% var rateInt = parseInt(topSoldManHinh[i].rating); %>
+                                            <% for (var j = 0; j < rateInt; ++j) { %>
+                                                <li><i class="fas fa-star"></i></li>
+                                            <% } %>
+                                            <% if (topSoldManHinh[i].rating > rateInt) { ++rateInt; %>
+                                                <li><i class="fas fa-star-half-alt"></i></li>
+                                            <% } %>        
+                                            <% while (rateInt < 5) { ++rateInt; %>
+                                                <li><i class="far fa-star"></i></li>
+                                            <% } %>                       
+                                        </ul>
+                                    </div>
+                                    <a href="/product/<%= topSoldManHinh[i].id %>" class="card-body card-product-name">
+                                        <%= topSoldManHinh[i].name %>
+                                    </a>
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-end">
+                                            <div class="price-box">
+                                                <span class="card-price">
+                                                    <%= (topSoldManHinh[i].price*(100-topSoldManHinh[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %>
+                                                </span>
+                                                <% if (topSoldManHinh[i].promo !== 0) { %>
+                                                    <span class="card-old-price">
+                                                        <%= topSoldManHinh[i].price.toLocaleString('vi',{style:'currency',currency:'VND'}) %>
+                                                    </span>
+                                                <% } %>
+                                            </div>
+                                            <div class="flex-fill d-flex justify-content-end">
+                                                <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldManHinh[i].id %>">
+                                                    <i class="fal fa-heart"></i>
+                                                </button>
+                                                <button onclick="location.href=''" type="button" class="card-btn-cart">
+                                                    <i class="fal fa-shopping-cart"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Card end -->
-
-                            <!-- Card begin-->
-                            <div class="card col-lg col-md-4 col-6">
-                                <img class="card-img-top" src="/images/featured-product/4.jpg" alt="Card image cap" />
-                                <div class="card-body card-category">
-                                    Phụ kiện chơi game
-                                </div>
-                                <div class="card-body rating-stars">
-                                    <ul class="rating">
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="far fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="product.html" class="card-body card-product-name">
-                                    Tay cầm chơi game Microsoft Xboxe One
-                                </a>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card end -->
-
-                            <!-- Card begin-->
-                            <div class="card col-lg col-md-4 col-6">
-                                <img class="card-img-top" src="/images/featured-product/4.jpg" alt="Card image cap" />
-                                <div class="card-body card-category">
-                                    Phụ kiện chơi game
-                                </div>
-                                <div class="card-body rating-stars">
-                                    <ul class="rating">
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="far fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="product.html" class="card-body card-product-name">
-                                    Tay cầm chơi game Microsoft Xboxe One
-                                </a>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-end">
-                                        <div class="price-box">
-                                            <span class="card-price">
-                                                780.000đ
-                                            </span>
-                                            <span class="card-old-price d-none">
-                                                980.000đ
-                                            </span>
-                                        </div>
-                                        <div class="flex-fill d-flex justify-content-end">
-                                            <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                                <i class="fal fa-heart"></i>
-                                            </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                                <i class="fal fa-shopping-cart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                <% }} %>
                             <!-- Card end -->
                         </div>
                     </div>
@@ -1448,6 +758,19 @@
 
     <!-- Optional JavaScript -->
     <script src="/script/header.js"></script>
+    <script>
+        var likeProductIDs = JSON.parse(localStorage.getItem('likeProductIDs'));
+        document.querySelectorAll('.card-btn-wish').forEach(btn => {
+            let id = parseInt(btn.name.split('-')[2]);
+            if (likeProductIDs && likeProductIDs.includes(id)) {
+                btn.className = "card-btn-wish in-wish-list";
+                btn.innerHTML = '<i class="fas fa-heart"></i>';
+            } else {
+                btn.className = "card-btn-wish";
+                btn.innerHTML = '<i class="fal fa-heart"></i>';
+            }
+        });
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

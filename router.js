@@ -44,7 +44,41 @@ router.get('/', async (req, res) => {
         order: [['promo', 'DESC']],
         limit: 4
     });
-    res.render('user/index', {topPromo: topPromo});
+    var topSold = await product.findAll({
+        order: [['number_sell', 'DESC']],
+        limit: 4
+    });
+    var _idLaptopCategory = 0;
+    await category.findOne({
+        where: {
+            name: "Laptop"
+        }
+    }).then(result => _idLaptopCategory = result.id);
+
+    var _idManHinhCategory = 0;
+    await category.findOne({
+        where: {
+            name: "Màn hình"
+        }
+    }).then(result => _idManHinhCategory = result.id);
+
+    var topSoldLaptop = await product.findAll({
+        where: {categoryID: _idLaptopCategory},
+        order: [['number_sell', 'DESC']],
+        limit: 8
+    });
+    var topSoldManHinh = await product.findAll({
+        where: {categoryID: _idManHinhCategory},
+        order: [['number_sell', 'DESC']],
+        limit: 8
+    });
+    if (topSoldLaptop.length < 8) {
+        topSoldLaptop = null;
+    }
+    if (topSoldManHinh.length < 8) {
+        topSoldManHinh = null;
+    }
+    res.render('user/index', {topPromo: topPromo, topSold: topSold, topSoldLaptop: topSoldLaptop, topSoldManHinh: topSoldManHinh});
 });
 
 
@@ -65,15 +99,15 @@ router.get('/login', (req, res) => {
     res.render('user/login', { type: 0, message: '', field: -1});
 });
 
-router.post('/login', urlencodedParser, (req, res) => {
+router.post('/login', urlencodedParser, async (req, res) => {
     var _email = req.body.email.trim();
     var _password = req.body.password;
 
-    user.findOne({
+    await user.findOne({
         where: {
             email: _email
         }
-    }).then((result) => {
+    }).then( async (result) => {
         if (result) {
             if (bcrypt.compareSync(_password, result.password)) {
                 // Session based authentication
@@ -86,7 +120,14 @@ router.post('/login', urlencodedParser, (req, res) => {
                 var accessToken = jwt.sign(payload, 'secret');
                 
                 if (result.role === 0) {
-                    res.render('user/saveToken', { token: accessToken, name: result.fullname });
+                    var likeIDs = await like.findAll({ where: { userID: result.id } });
+                    likeProductIDs = [];
+                    if (likeIDs) {
+                        likeIDs.forEach(element => {
+                            likeProductIDs.push(element.productID);
+                        });
+                    }
+                    res.render('user/saveToken', { token: accessToken, name: result.fullname, likeProductIDs: likeProductIDs });
                 } else {
                     res.render('manager/saveToken', { token: accessToken, user: result.username });
                 }                    
