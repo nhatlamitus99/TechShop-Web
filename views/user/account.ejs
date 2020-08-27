@@ -11,8 +11,6 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
     <!-- Import font Roboto -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
-    <!-- Font Awesome -->
-    <script src="/script/fontawesome-pro.js"></script>
     <!-- Style -->
     <link rel="stylesheet" href="/css/account.css" />
     <link rel="stylesheet" href="/css/style.css" />
@@ -48,23 +46,23 @@
                                 <div class="user-name">Cao Nhơn Hưng</div>
                             </span>
                         </div>
-                        <a class="nav-item" id="acccount-infor-tab" data-toggle="tab" href="#account-infor" role="tab"
-                            aria-selected="false">
+                        <a class="nav-item" id="acccount-infor-tab" href="/account/0" role="tab" 
+                        aria-selected="<%if (tabID === 0) {%> true <%}else{%> false <%}%>">
                             <i class="fas fa-user icon"></i>
                             Thông tin tài khoản
                         </a>
-                        <a class="nav-item" id="shopping-list-tab" data-toggle="tab" href="#order-history" role="tab"
-                            aria-selected="true">
+                        <a class="nav-item" id="shopping-list-tab" href="/account/1" role="tab" 
+                        aria-selected="<%if (tabID === 1) {%> true <%}else{%> false <%}%>">
                             <i class="fas fa-list-alt icon"></i>
                             Quản lý đơn hàng
                         </a>
-                        <a class="nav-item" id="wishlist-tab" data-toggle="tab" href="#my-wishlist" role="tab"
-                            aria-selected="false">
+                        <a class="nav-item" id="wishlist-tab" href="/account/2" role="tab" 
+                        aria-selected="<%if (tabID === 2) {%> true <%}else{%> false <%}%>">
                             <i class="fas fa-heart icon"></i>
                             Sản phẩm yêu thích
                         </a>
-                        <a class="nav-item" id="checkout-infor-tab" data-toggle="tab" href="#checkout-infor" role="tab"
-                            aria-selected="false">
+                        <a class="nav-item" id="checkout-infor-tab" href="/account/3" role="tab" 
+                        aria-selected="<%if (tabID === 3) {%> true <%}else{%> false <%}%>">
                             <i class="far fa-credit-card icon"></i>
                             Thông tin thanh toán
                         </a>
@@ -72,7 +70,7 @@
                 </div>
                 <div class="col-lg-9 col-12 px-0">
                     <div class="tab-content" id="content">
-                        <div class="tab-pane fade" id="account-infor" role="tabpanel">
+                        <div class="tab-pane fade <%if (tabID === 0) {%> active show <%}%>" id="account-infor" role="tabpanel">
                             <h5>Thông tin tài khoản</h5>
                             <form>
                                 <div class="form-row">
@@ -197,7 +195,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane fade active show" id="order-history" role="tabpanel">
+                        <div class="tab-pane fade <%if (tabID === 1) {%> active show <%}%>" id="order-history" role="tabpanel">
                             <h5>Quản lý đơn hàng</h5>
                             <div class="table-responsive">
                                 <table class="order-table">
@@ -317,7 +315,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="my-wishlist" role="tabpanel">
+                        <div class="tab-pane fade <%if (tabID === 2) {%> active show <%}%>" id="my-wishlist" role="tabpanel">
                             <h5>Sản phẩm yêu thích</h5>
                             <div class="table-responsive">
                                 <table>
@@ -461,7 +459,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="checkout-infor" role="tabpanel">
+                        <div class="tab-pane fade <%if (tabID === 3) {%> active show <%}%>" id="checkout-infor" role="tabpanel">
                             <h5>Thông tin thanh toán</h5>
                             <div class="empty-board text-center">
                                 <div class="my-5">
@@ -573,7 +571,9 @@
     <!-- Footer end -->
 
     <!-- Optional JavaScript -->
-    <script src="/script/header.js"></script>
+    <script src="/script/public.js"></script>
+    <!-- Font Awesome -->
+    <script src="/script/fontawesome-pro.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

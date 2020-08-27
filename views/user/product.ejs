@@ -40,96 +40,83 @@
 
     <div class="main-area">
         <div class="container">
-            <!-- content-wraper start -->
+            <% if (dataProduct) { %>
             <div class="content-wraper">
                 <div class="row single-product-area">
+                    <!-- Product picture on the left side of area -->
                     <div class="col-lg-5 col-md-6 pl-0">
-                        <!-- Product Details Left -->
                         <div class="product-details-left">
                             <div class="product-details-images">
                                 <div class="lg-image">
-                                    <a class="popup-img venobox vbox-item" href="/images/product/large-size/1.jpg"
+                                    <a class="popup-img venobox vbox-item" href="<%= dataProduct.image %>"
                                         data-gall="myGallery">
-                                        <img src="/images/product/large-size/1.jpg" alt="product image" class="w-100" />
+                                        <img src="<%= dataProduct.image %>" alt="product image" class="w-100" />
                                     </a>
                                 </div>
                             </div>
                             <div class="d-none d-sm-block">
                                 <div class="product-details-thumbs row">
                                     <div class="sm-image col-3">
-                                        <img src="/images/product/small-size/1.jpg" alt="product image thumb"
+                                        <img src="<%= dataProduct.image %>" alt="product image thumb"
                                             class="w-100" />
                                     </div>
                                     <div class="sm-image col-3">
-                                        <img src="/images/product/small-size/2.jpg" alt="product image thumb"
+                                        <img src="<%= dataProduct.image %>" alt="product image thumb"
                                             class="w-100" />
                                     </div>
                                     <div class="sm-image col-3">
-                                        <img src="/images/product/small-size/3.jpg" alt="product image thumb"
+                                        <img src="<%= dataProduct.image %>" alt="product image thumb"
                                             class="w-100" />
                                     </div>
                                     <div class="sm-image col-3">
-                                        <img src="/images/product/small-size/4.jpg" alt="product image thumb"
+                                        <img src="<%= dataProduct.image %>" alt="product image thumb"
                                             class="w-100" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--// Product Details Left -->
                     </div>
+                    <!-- End Product picture -->
 
                     <div class="col-lg-7 col-md-6 pr-0">
                         <div class="product-details-view-content pt-60">
                             <div class="product-info">
-                                <h2>
-                                    Màn hình ASUS ROG SWIFT PG27UQ 27” 4K
-                                    UHD 144Hz G-SYNC HDR
-                                </h2>
+                                <h2> <%= dataProduct.name %> </h2>
                                 <div class="product-category">
                                     <b>Thương hiệu:</b>
-                                    <i>ASUS</i>
+                                    <i><%= dataProduct.brand %></i>
                                 </div>
                                 <div class="rating-review mt-3">
                                     <div class="rating-stars">
                                         <ul class="rating">
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star-half-alt"></i>
-                                            </li>
-                                            <li>
-                                                <i class="far fa-star"></i>
-                                            </li>
+                                            <% var rateInt = parseInt(dataProduct.rating); %>
+                                            <% for (var j = 0; j < rateInt; ++j) { %>
+                                                <li><i class="fas fa-star"></i></li>
+                                            <% } %>
+                                            <% if (dataProduct.rating > rateInt) { ++rateInt; %>
+                                                <li><i class="fas fa-star-half-alt"></i></li>
+                                            <% } %>        
+                                            <% while (rateInt < 5) { ++rateInt; %>
+                                                <li><i class="far fa-star"></i></li>
+                                            <% } %>  
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="price-box mt-3">
                                     Giá:
                                     <span class="price ml-2">
-                                        6.990.000đ
+                                        <%= (dataProduct.price*(100-dataProduct.promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %>
                                     </span>
+                                    <% if (dataProduct.promo !== 0) { %>
+                                        <span class="old-price"><%= dataProduct.price.toLocaleString('vi',{style:'currency',currency:'VND'}) %></span>
+                                    <% } %>
                                 </div>
-                                <div class="product-desc mt-3">
-                                    Kích thước : 27"<br />
-                                    Độ phân giải : 2K WQHD (2560 x 1440)<br />
-                                    Khả năng hiển thị màu : 16.7 triệu
-                                    màu<br />
-                                    Thời gian đáp ứng : 1ms<br />
-                                    Tần số quét : 165Hz<br />
-                                    Hỗ trợ Nvidia G-Sync<br />
-                                    Kết nối : HDMI 1.4, DisplayPort 1.2, 2
-                                    cổng USB, Jack tai nghe 3.5mm
+                                <div class="product-desc" style="white-space: pre-line">
+                                    <%= dataProduct.info %>
                                 </div>
                                 <div class="line"></div>
                                 <div class="add-to-wishlist my-3">
-                                    <button type="button" class="wishlist-btn">
+                                    <button type="button" class="card-btn-wish" name="wishlist-btn-<%= dataProduct.id %>">
                                         <i class="far fa-heart"></i>
                                     </button>
                                     Thêm vào danh sách yêu thích
@@ -138,7 +125,7 @@
                                     <label>Số lượng</label>
                                     <form action="" class="cart-quantity row">
                                         <div class="quantity d-flex mr-4">
-                                            <input class="cart-plus-minus-box" value="1" type="text" />
+                                            <input id="read-quantity" class="cart-plus-minus-box" value="1" type="text" readonly/>
                                             <div>
                                                 <div class="inc qtybutton">
                                                     <i class="fa fa-angle-up"></i>
@@ -174,7 +161,7 @@
                     </div>
                 </div>
             </div>
-            <!-- content-wraper end -->
+
             <br />
 
             <div class="section-title nav" id="myTab" role="tablist">
@@ -189,34 +176,8 @@
             </div>
             <div class="tab-content mt-4" id="myTabContent">
                 <div class="tab-pane fade show active" id="detail" role="tabpanel">
-                    <p>
-                        Màn hình chơi game ROG Swift PG27UQ – 27” 4K UHD
-                        (3840 x 2160), Có thể ép xung 144Hz, G-SYNC HDR,
-                        Chấm lượng tử , IPS, Aura Sync.
-                    </p>
-                    <p>
-                        Màn hình chơi game 27 inch 4K UHD (3840 x 2160) HDR
-                        có tần số quét 144Hz có thể ép xung mang lại các
-                        hình ảnh chơi game siêu mịn.
-                    </p>
-                    <p>
-                        NVIDIA G-SYNC HDR mang lại độ tương phản và màu sắc
-                        sống động như thật, làm nổi bật các màu trắng sáng
-                        nhất và các màu đen sẫm màu nhất mang lại các chi
-                        tiết chưa từng có trước đó.
-                    </p>
-                    <p>
-                        Màn hình IPS chấm lượng tử có gam màu DCI-P3 rộng
-                        cung cấp màu sắc trung thực và màu sắc mượt mà hơn.
-                    </p>
-                    <p>
-                        Công nghệ ASUS Aura Sync tạo ra ánh sáng xung quanh
-                        phong phú và hỗ trợ đồng bộ hóa với các bộ phận và
-                        thiết bị ngoại vi có bật Aura.
-                    </p>
-                    <p>
-                        Hiệu ứng Ánh sáng ROG mới có logo ROG để tạo ra
-                        không khí hoàn hảo cho thiết lập chơi game của bạn.
+                    <p style="white-space: pre-line">
+                        <%= dataProduct.detail %>
                     </p>
                 </div>
                 <div class="tab-pane fade" id="review" role="tabpanel">
@@ -322,66 +283,55 @@
                     Các sản phẩm tương tự:
                 </span>
             </div>
-            <div class="row mt-4">
-                <div class="card col-lg-3 col-md-4 col-6">
-                    <img class="card-img-top" src="/images/featured-product/4.jpg" alt="Card image cap" />
+            <div class="mt-3 row">
+            <% if (similarProducts) { for (var i = 0; i < similarProducts.length; ++i) { %>
+                <% if (i < 2) { %>
+                <div class="card col-lg col-md-4 col-6">
+                <% } else if (i == 2) { %>
+                <div class="card col-lg col-md-4 d-none d-md-block">
+                <% } else { %>
+                <div class="card col-lg d-none d-lg-block">
+                <% } %>
+                    <img class="card-img-top" src="<%= similarProducts[i].image %>" alt="Card image cap" />
                     <div class="card-body card-category">
-                        Phụ kiện chơi game
+                        <% var ctg = 'Danh mục';
+                        if (locals.lcCategories) {
+                            for (var c of lcCategories) {
+                                if (c.id === similarProducts[i].categoryID){
+                                    ctg = c.name;
+                                    break;
+                                }
+                            }
+                        } %>
+                        <%= ctg %>
                     </div>
                     <div class="card-body rating-stars">
                         <ul class="rating">
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="far fa-star"></i></li>
+                            <% var rateInt = parseInt(similarProducts[i].rating); %>
+                            <% for (var j = 0; j < rateInt; ++j) { %>
+                                <li><i class="fas fa-star"></i></li>
+                            <% } %>
+                            <% if (similarProducts[i].rating > rateInt) { ++rateInt; %>
+                                <li><i class="fas fa-star-half-alt"></i></li>
+                            <% } %>        
+                            <% while (rateInt < 5) { ++rateInt; %>
+                                <li><i class="far fa-star"></i></li>
+                            <% } %>                       
                         </ul>
                     </div>
-                    <a href="product.html" class="card-body card-product-name">
-                        Tay cầm chơi game Microsoft Xboxe One
+                    <a href="/product/<%= similarProducts[i].id %>" class="card-body card-product-name">
+                        <%= similarProducts[i].name %>
                     </a>
                     <div class="card-body">
                         <div class="d-flex align-items-end">
                             <div class="price-box">
-                                <span class="card-price">780.000đ</span>
-                                <span class="card-old-price">980.000đ</span>
+                                <span class="card-price"><%= (similarProducts[i].price*(100-similarProducts[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %></span>
+                                <% if (similarProducts[i].promo !== 0) { %>
+                                <span class="card-old-price"><%= similarProducts[i].price.toLocaleString('vi',{style:'currency',currency:'VND'}) %></span>
+                                <% } %>
                             </div>
                             <div class="flex-fill d-flex justify-content-end">
-                                <button type="button" class="card-btn-wish in-wish-list">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-                                <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                    <i class="fal fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card col-lg-3 col-md-4 col-6">
-                    <img class="card-img-top" src="/images/featured-product/3.jpg" alt="Card image cap" />
-                    <div class="card-body card-category">
-                        Phụ kiện chơi game
-                    </div>
-                    <div class="card-body rating-stars">
-                        <ul class="rating">
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="far fa-star"></i></li>
-                        </ul>
-                    </div>
-                    <a href="product.html" class="card-body card-product-name">
-                        Tay cầm chơi game Microsoft Xboxe One
-                    </a>
-                    <div class="card-body">
-                        <div class="d-flex align-items-end">
-                            <div class="price-box">
-                                <span class="card-price">780.000đ</span>
-                                <span class="card-old-price">980.000đ</span>
-                            </div>
-                            <div class="flex-fill d-flex justify-content-end">
-                                <button onclick="location.href=''" type="button" class="card-btn-wish">
+                                <button type="button" class="card-btn-wish" name="btn-like-<%= similarProducts[i].id %>">
                                     <i class="fal fa-heart"></i>
                                 </button>
                                 <button onclick="location.href=''" type="button" class="card-btn-cart">
@@ -391,77 +341,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="card col-lg-3 col-md-4 d-none d-md-block">
-                    <img class="card-img-top" src="/images/featured-product/5.jpg" alt="Card image cap" />
-                    <div class="card-body card-category">
-                        Phụ kiện chơi game
-                    </div>
-                    <div class="card-body rating-stars">
-                        <ul class="rating">
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="far fa-star"></i></li>
-                        </ul>
-                    </div>
-                    <a href="product.html" class="card-body card-product-name">
-                        Tay cầm chơi game Microsoft Xboxe One
-                    </a>
-                    <div class="card-body">
-                        <div class="d-flex align-items-end">
-                            <div class="price-box">
-                                <span class="card-price">780.000đ</span>
-                                <span class="card-old-price">980.000đ</span>
-                            </div>
-                            <div class="flex-fill d-flex justify-content-end">
-                                <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                    <i class="fal fa-heart"></i>
-                                </button>
-                                <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                    <i class="fal fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card col-lg-3 d-none d-lg-block">
-                    <img class="card-img-top" src="/images/featured-product/6.jpg" alt="Card image cap" />
-                    <div class="card-body card-category">
-                        Phụ kiện chơi game
-                    </div>
-                    <div class="card-body rating-stars">
-                        <ul class="rating">
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="fas fa-star"></i></li>
-                            <li><i class="far fa-star"></i></li>
-                        </ul>
-                    </div>
-                    <a href="product.html" class="card-body card-product-name">
-                        Tay cầm chơi game Microsoft Xboxe One
-                    </a>
-                    <div class="card-body">
-                        <div class="d-flex align-items-end">
-                            <div class="price-box">
-                                <span class="card-price">780.000đ</span>
-                                <span class="card-old-price">980.000đ</span>
-                            </div>
-                            <div class="flex-fill d-flex justify-content-end">
-                                <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                    <i class="fal fa-heart"></i>
-                                </button>
-                                <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                    <i class="fal fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <% }} %>
             </div>
             <!-- Similar products end -->
         </div>
+        <% } %>
     </div>
 
     <br />
@@ -556,7 +440,27 @@
     <!-- Footer end -->
 
     <!-- Optional JavaScript -->
-    <script src="/script/header.js"></script>
+    <script src="/script/public.js"></script>
+    <script>
+        document.querySelectorAll(".qtybutton").forEach(btn => { 
+            btn.onclick = () => {
+                var quantity = btn.parentElement.parentElement.querySelector("input");
+                var oldVal = quantity.value;
+                var newVal = null;
+                if (btn.classList.contains("inc")) {
+                    newVal = parseFloat(oldVal) + 1;
+                } else {
+                    // Don't allow decrementing below zero
+                    if (oldVal > 1) {
+                        newVal = parseFloat(oldVal) - 1;
+                    } else {
+                        newVal = 1;
+                    }
+                }
+                quantity.value = newVal;
+            }
+        });
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

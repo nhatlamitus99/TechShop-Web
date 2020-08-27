@@ -40,6 +40,12 @@
     font-weight: 500;
     color: #ff0000;
 }
+.price-box > .old-price {
+    text-decoration: line-through;
+    font-size: 22px;
+    font-style: italic;
+    color: #757575;
+}
 
 .line {
     border-bottom: 1px solid #c0c0c0;
@@ -50,6 +56,11 @@
     border: 1px solid #757575;
     padding: 0 5px;
     height: 22px;
+    z-index: 5;
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out 0s;
 }
 
 .single-add-to-cart .qtybutton.dec {
@@ -57,7 +68,7 @@
 }
 
 .quantity input {
-    width: 50px;
+    width: 70px;
     text-align: center;
     border: 1px solid #757575;
     border-right: 0;
@@ -76,7 +87,7 @@
     background-color: black;
 }
 
-.add-to-wishlist .wishlist-btn {
+.add-to-wishlist button {
     color: #454545;
     border: 0;
     background-color: inherit;
@@ -84,10 +95,6 @@
     padding: 0;
     margin-right: 8px;
     font-size: 18px;
-}
-
-.add-to-wishlist .wishlist-btn:hover {
-    color: #ff0000;
 }
 
 .tab-pane .fa-star,

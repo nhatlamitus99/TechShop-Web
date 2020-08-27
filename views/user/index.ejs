@@ -649,7 +649,7 @@
                                                 <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldManHinh[i].id %>">
                                                     <i class="fal fa-heart"></i>
                                                 </button>
-                                                <button onclick="location.href=''" type="button" class="card-btn-cart">
+                                                <button onclick="" type="button" class="card-btn-cart">
                                                     <i class="fal fa-shopping-cart"></i>
                                                 </button>
                                             </div>
@@ -757,20 +757,7 @@
     <!-- Footer end -->
 
     <!-- Optional JavaScript -->
-    <script src="/script/header.js"></script>
-    <script>
-        var likeProductIDs = JSON.parse(localStorage.getItem('likeProductIDs'));
-        document.querySelectorAll('.card-btn-wish').forEach(btn => {
-            let id = parseInt(btn.name.split('-')[2]);
-            if (likeProductIDs && likeProductIDs.includes(id)) {
-                btn.className = "card-btn-wish in-wish-list";
-                btn.innerHTML = '<i class="fas fa-heart"></i>';
-            } else {
-                btn.className = "card-btn-wish";
-                btn.innerHTML = '<i class="fal fa-heart"></i>';
-            }
-        });
-    </script>
+    <script src="/script/public.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

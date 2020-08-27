@@ -3,11 +3,9 @@ function makeRequest(url, method) {
 
     var jwtToken = localStorage.getItem('token');
     var headers = {}
-
     if (jwtToken) {
         headers['token'] = jwtToken;
     }
-
     return fetch(url, {
         method: method, // *GET, POST, PUT, DELETE, etc.
         mode: 'cors',
@@ -50,3 +48,16 @@ function searchBox() {
         window.location.replace("/search?q=" + query);
     }
 }
+
+// Process like button
+var likeProductIDs = JSON.parse(localStorage.getItem('likeProductIDs'));
+document.querySelectorAll('.card-btn-wish').forEach(btn => {
+    let id = parseInt(btn.name.split('-')[2]);
+    if (likeProductIDs && likeProductIDs.includes(id)) {
+        btn.className = "card-btn-wish in-wish-list";
+        btn.innerHTML = '<i class="fas fa-heart"></i>';
+    } else {
+        btn.className = "card-btn-wish";
+        btn.innerHTML = '<i class="fal fa-heart"></i>';
+    }
+});

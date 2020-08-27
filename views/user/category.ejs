@@ -12,10 +12,10 @@
     <!-- Import font Roboto -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
     <!-- Font Awesome -->
-    <script src="../../public/script/fontawesome-pro.js"></script>
+    <script src="/script/fontawesome-pro.js"></script>
     <!-- Style -->
-    <link rel="stylesheet" href="../../public/css/category.css" />
-    <link rel="stylesheet" href="../../public/css/style.css" />
+    <link rel="stylesheet" href="/css/category.css" />
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
@@ -23,12 +23,13 @@
     <%- include('header.ejs') %>
     <!-- End Header -->
 
+
     <!-- Nav bar begin-->
     <div class="breadcrumb p-1 d-none d-sm-block">
         <div class="container">
-            <a href="./index">Trang chủ</a>
+            <a href="/">Trang chủ</a>
             <i class="far fa-angle-right mx-2"></i>
-            <a>Laptop chính hãng</a>
+            <a><%= categoryName %></a>
         </div>
     </div>
     <!-- Nav bar end -->
@@ -88,7 +89,7 @@
                     <div class="col-lg-9 p-0 m-0 pl-lg-1">
                         <div class="banner p-0 d-none d-md-block">
                             <div class="container">
-                                <img class="w-100" src="../../public/images/bg-banner/bg-banner.jpg" alt="Big banner" />
+                                <img class="w-100" src="/images/bg-banner/bg-banner.jpg" alt="Big banner" />
                                 <div class="banner-content">
                                     <h5 style="font-weight: 400;">
                                         Khuyến mãi
@@ -117,12 +118,12 @@
             </div>
             <br />
         </div>
-        .
+        
         <div class="list-product-section">
             <div class="container">
                 <div class="sort-area py-2 px-2 row justify-content-between align-items-center">
                     <div class="number-of-products mr-5">
-                        Tìm thấy <b>169</b> sản phẩm
+                        Tìm thấy <b><%= nofProducts %></b> sản phẩm
                     </div>
                     <div class="right-area d-flex justify-content-between">
                         <div class="sort mr-5 row align-items-center">
@@ -132,10 +133,10 @@
                                     Tên: A-Z
                                 </option>
                                 <option value="2">Tên: Z-A</option>
-                                <option value="2">Giá: Tăng dần</option>
-                                <option value="2">Giá: Giảm dần</option>
-                                <option value="2">Mới nhất</option>
-                                <option value="2">Cũ nhất</option>
+                                <option value="3">Giá: Tăng dần</option>
+                                <option value="4">Giá: Giảm dần</option>
+                                <option value="5">Mới nhất</option>
+                                <option value="6">Cũ nhất</option>
                             </select>
                         </div>
                         <div class="view row align-items-center">
@@ -152,447 +153,77 @@
                     </div>
                 </div>
 
+                <% var nofRows = 0; if (dataProducts) {nofRows = dataProducts.length;} %> 
                 <!-- Card List begin -->
-                <div class="row">
+                <div class="row mt-1">
+                <% if (dataProducts) { 
+                    for (var i = 0; i < nofRows; ++i) { %>
                     <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/4.jpg" alt="Card image cap" />
+                        <img class="card-img-top" src="<%= dataProducts[i].image %>" alt="Card image cap" />
                         <div class="card-body card-category">
-                            Phụ kiện chơi game
+                            <%= categoryName %>
                         </div>
                         <div class="card-body rating-stars">
                             <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
+                                <% var rateInt = parseInt(dataProducts[i].rating); %>
+                                <% for (var j = 0; j < rateInt; ++j) { %>
+                                    <li><i class="fas fa-star"></i></li>
+                                <% } %>
+                                <% if (dataProducts[i].rating > rateInt) { ++rateInt; %>
+                                    <li><i class="fas fa-star-half-alt"></i></li>
+                                <% } %>        
+                                <% while (rateInt < 5) { ++rateInt; %>
+                                    <li><i class="far fa-star"></i></li>
+                                <% } %>                       
                             </ul>
                         </div>
-                        <a href="product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
+                        <a href="/product/<%= dataProducts[i].id %>" class="card-body card-product-name">
+                            <%= dataProducts[i].name %>
                         </a>
                         <div class="card-body">
                             <div class="d-flex align-items-end">
                                 <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
+                                    <span class="card-price">
+                                        <%= (dataProducts[i].price*(100-dataProducts[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %>
+                                    </span>
+                                    <% if (dataProducts[i].promo !== 0) { %>
+                                        <span class="card-old-price">
+                                            <%= dataProducts[i].price.toLocaleString('vi',{style:'currency',currency:'VND'}) %>
+                                        </span>
+                                    <% } %>
                                 </div>
                                 <div class="flex-fill d-flex justify-content-end">
-                                    <button type="button" class="card-btn-wish in-wish-list">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/3.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
+                                    <button type="button" class="card-btn-wish" name="btn-like-<%= dataProducts[i].id %>">
                                         <i class="fal fa-heart"></i>
                                     </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
+                                    <button type="button" class="card-btn-cart">
                                         <i class="fal fa-shopping-cart"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/5.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/6.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/4.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button type="button" class="card-btn-wish in-wish-list">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/3.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/5.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/6.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="./product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/4.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button type="button" class="card-btn-wish in-wish-list">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/3.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/5.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product.html" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-lg-3 col-md-4 col-6">
-                        <img class="card-img-top" src="../../public/images/featured-product/6.jpg" alt="Card image cap" />
-                        <div class="card-body card-category">
-                            Phụ kiện chơi game
-                        </div>
-                        <div class="card-body rating-stars">
-                            <ul class="rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="far fa-star"></i></li>
-                            </ul>
-                        </div>
-                        <a href="product.html" class="card-body card-product-name">
-                            Tay cầm chơi game Microsoft Xboxe One
-                        </a>
-                        <div class="card-body">
-                            <div class="d-flex align-items-end">
-                                <div class="price-box">
-                                    <span class="card-price">780.000đ</span>
-                                    <span class="card-old-price">980.000đ</span>
-                                </div>
-                                <div class="flex-fill d-flex justify-content-end">
-                                    <button onclick="location.href=''" type="button" class="card-btn-wish">
-                                        <i class="fal fa-heart"></i>
-                                    </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
-                                        <i class="fal fa-shopping-cart"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
-
                 <!-- Card List end -->
-
                 <br />
                 <br />
-
                 <nav aria-label="pagination-area">
                     <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link">Trước</a>
+                        <li class="page-item <%if (page < 2) {%> disabled <%}%>">
+                            <a class="page-link" href="/category/<%= categoryID %>?page=<%= page-1 %>">Trước</a>
                         </li>
-                        <li class="page-item active">
-                            <a class="page-link">1</a>
+                        <% for (var p=1; p <= lastPage; ++p) {%>
+                        <li class="page-item <%if (p === page) {%> active <%}%>">
+                            <a class="page-link" href="/category/<%= categoryID %>?page=<%= p %>"><%= p %></a>
                         </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link">...</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">15</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Sau</a>
+                        <% } %>
+                        <li class="page-item <%if (page >= lastPage) {%> disabled <%}%>">
+                            <a class="page-link" href="/category/<%= categoryID %>?page=<%= page+1 %>">Sau</a>
                         </li>
                     </ul>
                 </nav>
+                <% } %>
             </div>
         </div>
     </div>
@@ -659,20 +290,20 @@
                     <div>
                         <h5>PHƯƠNG THỨC THANH TOÁN</h5>
                         <h2 class="line"></h2>
-                        <img src="../../public/images/footer/visa.svg" width="54" class="mr-3" />
-                        <img src="../../public/images/footer/maestro.svg" width="54" class="mr-3" />
-                        <img src="../../public/images/footer/american-express.svg" width="54" class="mr-3" />
-                        <img src="../../public/images/footer/jcb.svg" width="54" class="mr-3" />
-                        <img src="../../public/images/footer/paypal.svg" width="54" class="mr-3" />
-                        <img src="../../public/images/footer/ebay.svg" width="54" />
+                        <img src="/images/footer/visa.svg" width="54" class="mr-3" />
+                        <img src="/images/footer/maestro.svg" width="54" class="mr-3" />
+                        <img src="/images/footer/american-express.svg" width="54" class="mr-3" />
+                        <img src="/images/footer/jcb.svg" width="54" class="mr-3" />
+                        <img src="/images/footer/paypal.svg" width="54" class="mr-3" />
+                        <img src="/images/footer/ebay.svg" width="54" />
                     </div>
                     <br />
                     <br />
                     <div>
                         <h5>KẾT NỐI VỚI CHÚNG TÔI</h5>
                         <h2 class="line"></h2>
-                        <img src="../../public/images/footer/facebook.svg" width="40" class="mr-3" />
-                        <img src="../../public/images/footer/youtube.svg" width="50" />
+                        <img src="/images/footer/facebook.svg" width="40" class="mr-3" />
+                        <img src="/images/footer/youtube.svg" width="50" />
                     </div>
                 </div>
             </div>
@@ -689,7 +320,7 @@
     <!-- Footer end -->
 
     <!-- Optional JavaScript -->
-    <script src="/script/header.js"></script>
+    <script src="/script/public.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

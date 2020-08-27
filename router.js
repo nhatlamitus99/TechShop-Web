@@ -9,8 +9,11 @@ const passport = require('passport');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const authenticateUser = require('./middlewares/auth');
-const HASH_KEY_SYNC = 10;
 
+const HASH_KEY_SYNC = 10;
+const PRODUCTS_PER_PAGE = 12;
+
+const sequelize = require('sequelize');
 var user = require('./models/User');
 var product = require('./models/Product');
 var brand = require('./models/Brand');
@@ -37,64 +40,11 @@ var storage = multer.diskStorage({
 var uploadFile = multer({ storage: storage });
 
 
-// HOME PAGE
+/////////////////////////////////////////////////    FOR GUEST AND NORMAL USER    ///////////////////////////////////////////////////////
 
-router.get('/', async (req, res) => {
-    var topPromo = await product.findAll({
-        order: [['promo', 'DESC']],
-        limit: 4
-    });
-    var topSold = await product.findAll({
-        order: [['number_sell', 'DESC']],
-        limit: 4
-    });
-    var _idLaptopCategory = 0;
-    await category.findOne({
-        where: {
-            name: "Laptop"
-        }
-    }).then(result => _idLaptopCategory = result.id);
-
-    var _idManHinhCategory = 0;
-    await category.findOne({
-        where: {
-            name: "Màn hình"
-        }
-    }).then(result => _idManHinhCategory = result.id);
-
-    var topSoldLaptop = await product.findAll({
-        where: {categoryID: _idLaptopCategory},
-        order: [['number_sell', 'DESC']],
-        limit: 8
-    });
-    var topSoldManHinh = await product.findAll({
-        where: {categoryID: _idManHinhCategory},
-        order: [['number_sell', 'DESC']],
-        limit: 8
-    });
-    if (topSoldLaptop.length < 8) {
-        topSoldLaptop = null;
-    }
-    if (topSoldManHinh.length < 8) {
-        topSoldManHinh = null;
-    }
-    res.render('user/index', {topPromo: topPromo, topSold: topSold, topSoldLaptop: topSoldLaptop, topSoldManHinh: topSoldManHinh});
-});
-
-
-// SEARCH BOX
-router.get('/search', (req, res) => {
-    var query = req.query.q;
-    console.log(query);
-    // res.sendStatus(200);
-    res.redirect('/');
-});
-
-
-// SIGN UP & LOG IN 
+//===================================== LOGIN, LOG OUT & REGISTER ============================================//
 
 // render type: 1 = login, type: 2 = register, type: 0 = do nothing
-
 router.get('/login', (req, res) => {
     res.render('user/login', { type: 0, message: '', field: -1});
 });
@@ -187,11 +137,8 @@ router.post('/register', urlencodedParser, (req, res) => {
         });
 });
 
-
 // Register via Facebook
-
 router.get('/auth/facebook', passport.authenticate('facebook',{scope:'email'}));
-
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }),
     function (req, res) {
@@ -200,9 +147,7 @@ router.get('/auth/facebook/callback',
 );
 
 // Register via Google
-
 router.get('/auth/google',  passport.authenticate('google', { scope: ['email']}));
-
 router.get('/auth/google/callback',
     passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }),
     function (req, res) {
@@ -211,13 +156,247 @@ router.get('/auth/google/callback',
 );
 
 
-// USER ACCOUNT PAGE
+//===================================== HOME PAGE ============================================//
 
-router.get('/account/:tab', authenticateUser, (req, res) => {
-    var tab = parseInt(req.params.tab);
-    res.render('user/account', { tab: tab });
+router.get('/', async (req, res) => {
+    var topPromo = await product.findAll({
+        order: [['promo', 'DESC']],
+        limit: 4
+    });
+    var topSold = await product.findAll({
+        order: [['number_sell', 'DESC']],
+        limit: 4
+    });
+    var _idLaptopCategory = 0;
+    await category.findOne({
+        where: {
+            name: "Laptop"
+        }
+    }).then(result => _idLaptopCategory = result.id);
+
+    var _idManHinhCategory = 0;
+    await category.findOne({
+        where: {
+            name: "Màn hình"
+        }
+    }).then(result => _idManHinhCategory = result.id);
+
+    var topSoldLaptop = await product.findAll({
+        where: {categoryID: _idLaptopCategory},
+        order: [['number_sell', 'DESC']],
+        limit: 8
+    });
+    var topSoldManHinh = await product.findAll({
+        where: {categoryID: _idManHinhCategory},
+        order: [['number_sell', 'DESC']],
+        limit: 8
+    });
+    if (topSoldLaptop.length < 8) {
+        topSoldLaptop = null;
+    }
+    if (topSoldManHinh.length < 8) {
+        topSoldManHinh = null;
+    }
+    res.render('user/index', {topPromo: topPromo, topSold: topSold, topSoldLaptop: topSoldLaptop, topSoldManHinh: topSoldManHinh});
 });
 
+
+//===================================== 404 NOT FOUND PAGE ============================================//
+
+router.get('/404', (req, res) => {
+    res.render('user/404.ejs');
+});
+
+
+//===================================== SEARCH FOR PRODUCT ============================================//
+
+router.get('/search', (req, res) => {
+    var query = req.query.q;
+    console.log(query);
+    // res.sendStatus(200);
+    res.redirect('/');
+});
+
+
+//===================================== USER ACCOUNT PAGE ============================================//
+
+// tab = 0: account infor, tab = 1: order management, tab = 2: wishlist, tab = 3: payment infor
+router.get('/account/:tab', authenticateUser, (req, res) => {
+    var tab = parseInt(req.params.tab);
+    res.render('user/account', { tabID: tab });
+});
+
+
+//===================================== POLICY PAGE ============================================//
+
+router.get('/policy', (req, res) => {
+    res.render('user/policy')
+});
+
+
+//===================================== SINGLE PRODUCT DETAIL PAGE ============================================//
+
+router.get('/product/:id', async (req, res) => {
+    var _id = parseInt(req.params.id);
+    var data = await product.findByPk(_id);
+    var dataProduct = data;
+    var similarProducts = null;
+    if (data) {
+        var row_category = await category.findByPk(data.categoryID);
+        var row_brand = await brand.findByPk(data.brandID);
+        dataProduct['brand'] = row_brand.name;
+        dataProduct['category'] = row_category.name;
+
+        // IMPROVE BY AI IN FUTURE
+        similarProducts = await product.findAll({
+            order: [['number_sell', 'DESC']],
+            where: {
+                id: {[sequelize.Op.not]: _id},
+                brandID: data.brandID
+            },
+            limit: 4
+        });
+    }
+    res.render('user/product', { 'dataProduct': dataProduct , 'similarProducts': similarProducts});
+});
+
+
+//===================================== CATEGORY PRODUCTS PAGE ============================================//
+
+router.get('/category/:id', async (req, res) => {
+    if (isNaN(req.params.id)) {
+        res.redirect('/404');
+    }
+    var _id = parseInt(req.params.id);
+
+    var row_category = await category.findByPk(_id);
+    var categoryName = "Danh mục";
+    if (row_category) {
+        categoryName = row_category.name;
+    }
+
+    // pagination
+    var page = 1;
+    if (req.query.page && /^\d+$/.test(String(req.query.page))) {
+        page = Math.max(1, parseInt(req.query.page));
+    } else {
+        res.redirect('/category/' + _id + '?page=1');
+    }
+    var len = await product.count({ where: { categoryID: _id } }) || 0;
+    var lastPage = Math.ceil(len / PRODUCTS_PER_PAGE);
+    if (len === 0) {
+        res.render('user/category', {
+            'dataProducts': null,
+            'categoryName': categoryName,
+            'categoryID': _id,
+            'nofProducts': len
+        });
+        return;
+    }
+    if (page > lastPage) {
+        res.redirect('/category/' + _id + '?page=' + lastPage);
+    }
+    var dataProducts = await product.findAndCountAll({
+        order: [['name']],
+        where: { categoryID: _id },
+        limit: 12,
+        offset: (page - 1) * PRODUCTS_PER_PAGE
+    });
+
+    res.render('user/category', {
+        'dataProducts': dataProducts.rows,
+        'categoryName': categoryName,
+        'page': page,
+        'categoryID': _id,
+        'nofProducts': len,
+        'lastPage': lastPage
+    });
+});
+
+
+router.get('/user/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
+    if (req.user.dataValues.role !== 0) {
+        return res.sendStatus(403);
+    }
+    order.findAll({
+        where:{
+            userID: req.user.dataValues.id
+        }
+    })
+    .then(results=>{
+        res.render('user/order', {'data': results})
+    })
+    .catch(err=> console.log(err))        
+})
+
+router.post('/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
+    product.findOne({
+        where:{
+            name: req.body.name
+        }
+    })
+    .then(result=>{
+        if(result){
+            var _productID = result.id
+            if(req.body.number>result.number)
+                res.render('user/order', {'message': 'Not enough product in storage'})
+            else{
+                order.create({
+                    userID: req.user.dataValues.id,
+                    date: new Date(),
+                    productID: _productID,
+                    number: req.body.number,
+                    status: "new"
+                })
+                .then(result1=>{
+                    if(result1){
+                        product.findOne({
+                            where:{
+                                id: _productID
+                            }
+                        })
+                        .then(product=>{
+                            num = product.number
+                            num_sell = product.number_sell
+                            product.update({
+                                number: num-req.body.number,
+                                number_sell: parseInt(num_sell)+parseInt(req.body.number)
+                            }, {
+                                where:{
+                                    id: _productID
+                                }
+                            })
+                            .then(result2=>{
+                                res.render('user/order')
+                            })
+                            .catch(err=> console.log(err))
+                        })         
+                    }
+                })
+                .catch(err=> console.log(err))
+            }      
+        }
+    })
+    .catch(err=> console.log(err))
+})
+
+router.get('/like',passport.authenticate('jwt', { session: false }), (req, res)=>{
+    like.findOne({
+        where:{
+            userID: req.user.dataValues.id
+        }
+    })
+    .then(result=>{
+        res.json({'data': result})
+    })
+    .catch(err=> console.log(err))
+})
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////     FOR MANAGER AND ADMIN     /////////////////////////////////////////////
 
 // USER API
 
@@ -301,27 +480,15 @@ router.post('/checkout', passport.authenticate('jwt', { session: false }), (req,
 })
 
 
-// POLICY route 
-
-router.get('/policy', (req, res)=>{
-    res.render('user/policy')
-})
-
-// USAGE route
-
-router.get('/usage', (req, res)=>{
-    res.render('user/usage')
-})
-
 // PURCHASE route
 
 router.get('/purchase', (req, res)=>{
     res.render('user/purchase')
 })
 
+
 // PRODUCT route & api
 
-// for customer only
 router.get('/product', (req, res) => {
     if (req.user.dataValues.role !== 0) {
         return res.sendStatus(403);
@@ -332,18 +499,7 @@ router.get('/product', (req, res) => {
         })
         .catch(err => console.log(err))
 });
-router.get('/product/:id', async (req, res) => {
-    var _id = parseInt(req.params.id);
-    var data = await product.findByPk(_id);
-    var dataProduct = data;
-    if (data) {
-        var row_category = await category.findByPk(data.categoryID);
-        var row_brand = await brand.findByPk(data.brandID);
-        dataProduct['brand'] = row_brand.name;
-        dataProduct['category'] = row_category.name;
-    }
-    res.render('user/product', { 'dataProduct': dataProduct });
-});
+
 
 router.get('/api/product', (req, res)=>{
     product.findAll()
@@ -636,20 +792,6 @@ router.delete('/category/:id', passport.authenticate('jwt', { session: false }),
 
 // CART route & api
 
-// Get to cart page of user account
-router.get('/cart', authenticateUser, (req, res) => {
-    
-    cart.findOne({
-        where: {
-            userID: req.session.userID
-        }
-    })
-        .then(result => {
-            res.render('user/cart', { 'data': result })
-        })
-        .catch(err => console.log(err))
-});
-
 router.post('/cart', passport.authenticate('jwt', { session: false }), (req, res) => {
     if (req.user.dataValues.role !== 0) {
         return res.sendStatus(403);
@@ -712,22 +854,6 @@ router.delete('/cart/:id', passport.authenticate('jwt', { session: false }),(req
 
 
 // ORDER route & api
-
-router.get('/user/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    if (req.user.dataValues.role !== 0) {
-        return res.sendStatus(403);
-    }
-    order.findAll({
-        where:{
-            userID: req.user.dataValues.id
-        }
-    })
-    .then(results=>{
-        res.render('user/order', {'data': results})
-    })
-    .catch(err=> console.log(err))        
-})
-
 
 router.get('/manager/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
     if (req.user.dataValues.role === 0) {
@@ -1002,71 +1128,7 @@ router.get('/manager/api/order/cancelled/:id', passport.authenticate('jwt', { se
     .catch(err=> console.log(err))
 })
 
-router.post('/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    product.findOne({
-        where:{
-            name: req.body.name
-        }
-    })
-    .then(result=>{
-        if(result){
-            var _productID = result.id
-            if(req.body.number>result.number)
-                res.render('user/order', {'message': 'Not enough product in storage'})
-            else{
-                order.create({
-                    userID: req.user.dataValues.id,
-                    date: new Date(),
-                    productID: _productID,
-                    number: req.body.number,
-                    status: "new"
-                })
-                .then(result1=>{
-                    if(result1){
-                        product.findOne({
-                            where:{
-                                id: _productID
-                            }
-                        })
-                        .then(product=>{
-                            num = product.number
-                            num_sell = product.number_sell
-                            product.update({
-                                number: num-req.body.number,
-                                number_sell: parseInt(num_sell)+parseInt(req.body.number)
-                            }, {
-                                where:{
-                                    id: _productID
-                                }
-                            })
-                            .then(result2=>{
-                                res.render('user/order')
-                            })
-                            .catch(err=> console.log(err))
-                        })         
-                    }
-                })
-                .catch(err=> console.log(err))
-            }      
-        }
-    })
-    .catch(err=> console.log(err))
-})
 
-
-// LIKE route & api
-
-router.get('/like',passport.authenticate('jwt', { session: false }), (req, res)=>{
-    like.findOne({
-        where:{
-            userID: req.user.dataValues.id
-        }
-    })
-    .then(result=>{
-        res.json({'data': result})
-    })
-    .catch(err=> console.log(err))
-})
 
 router.get('/api/like', passport.authenticate('jwt', { session: false }), (req, res)=>{
     like.findOne({

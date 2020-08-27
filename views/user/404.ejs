@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>FAVADA</title>
+    <title>FAVADA: Login or Register</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -12,85 +12,60 @@
     <!-- Import font Roboto -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
     <!-- Font Awesome -->
-    <script src="/script/"></script>
+    <script src="/script/fontawesome-pro.js"></script>
     <!-- Style -->
-    <link rel="stylesheet" href="/css/checkout.css" />
+    <link rel="stylesheet" href="/css/login.css" />
     <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        h1 {
+            font-size: 200px;
+            color: #ffe600;
+            font-weight: 700;
+        }
+        .error-btn {
+            border-radius: 15px;
+            background-color: #ffe600;
+            padding: 5px 15px;
+            border: 0;
+        }
+        .error-btn a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+
 </head>
 
 <body>
     <!-- Begin Header -->
     <%- include('header.ejs') %>
     <!-- End Header -->
-
-    <!-- Breadcrumb begin-->
-    <div class="breadcrumb p-1 d-none d-sm-block">
-        <div class="container">
-            <a href="/">Trang chủ</a>
-            <i class="far fa-angle-right mx-2"></i>
-            <a href="./cart.html">Giỏ hàng</a>
-            <i class="far fa-angle-right mx-2"></i>
-            <a>Thông tin giao hàng</a>
-        </div>
-    </div>
-    <!-- Breadcrumb end -->
+    <br />
     <br />
 
-    <div class="main-area">
-        <div class="container justify-content-center d-flex">
-            <div class="col-lg-8 col-md-12 px-0">
-                <div class="is-registed">
-                    Bạn đã có tài khoản? <a href="./login.html">Đăng nhập</a>
+    <div class="error404-area mb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="error-wrapper text-center ptb-50 pt-xs-20">
+                        <div class="error-text">
+                            <h1>404</h1>
+                            <h2>OPPS! KHÔNG THỂ TÌM THẤY TRANG</h2>
+                            <p>Xin lỗi nhưng trang bạn tìm kiếm không tồn tại, đã bị gỡ bỏ, <br> tên thay đổi hoặc tạm thời không khả dụng.</p>
+                        </div>
+                        <div class="error-btn btn-warning btn">
+                            <a href="/">Quay lại trang chủ</a>
+                        </div>
+                    </div>
                 </div>
-                <form class="mt-4">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Họ và tên" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-8">
-                            <input type="email" class="form-control" placeholder="Email" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <input type="text" class=" form-control" placeholder="Số điện thoại" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Địa chỉ" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <select class="form-control" required>
-                                <option value="" selected hidden>Tỉnh/Thành phố</option>
-                                <option value="1">Bình Định</option>
-                                <option value="2">Phú Yên</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <select class="form-control" required>
-                                <option value="" selected hidden>Quận/Huyện</option>
-                                <option value="1">Quy Nhơn</option>
-                                <option value="2">Phù Cát</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row px-1 mt-3 justify-content-between align-items-center">
-                        <a class="turn-back py-2" href="./cart.html">
-                            <i class="far fa-angle-left mr-1"></i>
-                            Giỏ hàng
-                        </a>
-                        <button type="submit" class="finish-checkout btn btn-dark">
-                            Xác nhận đặt hàng
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
 
+
     <br />
     <br />
-    <br />
-    <!-- Footer begin -->
+    <!-- Begin Footer  -->
     <footer>
         <div class="container pt-3 pb-1">
             <div class="row d-flex justify-content-between no-gutters">
@@ -176,9 +151,10 @@
             </div>
         </div>
     </footer>
-    <!-- Footer end -->
+    <!-- End Footer -->
 
     <!-- Optional JavaScript -->
+    <script src="/script/validator.js"></script>
     <script src="/script/public.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
