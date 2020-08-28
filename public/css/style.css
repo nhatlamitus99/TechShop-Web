@@ -152,6 +152,8 @@ footer > div:nth-child(2) {
 }
 .card {
     border: 0;
+}
+.card:not(.card-horizontal) {
     max-width: 291px;
 }
 .card:hover {

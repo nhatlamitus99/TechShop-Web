@@ -25,14 +25,14 @@ var htAccount = ht.querySelector('#ht-account');
 var htLogout = ht.querySelector('#ht-logout');
 
 var jwtToken = localStorage.getItem('token');
-var name = localStorage.getItem('name');
+var username = localStorage.getItem('username');
 
 if (jwtToken && jwtToken.length) {
     htLogin.classList.add('d-none');
     htCheckOrder.classList.remove('d-none');
     htAccount.classList.remove('d-none');
     htLogout.classList.remove('d-none');
-    htAccount.append(name.toUpperCase());
+    htAccount.append(username.toUpperCase());
 } else {
     htLogin.classList.remove('d-none');
     htCheckOrder.classList.add('d-none');
@@ -52,7 +52,7 @@ function searchBox() {
 // Process like button
 var likeProductIDs = JSON.parse(localStorage.getItem('likeProductIDs'));
 document.querySelectorAll('.card-btn-wish').forEach(btn => {
-    let id = parseInt(btn.name.split('-')[2]);
+    let id = parseInt(btn.id.split('-')[2]);
     if (likeProductIDs && likeProductIDs.includes(id)) {
         btn.className = "card-btn-wish in-wish-list";
         btn.innerHTML = '<i class="fas fa-heart"></i>';
@@ -62,4 +62,30 @@ document.querySelectorAll('.card-btn-wish').forEach(btn => {
     }
 });
 
-// Function for change value of a key in req.query
+function hitLike(productID) {
+    if (!(jwtToken && jwtToken.length)) {
+        window.location.href = '/login';
+        return;
+    }
+    console.log(productID, typeof (productID));
+    let _id = parseInt(productID);
+    let btn = document.querySelector('#btn-like-' + productID);
+    if (likeProductIDs && likeProductIDs.includes(_id)) {
+        btn.className = "card-btn-wish";
+        btn.innerHTML = '<i class="fal fa-heart"></i>';
+        makeRequest('/like/' + productID, 'DELETE');
+        const i = likeProductIDs.indexOf(_id);
+        likeProductIDs.splice(i, 1);
+        localStorage.setItem("likeProductIDs", likeProductIDs);
+    } else {
+        btn.className = "card-btn-wish in-wish-list";
+        btn.innerHTML = '<i class="fas fa-heart"></i>';
+        makeRequest('/like/' + productID, 'PUT');
+        if (likeProductIDs) {
+            likeProductIDs.push(_id);
+        } else {
+            likeProductIDs = [_id];
+        }
+        localStorage.setItem("likeProductIDs", likeProductIDs);
+    }
+}

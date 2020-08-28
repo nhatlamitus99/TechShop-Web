@@ -202,10 +202,11 @@
                                         <% } %>
                                     </div>
                                     <div class="flex-fill d-flex justify-content-end">
-                                        <button type="button" class="card-btn-wish" name="btn-like-<%= topPromo[i].id %>">
+                                        <button type="button" class="card-btn-wish" id="btn-like-<%= topPromo[i].id %>" 
+                                            onclick="hitLike('<%= topPromo[i].id %>')">
                                             <i class="fal fa-heart"></i>
                                         </button>
-                                        <button onclick="location.href=''" type="button" class="card-btn-cart">
+                                        <button onclick="" type="button" class="card-btn-cart">
                                             <i class="fal fa-shopping-cart"></i>
                                         </button>
                                     </div>
@@ -275,7 +276,7 @@
                                     <% } %>
                                 </div>
                                 <div class="flex-fill d-flex justify-content-end">
-                                    <button type="button" class="card-btn-wish" name="btn-like-<%= topSold[i].id %>">
+                                    <button type="button" class="card-btn-wish" id="btn-like-<%= topSold[i].id %>">
                                         <i class="fal fa-heart"></i>
                                     </button>
                                     <button onclick="location.href=''" type="button" class="card-btn-cart">
@@ -390,7 +391,7 @@
                                             <% } %>
                                         </div>
                                         <div class="flex-fill d-flex justify-content-end">
-                                            <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldLaptop[i].id %>">
+                                            <button type="button" class="card-btn-wish" id="btn-like-<%= topSoldLaptop[i].id %>">
                                                 <i class="fal fa-heart"></i>
                                             </button>
                                             <button onclick="location.href=''" type="button" class="card-btn-cart">
@@ -413,7 +414,7 @@
                         <% if (topSoldLaptop) { 
                             for (var i = 0; i < 5; ++i) { %>
                             <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
+                            <div class="card card-horizontal d-flex flex-row pl-0 pr-1">
                                 <img class="col-lg-4 px-0 w-100" src="<%= topSoldLaptop[i].image %>" alt="Card image cap" />
                                 <div class="d-flex flex-column pr-0 py-2">
                                     <div class="d-flex mb-1">
@@ -462,7 +463,7 @@
                                             <% } %>
                                         </div>
                                         <div class="flex-fill d-flex justify-content-end">
-                                            <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldLaptop[i].id %>">
+                                            <button type="button" class="card-btn-wish" id="btn-like-<%= topSoldLaptop[i].id %>">
                                                 <i class="fal fa-heart"></i>
                                             </button>
                                             <button onclick="location.href=''" type="button" class="card-btn-cart">
@@ -528,7 +529,7 @@
                         <% if (topSoldManHinh) { 
                             for (var i = 0; i < 5; ++i) { %>
                             <!-- Card begin-->
-                            <div class="card d-flex flex-row pl-0 pr-1">
+                            <div class="card card-horizontal d-flex flex-row pl-0 pr-1">
                                 <img class="col-lg-4 px-0 w-100" src="<%= topSoldManHinh[i].image %>" alt="Card image cap" />
                                 <div class="d-flex flex-column pr-0 py-2">
                                     <div class="d-flex mb-1">
@@ -577,7 +578,7 @@
                                             <% } %>
                                         </div>
                                         <div class="flex-fill d-flex justify-content-end">
-                                            <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldManHinh[i].id %>">
+                                            <button type="button" class="card-btn-wish" id="btn-like-<%= topSoldManHinh[i].id %>">
                                                 <i class="fal fa-heart"></i>
                                             </button>
                                             <button onclick="location.href=''" type="button" class="card-btn-cart">
@@ -646,7 +647,7 @@
                                                 <% } %>
                                             </div>
                                             <div class="flex-fill d-flex justify-content-end">
-                                                <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldManHinh[i].id %>">
+                                                <button type="button" class="card-btn-wish" id="btn-like-<%= topSoldManHinh[i].id %>">
                                                     <i class="fal fa-heart"></i>
                                                 </button>
                                                 <button onclick="" type="button" class="card-btn-cart">

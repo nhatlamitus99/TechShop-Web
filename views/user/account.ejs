@@ -43,7 +43,7 @@
                             </span>
                             <span class="ml-1">
                                 <div>Tài khoản của</div>
-                                <div class="user-name">Cao Nhơn Hưng</div>
+                                <div class="user-name"></div>
                             </span>
                         </div>
                         <a class="nav-item" id="acccount-infor-tab" href="/account/0" role="tab" 
@@ -72,32 +72,22 @@
                     <div class="tab-content" id="content">
                         <div class="tab-pane fade <%if (tabID === 0) {%> active show <%}%>" id="account-infor" role="tabpanel">
                             <h5>Thông tin tài khoản</h5>
+                            <% if (typeof(userInfo) !== 'undefined' && userInfo) { %>
                             <form>
                                 <div class="form-row">
                                     <div class="label col-md-2 col-4 d-flex align-items-center">
                                         Họ và tên
                                     </div>
                                     <div class="form-group col-md-8">
-                                        <input type="text" class="form-control" value="Cao Nhơn Hưng" required />
+                                        <input type="text" class="form-control" value="<%= userInfo.fullname %>" required />
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="label col-md-2 col-4 d-flex align-items-center">
                                         Số điện thoại
                                     </div>
-                                    <div class="form-group col-md-8 row pr-0">
-                                        <input id="phone" type="text" class="form-control col-9"
-                                            placeholder="Hãy nhập SĐT để trải nghiệm tốt hơn" required />
-                                        <button class="btn-send-code col-3 px-0">Gửi mã</button>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="label col-md-2 col-4 d-flex align-items-center">
-                                        Mã xác thực
-                                    </div>
                                     <div class="form-group col-md-8">
-                                        <input type="text" class="form-control"
-                                            placeholder="Nhập mã xác thực gửi tới SĐT trên" required />
+                                        <input type="text" class="form-control" value="<%= userInfo.phone %>" required />
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -111,9 +101,14 @@
                                         Giới tính
                                     </div>
                                     <div class="form-group col-8">
-                                        <label class="radio-inline"><input type="radio" name="optradio" checked /> Nam
+                                        <label class="radio-inline"><input type="radio" name="optradio" 
+                                            <%if (userInfo.sex === true) {%> checked <%}%> /> 
+                                            Nam
                                         </label>
-                                        <label class="radio-inline"><input type="radio" name="optradio" /> Nữ</label>
+                                        <label class="radio-inline"><input type="radio" name="optradio" 
+                                            <%if (userInfo.sex === false) {%> checked <%}%> /> 
+                                            Nữ
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -123,43 +118,34 @@
                                     <div class="form-group form-row col-md-8">
                                         <select id="dob-day" class="form-control col-3 mr-3">
                                             <option value="" selected hidden>Ngày</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">...</option>
+                                            <% for (var d = 1; d < 32; ++d) {%>
+                                            <option value="<%= d %>"><%= d %></option>
+                                            <% } %>
                                         </select>
                                         <select id="dob-month" class="form-control col-3 mr-3">
                                             <option value="" selected hidden>Tháng</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">...</option>
+                                            <% for (var m = 1; m < 13; ++m) {%>
+                                            <option value="<%= m %>"><%= m %></option>
+                                            <% } %>
                                         </select>
                                         <select id="dob-year" class="form-control col-3">
                                             <option value="" selected hidden>Năm</option>
-                                            <option value="1">1999</option>
-                                            <option value="2">2000</option>
-                                            <option value="3">2001</option>
-                                            <option value="4">2002</option>
-                                            <option value="5">2003</option>
-                                            <option value="6">...</option>
+                                            <% for (var y = 1900; y < 2020; ++y) {%>
+                                            <option value="<%= y %>"><%= y %></option>
+                                            <% } %>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-2"> </div>
                                     <div class="form-group col-8">
-                                        <input class="" type="checkbox" value="" id="defaultCheck1" />
-                                        <label class="form-check-label" for="defaultCheck1">
+                                        <input type="checkbox" id="check-change-pass" onclick="showChangePass()" checked/>
+                                        <label class="form-check-label" for="check-change-pass">
                                             Thay đổi mật khẩu
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row belong-to-checkBox">
                                     <div class="label col-md-2 col-4 d-flex align-items-center">
                                         Mật khẩu cũ
                                     </div>
@@ -168,7 +154,7 @@
                                             required />
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row belong-to-checkBox">
                                     <div class="label col-md-2 col-4 d-flex align-items-center">
                                         Mật khẩu mới
                                     </div>
@@ -177,7 +163,7 @@
                                             placeholder="Nhập mật khẩu từ 6 đến 32 ký tự" required />
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row belong-to-checkBox">
                                     <div class="label col-md-2 col-4 d-flex align-items-center">
                                         Nhập lại
                                     </div>
@@ -194,6 +180,7 @@
                                     </button>
                                 </div>
                             </form>
+                            <% } %>
                         </div>
                         <div class="tab-pane fade <%if (tabID === 1) {%> active show <%}%>" id="order-history" role="tabpanel">
                             <h5>Quản lý đơn hàng</h5>
@@ -320,141 +307,67 @@
                             <div class="table-responsive">
                                 <table>
                                     <tbody>
-                                        <tr>
-                                            <td class="product-image">
-                                                <img class="w-100" src="/images/product/small-size/3.jpg"
-                                                    alt="Card image cap" />
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column pr-3 py-2">
-                                                    <div class="d-flex mb-1">
-                                                        <div class="category border-0">Phụ kiện</div>
-                                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                                            <ul class="rating">
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="far fa-star"></i></li>
-                                                            </ul>
+                                        <% if (typeof(likeProducts) !== 'undefined' && likeProducts) { 
+                                            for (var i = 0; i < likeProducts.length; ++i) { %>
+                                            <tr>
+                                                <td class="product-image">
+                                                    <img class="w-100" src="<%= likeProducts[i].image %>" 
+                                                        alt="Card image cap" />
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex flex-column pr-3 py-2">
+                                                        <div class="d-flex mb-1">
+                                                            <div class="category border-0">
+                                                                <% var ctg = 'Danh mục';
+                                                                if (locals.lcCategories) {
+                                                                    for (var c of lcCategories) {
+                                                                        if (c.id === likeProducts[i].categoryID){
+                                                                            ctg = c.name;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                } %>
+                                                                <%= ctg %>
+                                                            </div>
+                                                            <div class="rating-box flex-fill d-flex justify-content-end">
+                                                                <ul class="rating">
+                                                                    <% var rateInt = parseInt(likeProducts[i].rating); %>
+                                                                    <% for (var j = 0; j < rateInt; ++j) { %>
+                                                                        <li><i class="fas fa-star"></i></li>
+                                                                    <% } %>
+                                                                    <% if (likeProducts[i].rating > rateInt) { ++rateInt; %>
+                                                                        <li><i class="fas fa-star-half-alt"></i></li>
+                                                                    <% } %>        
+                                                                    <% while (rateInt < 5) { ++rateInt; %>
+                                                                        <li><i class="far fa-star"></i></li>
+                                                                    <% } %>  
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <a href="/product/<%= likeProducts[i].id %>" class="card-body card-product-name">
+                                                            <%= likeProducts[i].name %>
+                                                        </a>
+                                                        <div class="card-body mt-auto d-flex align-items-end">
+                                                            <div class="price-box">
+                                                                <span class="card-price"><%= (likeProducts[i].price*(100-likeProducts[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %></span>
+                                                                <% if (likeProducts[i].promo !== 0) { %>
+                                                                <span class="card-old-price"><%= likeProducts[i].price.toLocaleString('vi',{style:'currency',currency:'VND'}) %></span>
+                                                                <% } %>
+                                                            </div>
+                                                            <div class="flex-fill d-flex justify-content-end">
+                                                                <button type="button" class="card-btn-wish" id="btn-like-<%= likeProducts[i].id %>">
+                                                                    <i class="fas fa-heart"></i>
+                                                                </button>
+                                                                <button onclick="" type="button" class="card-btn-cart">
+                                                                    <i class="fal fa-shopping-cart"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <a href="product.html" class="card-body card-product-name">
-                                                        Tay cầm chơi game Microsoft Xbox One
-                                                    </a>
-                                                    <div class="card-body mt-auto d-flex align-items-end">
-                                                        <div class="price-box">
-                                                            <span class="card-price">
-                                                                780.000đ
-                                                            </span>
-                                                            <span class="card-old-price">
-                                                                980.000đ
-                                                            </span>
-                                                        </div>
-                                                        <div class="flex-fill d-flex justify-content-end">
-                                                            <button onclick="location.href=''" type="button"
-                                                                class="card-btn-wish">
-                                                                <i class="fas fa-heart"></i>
-                                                            </button>
-                                                            <button onclick="location.href=''" type="button"
-                                                                class="card-btn-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-image">
-                                                <img class="w-100" src="/images/product/small-size/3.jpg"
-                                                    alt="Card image cap" />
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column pr-3 py-2">
-                                                    <div class="d-flex mb-1">
-                                                        <div class="category border-0">Phụ kiện</div>
-                                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                                            <ul class="rating">
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="far fa-star"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <a href="product.html" class="card-body card-product-name">
-                                                        Tay cầm chơi game Microsoft Xbox One
-                                                    </a>
-                                                    <div class="card-body mt-auto d-flex align-items-end">
-                                                        <div class="price-box">
-                                                            <span class="card-price">
-                                                                780.000đ
-                                                            </span>
-                                                            <span class="card-old-price">
-                                                                980.000đ
-                                                            </span>
-                                                        </div>
-                                                        <div class="flex-fill d-flex justify-content-end">
-                                                            <button onclick="location.href=''" type="button"
-                                                                class="card-btn-wish">
-                                                                <i class="fas fa-heart"></i>
-                                                            </button>
-                                                            <button onclick="location.href=''" type="button"
-                                                                class="card-btn-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-image">
-                                                <img class="w-100" src="/images/product/small-size/3.jpg"
-                                                    alt="Card image cap" />
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column pr-3 py-2">
-                                                    <div class="d-flex mb-1">
-                                                        <div class="category border-0">Phụ kiện</div>
-                                                        <div class="rating-box flex-fill d-flex justify-content-end">
-                                                            <ul class="rating">
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="far fa-star"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <a href="product.html" class="card-body card-product-name">
-                                                        Tay cầm chơi game Microsoft Xbox One
-                                                    </a>
-                                                    <div class="card-body mt-auto d-flex align-items-end">
-                                                        <div class="price-box">
-                                                            <span class="card-price">
-                                                                780.000đ
-                                                            </span>
-                                                            <span class="card-old-price">
-                                                                980.000đ
-                                                            </span>
-                                                        </div>
-                                                        <div class="flex-fill d-flex justify-content-end">
-                                                            <button onclick="location.href=''" type="button"
-                                                                class="card-btn-wish">
-                                                                <i class="fas fa-heart"></i>
-                                                            </button>
-                                                            <button onclick="location.href=''" type="button"
-                                                                class="card-btn-cart">
-                                                                <i class="fal fa-shopping-cart"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        <% } } %>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -469,7 +382,7 @@
                                     hơn</div>
                                 <div class="mb-5 mt-4">
                                     <button type="submit" class="btn-continue-shopping"
-                                        onclick="location.href='/index.html'">Tiếp tục mua sắm</button>
+                                        onclick="location.href='/'">Tiếp tục mua sắm</button>
                                 </div>
                             </div>
                         </div>
@@ -572,8 +485,27 @@
 
     <!-- Optional JavaScript -->
     <script src="/script/public.js"></script>
+    <script>
+        var username = localStorage.getItem('username');
+        document.querySelector('#side-bar').querySelector('.user-name').innerText = username;        
+    </script>
     <!-- Font Awesome -->
     <script src="/script/fontawesome-pro.js"></script>
+    <script>
+        function showChangePass() {
+            var checkBox = document.querySelector('#check-change-pass');
+            var contents = document.querySelectorAll('.belong-to-checkBox');
+            if (checkBox.checked === true) {
+                contents.forEach(ele => {
+                    ele.classList.remove('d-none'); 
+                });
+            } else {
+                contents.forEach(ele => {
+                    ele.classList.add('d-none');
+                });
+            }
+        }
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

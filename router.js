@@ -99,6 +99,7 @@ router.post('/login', urlencodedParser, async (req, res) => {
                 req.session.isAuth = true;
                 req.session.userID = result.id;
                 req.session.role = result.role;
+                req.session.likeProductIDs = null;
 
                 // Token based authentication
                 var payload = { id: result.id, role: result.role };
@@ -112,7 +113,8 @@ router.post('/login', urlencodedParser, async (req, res) => {
                             likeProductIDs.push(element.productID);
                         });
                     }
-                    res.render('user/saveToken', { token: accessToken, name: result.fullname, likeProductIDs: likeProductIDs });
+                    req.session.likeProductIDs = likeProductIDs;
+                    res.render('user/saveToken', { token: accessToken, username: result.username, likeProductIDs: likeProductIDs });
                 } else {
                     res.render('manager/saveToken', { token: accessToken, user: result.username });
                 }                    
@@ -134,6 +136,7 @@ router.get('/logout', authenticateUser, (req, res) => {
     req.session.isAuth = false;
     req.session.userID = null;
     req.session.role = null;
+    req.session.likeProductIDs = null;
     res.redirect('/');
 });
 
@@ -256,9 +259,61 @@ router.get('/search', (req, res) => {
 //===================================== USER ACCOUNT PAGE ============================================//
 
 // tab = 0: account infor, tab = 1: order management, tab = 2: wishlist, tab = 3: payment infor
-router.get('/account/:tab', authenticateUser, (req, res) => {
+router.get('/account/:tab', authenticateUser, async (req, res) => {
+    if (isNaN(req.params.tab) || parseInt(req.params.tab) < 0) {
+        res.redirect('/404');
+        return;
+    }
     var tab = parseInt(req.params.tab);
-    res.render('user/account', { tabID: tab });
+    if (tab == 0) {
+        var userInfo = await user.findByPk(req.session.userID);
+        res.render('user/account', { 'tabID': tab,  'userInfo': userInfo});
+    }
+    if (tab == 1) {
+        res.render('user/account', { tabID: tab });
+    }
+    if (tab == 2) {
+        var likeProducts = await product.findAll({
+            where: {
+                id: { [sequelize.Op.in]: req.session.likeProductIDs }
+            }
+        });
+        res.render('user/account', { 'tabID': tab,  'likeProducts': likeProducts});
+    }
+    if (tab == 3) {
+        res.render('user/account', { tabID: tab });
+    }
+});
+
+
+//===================================== LIKE PRODUCT API ============================================//
+
+router.put('/like/:productID', authenticateUser, async (req, res) => {
+    if (isNaN(req.params.productID) || parseInt(req.params.productID) < 0) {
+        res.redirect('/404');
+        return;
+    }
+    var _productID = parseInt(req.params.productID);
+    await like.create({
+        userID: req.session.userID,
+        productID: _productID
+    });
+    res.sendStatus(200); 
+});
+
+router.delete('/like/:productID', authenticateUser, async (req, res) => {
+    if (isNaN(req.params.productID) || parseInt(req.params.productID) < 0) {
+        res.redirect('/404');
+        return;
+    }
+    var _productID = parseInt(req.params.productID);
+    await like.destroy({
+        where: {
+            userID: req.session.userID,
+            productID: _productID
+        }
+    });
+    res.sendStatus(200); 
 });
 
 
@@ -272,6 +327,10 @@ router.get('/policy', (req, res) => {
 //===================================== SINGLE PRODUCT DETAIL PAGE ============================================//
 
 router.get('/product/:id', async (req, res) => {
+    if (isNaN(req.params.id) || parseInt(req.params.id) < 0) {
+        res.redirect('/404');
+        return;
+    }
     var _id = parseInt(req.params.id);
     var data = await product.findByPk(_id);
     var dataProduct = data;
@@ -299,8 +358,9 @@ router.get('/product/:id', async (req, res) => {
 //===================================== CATEGORY PRODUCTS PAGE ============================================//
 
 router.get('/category/:id', async (req, res) => {
-    if (isNaN(req.params.id)) {
+    if (isNaN(req.params.id) || parseInt(req.params.id) < 0) {
         res.redirect('/404');
+        return;
     }
     var _id = parseInt(req.params.id);
 
@@ -488,18 +548,6 @@ router.post('/order', passport.authenticate('jwt', { session: false }),(req, res
                 .catch(err=> console.log(err))
             }      
         }
-    })
-    .catch(err=> console.log(err))
-})
-
-router.get('/like',passport.authenticate('jwt', { session: false }), (req, res)=>{
-    like.findOne({
-        where:{
-            userID: req.user.dataValues.id
-        }
-    })
-    .then(result=>{
-        res.json({'data': result})
     })
     .catch(err=> console.log(err))
 })
@@ -1252,25 +1300,6 @@ router.get('/api/like', passport.authenticate('jwt', { session: false }), (req, 
         res.json({'data': result})
     })
 })
-
-router.post('/like', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    like.create({
-        userID: req.user.dataValues.id,
-        productID: req.body.productID
-    })
-    res.render('user/index')
-})
-
-
-router.delete('/like/:productID',passport.authenticate('jwt', { session: false }), (req, res)=>{
-    like.destroy({
-        where: {
-            productID: req.params.productID
-        }
-    })
-    res.render('user/index')
-})
-
 
 
 
