@@ -61,3 +61,5 @@ document.querySelectorAll('.card-btn-wish').forEach(btn => {
         btn.innerHTML = '<i class="fal fa-heart"></i>';
     }
 });
+
+// Function for change value of a key in req.query

@@ -16,13 +16,14 @@
     font-weight: 500;
 }
 
-.filter-brand > div,
+.filter-brand > input,
 .filter-brand > button {
     border-radius: 0;
 }
 
 .filter-brand .text {
-    color: #757575;
+    color: #474747;
+    background-color: white;
 }
 
 .filter-brand > button {

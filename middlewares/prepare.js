@@ -9,6 +9,7 @@ const prepare = async (req, res, next) => {
     if (categories) {
         res.locals.lcCategories = categories;
     }
+    console.log(req.url);
     next();
 };
 

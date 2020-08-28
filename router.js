@@ -12,6 +12,7 @@ const authenticateUser = require('./middlewares/auth');
 
 const HASH_KEY_SYNC = 10;
 const PRODUCTS_PER_PAGE = 12;
+const MAX_PRICE = 999999999;
 
 const sequelize = require('sequelize');
 var user = require('./models/User');
@@ -38,6 +39,40 @@ var storage = multer.diskStorage({
 });
    
 var uploadFile = multer({ storage: storage });
+
+var UpdateQueryString = (key, value, url) => {
+    if (!url) url = window.location.href;
+    var re = new RegExp("([?&])" + key + "=.*?(&|#|$)(.*)", "gi"),
+        hash;
+
+    if (re.test(url)) {
+        if (typeof value !== 'undefined' && value !== null) {
+            return url.replace(re, '$1' + key + "=" + value + '$2$3');
+        }
+        else {
+            hash = url.split('#');
+            url = hash[0].replace(re, '$1$3').replace(/(&|\?)$/, '');
+            if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
+                url += '#' + hash[1];
+            }
+            return url;
+        }
+    }
+    else {
+        if (typeof value !== 'undefined' && value !== null) {
+            var separator = url.indexOf('?') !== -1 ? '&' : '?';
+            hash = url.split('#');
+            url = hash[0] + separator + key + '=' + value;
+            if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
+                url += '#' + hash[1];
+            }
+            return url;
+        }
+        else {
+            return url;
+        }
+    }
+}
 
 
 /////////////////////////////////////////////////    FOR GUEST AND NORMAL USER    ///////////////////////////////////////////////////////
@@ -269,36 +304,106 @@ router.get('/category/:id', async (req, res) => {
     }
     var _id = parseInt(req.params.id);
 
+    res.locals.UpdateQueryString = UpdateQueryString;
+    res.locals.url = req.url;
+
+    // get category name from categoryID
     var row_category = await category.findByPk(_id);
     var categoryName = "Danh mục";
     if (row_category) {
         categoryName = row_category.name;
     }
+    // get all brand for filter
+    var brands = await brand.findAll();
 
-    // pagination
+    /* 
+    req.query can contain: 
+        + page: page index - from 1 (show limit PRODUCTS_PER_PAGE)
+        + sortBy: 0 = name from A-Z
+                  1 = name from Z-A
+                  2 = price asc
+                  3 = price desc
+                  4 = newest first
+                  5 = oldest first 
+        + brand: filter by brandID 
+        + minPrice: filter by min price
+        + maxPrice: filter by max price 
+    */
+
+    // for pagination
     var page = 1;
-    if (req.query.page && /^\d+$/.test(String(req.query.page))) {
-        page = Math.max(1, parseInt(req.query.page));
+    if (req.query.page && /^\d+$/.test(req.query.page)) {
+        page = parseInt(req.query.page);
+        if (page < 1) {
+            res.redirect('/category/' + _id + '?page=1');
+        }
     } else {
         res.redirect('/category/' + _id + '?page=1');
     }
-    var len = await product.count({ where: { categoryID: _id } }) || 0;
-    var lastPage = Math.ceil(len / PRODUCTS_PER_PAGE);
+    // for sorting
+    const mapSort = [['name', 'ASC'], ['name', 'DESC'], ['price', 'ASC'], ['price', 'DESC'], ['createdAt', 'DESC'], ['createdAt', 'ASC']];
+    var sortBy = 0;
+    if (req.query.sortBy && /^\d+$/.test(req.query.sortBy)) {
+        let n = parseInt(req.query.sortBy);
+        if (n >= 0 && n < 6) {
+            sortBy = n;
+        }
+    }
+    res.locals.sortBy = sortBy;
+    // for filtering
+    const _filter = {};
+    _filter['categoryID'] = _id;
+    var res_brand = [null, null];
+    if (req.query.brand && /^\d+$/.test(req.query.brand)) {
+        let n = parseInt(req.query.brand);
+        if (n > 0) {
+            _filter['brandID'] = n;
+            res_brand[0] = n;
+            await brand.findByPk(n).then(res => res_brand[1] = res.name);
+        }
+    }
+    var minPrice = 0, maxPrice = MAX_PRICE;
+    if (req.query.minPrice && /^\d+$/.test(req.query.minPrice)) {
+        let n = parseInt(req.query.minPrice);
+        if (n > 0) {
+            minPrice = n;
+        }
+    }
+    if (req.query.maxPrice && /^\d+$/.test(req.query.maxPrice)) {
+        let n = parseInt(req.query.maxPrice);
+        if (n > minPrice) {
+            maxPrice = n;
+        }
+    }
+    _filter['price'] = { [sequelize.Op.between]: [minPrice, maxPrice] };    
+
+    // count all products with following condition
+    var len = await product.count({
+        where: _filter
+    });
+    len = len || 0;
+    // if no product found, response null data
     if (len === 0) {
         res.render('user/category', {
             'dataProducts': null,
             'categoryName': categoryName,
             'categoryID': _id,
-            'nofProducts': len
+            'nofProducts': len,
+            'brands': brands,
+            'res_minPrice': minPrice,
+            'res_maxPrice': maxPrice,
+            'res_brandFilter': res_brand
         });
         return;
     }
+    // calculate index of last page
+    var lastPage = Math.ceil(len / PRODUCTS_PER_PAGE);
     if (page > lastPage) {
         res.redirect('/category/' + _id + '?page=' + lastPage);
     }
     var dataProducts = await product.findAndCountAll({
-        order: [['name']],
-        where: { categoryID: _id },
+        order: [mapSort[sortBy]],
+        where: _filter,
         limit: 12,
         offset: (page - 1) * PRODUCTS_PER_PAGE
     });
@@ -309,11 +414,18 @@ router.get('/category/:id', async (req, res) => {
         'page': page,
         'categoryID': _id,
         'nofProducts': len,
-        'lastPage': lastPage
+        'lastPage': lastPage,
+        'brands': brands,
+        'res_minPrice': minPrice,
+        'res_maxPrice': maxPrice,
+        'res_brandFilter': res_brand
     });
 });
 
 
+
+
+// leave untouch yet
 router.get('/user/order', passport.authenticate('jwt', { session: false }),(req, res)=>{
     if (req.user.dataValues.role !== 0) {
         return res.sendStatus(403);

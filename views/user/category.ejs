@@ -47,41 +47,34 @@
                             </div>
                             <div class="mt-3 mb-1">Thương hiệu</div>
                             <div class="filter-brand btn-group w-100">
-                                <div class="form-control text">
-                                    Bất kỳ
-                                </div>
+                                <input class="form-control text" id="filter-brand-text" readonly
+                                <%if (res_brandFilter[1]) {%> value=<%=res_brandFilter[1]%> <%} else {%> value="Bất kỳ" <%}%>
+                                <%if (res_brandFilter[0]) {%> name=<%=res_brandFilter[0]%> <%} else {%> name="-1" <%}%>
+                                />
                                 <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split"
                                     id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" data-reference="parent">
-                                    <span class="sr-only">
-                                        Toggle Dropdown
-                                    </span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                                    <a class="dropdown-item" href="#">
-                                        LENOVO
+                                <% if (brands) { brands.forEach(brand => { %>
+                                    <a class="dropdown-item" href="javascript:filterBrand(<%= brand.id %>, '<%= brand.name %>')">
+                                        <%= brand.name %>
                                     </a>
-                                    <a class="dropdown-item" href="#">
-                                        ACER
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        ASUS
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        DELL
-                                    </a>
+                                <% });} %>
                                 </div>
                             </div>
                             <div class="mt-2 mb-1">Giá thành</div>
                             <div class="d-flex align-items-center">
-                                <input class="form-control price" placeholder="Thấp nhất" />
+                                <input type="number" class="form-control price" id="filter-minPrice" placeholder="Thấp nhất" 
+                                <% if (res_minPrice && res_minPrice > 0) {%> value=<%= res_minPrice %> <%}%> />
                                 <i class="far fa-horizontal-rule mx-1 px-1"></i>
-                                <input class="form-control price" placeholder="Cao nhất" />
+                                <input type="number" value="" class="form-control price" id="filter-maxPrice" placeholder="Cao nhất" 
+                                <% if (res_maxPrice && res_maxPrice < 999999999) {%> value=<%= res_maxPrice %> <%}%> />
                             </div>
-                            <button class="btn-filter btn btn-warning mt-3">
+                            <button class="btn-filter btn btn-warning mt-3" onclick="filterRequest()">
                                 Lọc
                             </button>
-                            <button class="btn-clear btn btn-outline-dark mt-3">
+                            <button class="btn-clear btn btn-outline-dark mt-3" onclick="clearFilter()">
                                 Hủy
                             </button>
                         </div>
@@ -128,15 +121,25 @@
                     <div class="right-area d-flex justify-content-between">
                         <div class="sort mr-5 row align-items-center">
                             <span class="mr-3">Sắp xếp theo:</span>
-                            <select class="sort-filter">
-                                <option value="1" selected="selected">
+                            <select class="sort-filter" onchange="changeSortType(value)">
+                                <option value="0" <%if (sortBy && sortBy===0) {%> selected="selected" <%}%>>
                                     Tên: A-Z
                                 </option>
-                                <option value="2">Tên: Z-A</option>
-                                <option value="3">Giá: Tăng dần</option>
-                                <option value="4">Giá: Giảm dần</option>
-                                <option value="5">Mới nhất</option>
-                                <option value="6">Cũ nhất</option>
+                                <option value="1" <%if (sortBy && sortBy===1) {%> selected="selected" <%}%>>
+                                    Tên: Z-A
+                                </option>
+                                <option value="2" <%if (sortBy && sortBy===2) {%> selected="selected" <%}%>>
+                                    Giá: Tăng dần
+                                </option>
+                                <option value="3" <%if (sortBy && sortBy===3) {%> selected="selected" <%}%>>
+                                    Giá: Giảm dần
+                                </option>
+                                <option value="4" <%if (sortBy && sortBy===4) {%> selected="selected" <%}%>>
+                                    Mới nhất
+                                </option>
+                                <option value="5" <%if (sortBy && sortBy===5) {%> selected="selected" <%}%>>
+                                    Cũ nhất
+                                </option>
                             </select>
                         </div>
                         <div class="view row align-items-center">
@@ -211,15 +214,15 @@
                 <nav aria-label="pagination-area">
                     <ul class="pagination justify-content-end">
                         <li class="page-item <%if (page < 2) {%> disabled <%}%>">
-                            <a class="page-link" href="/category/<%= categoryID %>?page=<%= page-1 %>">Trước</a>
+                            <a class="page-link" href="<%= UpdateQueryString('page', page-1, url) %>">Trước</a>
                         </li>
                         <% for (var p=1; p <= lastPage; ++p) {%>
                         <li class="page-item <%if (p === page) {%> active <%}%>">
-                            <a class="page-link" href="/category/<%= categoryID %>?page=<%= p %>"><%= p %></a>
+                            <a class="page-link" href="<%= UpdateQueryString('page', p, url) %>"><%= p %></a>
                         </li>
                         <% } %>
                         <li class="page-item <%if (page >= lastPage) {%> disabled <%}%>">
-                            <a class="page-link" href="/category/<%= categoryID %>?page=<%= page+1 %>">Sau</a>
+                            <a class="page-link" href="<%= UpdateQueryString('page', page+1, url) %>">Sau</a>
                         </li>
                     </ul>
                 </nav>
@@ -321,6 +324,51 @@
 
     <!-- Optional JavaScript -->
     <script src="/script/public.js"></script>
+    <script>
+        var url = '<%- url %>';
+        var updateQueryString = <%- UpdateQueryString %>; // MUST NOT CHANGE
+        function changeSortType(val) {
+            window.location.href = updateQueryString('sortBy', val, url);
+        }
+        function filterBrand(id, val) {
+            var brandText = document.getElementById('filter-brand-text');
+            brandText.name = String(id);
+            brandText.value = val;
+        }
+        function filterRequest() {
+            var _brand = document.querySelector('#filter-brand-text').name;
+            var _minPrice = document.querySelector('#filter-minPrice').value;
+            var _maxPrice = document.querySelector('#filter-maxPrice').value;
+            if (_brand) {
+                _brand = parseInt(_brand);
+                if (_brand >= 0) {
+                    url = updateQueryString('brand', _brand, url);
+                }
+            }
+            if (_minPrice) {
+                _minPrice = parseInt(_minPrice);
+                url = updateQueryString('minPrice', _minPrice, url);
+            } else {
+                _minPrice = 0;
+            }
+            if (_maxPrice) {
+                _maxPrice = parseInt(_maxPrice);
+                if (_maxPrice > _minPrice) {
+                    url = updateQueryString('maxPrice', _maxPrice, url);
+                }
+            }
+            window.location.href = url;              
+        }
+        function clearFilter() {
+            var _brand = document.querySelector('#filter-brand-text');
+            var _minPrice = document.querySelector('#filter-minPrice');
+            var _maxPrice = document.querySelector('#filter-maxPrice');
+            _brand.name = "-1";
+            _minPrice.value = 0;
+            _maxPrice.value = 0;
+            window.location.href = window.location.pathname;
+        }
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
