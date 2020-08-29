@@ -54,8 +54,7 @@
 				<div class="form-group">
 					<label for="prprd">Nhà sản xuất</label>
 					<select class="form-control" id="prprd">
-						<option>Sam Sung</option>
-						<option>Sony</option>
+						
 					</select>
 				</div>
 				
@@ -86,6 +85,17 @@
 <script>
 	var formData = new FormData();
 	
+	$.ajax({
+		url: "http://localhost:3000/api/brand",
+		type: 'GET',
+		success: function(data) {
+			var x=document.getElementById("prprd");
+			for (var i=0;i<data.data.length;i++)
+			{
+				x.innerHTML+="<option>"+data.data[i].name+"</option>";
+			}
+		}
+	});
 	
 	function update()
 	{

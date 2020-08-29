@@ -9,6 +9,6 @@
 				<div style="font-size:15px;height:20px;top:0%;font-weight:bold;position:relative;top:0%;">Hoàng Đức</div>
 				<div style="font-size:12px;height:10px;font-weight:normal;">Nhân viên</div>
 			</div>
-	
+			
 			<img class="t_avt d_avt" onclick="option()" style="" src="/images/img/avt.png"></img>
 	

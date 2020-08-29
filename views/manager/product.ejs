@@ -31,7 +31,11 @@
 			
 		</div>
 		<div class="d_content t_content" >
-			
+			<div id="opt" style="visibility:hidden;width:15%;background-color:#DDDDDD;float:right;clear:both;top:0%;right:0%;position:absolute;">
+				<div>tài khoản</div>
+				<div style="width:100%;border-top-style:solid;border-width:1px;"></div>
+				<div>đăng xuất</div>
+			</div>
 			<div style="float:left;float:left;border-color:#CCCCCC;border-width:1px;height:40px;">
 			Sắp xếp:
 			<select style="color:#999999;height:100%;color:black;"  id="sortby">
@@ -59,7 +63,7 @@
       <td></td>
       <td></td>
       <td></td>
-	  <td><div class="btnrow" style="background-color:#3955e3;">xóa</div>
+	  <td><div onclick="del(this)" class="btnrow" style="background-color:#3955e3;">xóa</div>
 		<div class="btnrow" style="background-color:#f02e41;">sửa</div>
 		<div onclick="detail(this)" class="btnrow" style="background-color:#06993c;">chi tiết</div>
 	  </td>
@@ -82,6 +86,28 @@
 	{
 		window.location.href="http://localhost:3000/manager/detail_product/"+e.parentElement.parentElement.childNodes[1].innerHTML;
 	}
+	
+	function del(e)
+	{
+		 var r = confirm("Press a button!");
+		if (r == true) {
+		
+			$.ajax({
+			url: "http://localhost:3000/product/"+e.parentElement.parentElement.childNodes[1].innerHTML,
+			type: 'DELETE',
+			headers: {token : localStorage.getItem("token")}
+			,
+				success: function(data) {
+				
+				location.reload();			
+			}
+			});
+		}
+		
+		
+	
+	}
+	
 	
 	$.ajax({
     url: "http://localhost:3000/api/product",

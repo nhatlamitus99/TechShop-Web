@@ -72,7 +72,7 @@
 	var id=<%=id%>;
 	var total=0;
 	$.ajax({
-		url: "http://localhost:3000/manager/api/order/new/"+id,
+		url: "http://localhost:3000/manager/api/order/all/"+id,
 		type: 'GET',
 		headers: {token : localStorage.getItem("token")}
 		,
@@ -103,14 +103,29 @@
     success: function(data) {
 			console.log(data);
 			var r=document.getElementById("row");
+			
+			
 			for (var i=0;i<data.data.length;i++)
 			{
 				var cln = r.cloneNode(true);
 				
+				var name;
+				$.ajax({
+				url: "http://localhost:3000/api/product/"+data.data[i].id,
+				type: 'GET',
+				headers: {token : localStorage.getItem("token")},
+				success: function(data2) {
+					name=data2.data.name;
+					
+				},
+				async: false
+				});
+				
 				cln.innerHTML+="<th scope='row'>"+data.data[i].id+"</th>";
 				//cln.childNodes[3].innerHTML=data.data[i].name;
-				cln.innerHTML+="<td>"+"điện thoại"+"</td>";
+				cln.innerHTML+="<td>"+name+"</td>";
 				cln.innerHTML+="<td>"+data.data[i].total+"</td>";
+				
 				cln.innerHTML+="<td>"+data.data[i].price+"</td>";
 				cln.innerHTML+="<td>"+data.data[i].note+"</td>";
 				console.log(cln);

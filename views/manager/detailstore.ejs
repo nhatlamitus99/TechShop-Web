@@ -26,69 +26,83 @@
 		
 	</div>
 	<!--<div valign="bottom" class="footer">powered by TEAM10</div>	-->
+	
 	<div style="height:100vh;width:500px;float:left;">
 		<div id="hd" class="d_header t_header">
 			
+		
 		</div>
-		<div class="d_content t_content" style="line-height:40px;">
-			<img src="/images/img/edit.png" style="width:20px;height:20px;opacity:50%;"></img>
-			<div style="padding:10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);width:90%;height:auto;overflow:auto;">
-			<div>
-			mã sản phẩm:
-				<span id="prid" style="font-weight:bold;">#1249</span>
-				
-			</div>
-			<div>tên sản phẩm:
-				<span id="prname" style="font-weight:bold;">SSD 128GB Kingston</span>
-				
-			</div>
-			<div>số lượng còn lại:
-				<span id="prrm" style="font-weight:bold;">50</span>
-			</div>
-			<div>các kho đang chứa:
-				<span style="font-weight:bold;">1A,1B</span>
-			</div>
-			<div>đơn giá:
-				<span id="prprice" style="font-weight:bold;">#1249</span>
-			</div>
-			<div>nhà sản xuất:
-				<span style="font-weight:bold;">Kingston</span>
-			</div>
-			<div>thông số kỹ thuật:
-				<span style="font-weight:bold;">128GB, tuổi thọ trung bình 1 triệu giờ, tần số: 2.7</span>
-			</div>
-			<div>hình ảnh</div>
-			<img id="primg" style="float:left;width:200px;height:200px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="/images/240g.jpg"></img>
+		
+		<div class="d_content t_content" >
 			
-			<div class="btnrow" style="display:block;margin-left:calc(50% - 50px);background-color:#3955e3;clear:both;opacity:30%;">update</div>
-			</div>
+			Kho hàng <span id="storage_name"></span>:
 			
+			<table class="table" style="">
+			<thead>
+			<tr>
+				<th scope="col">Tên hàng hóa</th>
+				<th scope="col">Số lượng</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr id="row" style="visibility:hidden;height:0%;overflow:hidden;">
+					<th scope="row">1</th>
+					<td>
+					</td>
+					
+				</tr>
+    
+			</tbody>
+			</table>
+		
+		</br></br>
+		
+		<form style="width:50%;">
+			<div style="font-size:20px;font-weight: bold;width:100%;text-align: center;">Nhập hàng</div>
+			
+			<div class="form-group">
+				<label for="exampleFormControlSelect1">Hàng Hóa</label>
+				<select class="form-control" id="exampleFormControlSelect1">
+					<option>1</option>
+      
+				</select>
+				<label for="">Số lượng</label>
+				<input class="form-control" type="text" placeholder="10">
 			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+				
+		</div>
 	</div>
 </div>
 <script src="/script/navigate.js"></script>
-
 <script>
 	
-	var id= <%-id%>;
+	
 	
 	$.ajax({
-    url: "http://localhost:3000/api/product/"+id,
+    url: "http://localhost:3000/api/storage/"+<%-id%>,
     type: 'GET',
 	headers: {token : localStorage.getItem("token")}
 	,
     success: function(data) {
 				console.log(data);
-				document.getElementById("prname").innerHTML=data.data.name;
-				document.getElementById("prid").innerHTML=data.data.id;
-				document.getElementById("prprice").innerHTML=data.data.price;
-				document.getElementById("primg").src=data.data.image.substring(6,100);
-				document.getElementById("prrm").innerHTML=data.data.number-data.data.number_sell;
+				document.getElementById("storage_name").innerHTML=data.data.name;
+				var itm = document.getElementById("row");
+				for (var i = 0 ; i < data.data.length; i++)
+				{
+				
+				var cln = itm.cloneNode(true);
+				cln.childNodes[1].innerHTML=data.data[i].name;
+				cln.childNodes[3].innerHTML=data.data[i].position;
+				cln.style.height="50px";
+				cln.style.visibility="visible";
+				document.getElementById("row").parentElement.appendChild(cln);
+				}
+				itm.parentElement.removeChild(itm.parentElement.childNodes[1]);
 				
 			}
 	});
-	
-	
 	var myvar;
 	function affect()
 	{
@@ -99,10 +113,6 @@
 			return;
 		}
 		document.getElementById("opt").style.opacity= parseFloat(x)+0.1;
-	}
-	function no()
-	{
-		alert(1);
 	}
 	function option()
 	{
