@@ -355,7 +355,6 @@ router.get('/cart', authenticateUser, async (req, res) => {
 });
 
 router.post('/cart/:productID', authenticateUser, async (req, res) => {
-    console.log('Post to here');
     if (isNaN(req.params.productID) || parseInt(req.params.productID) < 0) {
         return res.redirect('/404');
     }
@@ -389,18 +388,25 @@ router.delete('/cart/:productID', passport.authenticate('jwt', { session: false 
     res.sendStatus(200); 
 });
 
-router.put('/cart/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    cart.update({
-        number: req.body.number
+router.put('/cart/:productID', authenticateUser, async (req, res) => {
+    if (isNaN(req.params.productID) || parseInt(req.params.productID) < 0) {
+        return res.redirect('/404');
+    }
+    var _quantity = 1;
+    if (req.query.quantity) {
+        _quantity = parseInt(req.query.quantity);
+    }
+    var _productID = parseInt(req.params.productID);
+    await cart.update({
+        number: _quantity
     }, {
-        where:{
-            id: req.params.id
+        where: {
+            userID: req.session.userID,
+            productID: _productID,
         }
-    })
-    .then(result=>{
-        res.json({'data': result})
-    })
-})
+    });
+    res.sendStatus(200);
+});
 
 
 //===================================== POLICY PAGE ============================================//

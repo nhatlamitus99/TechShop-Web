@@ -76,7 +76,7 @@
                                             <div class="row justify-content-center">
                                                 <input id="read-quantity-<%= cartProducts[i].id %>" class="change-quantity-box" 
                                                 value="<%= cartProducts[i].quantity %>" type="number" readonly 
-                                            onchange="quantityChange(this,'<%= cartProducts[i].id %>','<%= cartProducts[i].price %>','<%= cartProducts[i].promo %>')"/>
+                                            onchange="quantityChange(this,'<%= i %>')"/>
                                                 <div class="">
                                                     <div class="inc qtybutton">
                                                         <i class="fa fa-angle-up"></i>
@@ -112,7 +112,7 @@
                                     } %>
                                     <tr>
                                         <td class="li-head">Tạm tính:</td>
-                                        <td class="temp-total money <%=tmpTotal%>">
+                                        <td class="temp-total money">
                                             <%=tmpTotal.toLocaleString('vi',{style:'currency',currency:'VND'})%>
                                         </td>
                                     </tr>
@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="total-cost row">
                                     <div class="total-text col-7">Tổng cộng:</div>
-                                    <div class="total-money col-5 <%=(tmpTotal+21000)%>">
+                                    <div class="total-money col-5">
                                         <%=(tmpTotal+21000).toLocaleString('vi',{style:'currency',currency:'VND'})%>
                                     </div>
                                 </div>
@@ -253,6 +253,8 @@
     <!-- Optional JavaScript -->
     <script src="/script/public.js"></script>
     <script>
+        var Products = <%- JSON.stringify(cartProducts) %>;
+
         function removeFromCart(productID) {
             let _id = parseInt(productID);
             // request delete in database
@@ -269,8 +271,8 @@
         var btnsQuantity = document.querySelectorAll(".qtybutton");
         btnsQuantity.forEach(btn => { 
             btn.onclick = () => {
-                var quantity = btn.parentElement.parentElement.querySelector("input");
-                var oldVal = quantity.value;
+                var q = btn.parentElement.parentElement.querySelector("input");
+                var oldVal = q.value;
                 var newVal = null;
                 if (btn.classList.contains("inc")) {
                     newVal = parseFloat(oldVal) + 1;
@@ -282,28 +284,30 @@
                         newVal = 1;
                     }
                 }
-                quantity.value = newVal;
+                q.value = newVal;
                 // Trigger change event
                 var event = new Event('change');
                 // Dispatch it.
-                quantity.dispatchEvent(event);
+                q.dispatchEvent(event);
             }
         });
-        function quantityChange(e, id, price, promo) {
-            let quantity = parseInt(e.value); id = parseInt(id);
-            price = parseInt(price); promo = parseInt(promo);
+        function quantityChange(e, idx) {
+            let i = parseInt(idx);
+            Products[i].quantity = parseInt(e.value);
             let subTotal = e.parentElement.parentElement.parentElement.querySelector('span.amount');
-            subTotal.innerHTML = ((price*(100-promo)/100) * quantity).toLocaleString('vi',{style:'currency',currency:'VND'});
+            let p = Products[i];
+            subTotal.innerHTML = ((p.price*(100-p.promo)/100) * p.quantity).toLocaleString('vi',{style:'currency',currency:'VND'});
             let tmpTotal = document.querySelector('.temp-total');
             let total = document.querySelector('.total-money');
             let a = 0;
-            let b = 0;
+            for (var x of Products) {
+                a += (x.price*(100-x.promo)/100) * x.quantity;
+            }
             tmpTotal.innerHTML = a.toLocaleString('vi',{style:'currency',currency:'VND'});
-            total.innerHTML = b.toLocaleString('vi',{style:'currency',currency:'VND'});
-            tmpTotal.classList.replace(tmpTotal.classList[2],""+a);
-            total.classList.replace(total.classList[2],""+b);
+            total.innerHTML = (a+21000).toLocaleString('vi',{style:'currency',currency:'VND'});
 
-
+            let reqUrl = '/cart/' + p.id + '?quantity=' + p.quantity;
+            makeRequest(reqUrl, 'PUT', jwtToken, null);
         }
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

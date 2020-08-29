@@ -25,7 +25,7 @@ function makeRequest(url, method, jwtToken, message) {
             headers: headers
         }).then(function (response) {
             console.log(response.status);
-            alert(message);
+            if (message) alert(message);
         });
         return true
     }
