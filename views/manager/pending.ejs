@@ -32,97 +32,76 @@
 			
 		</div>
 		<div class="d_content t_content" >
-			<div style="width:360px;height:50px;float:left;">
-			<input  type="text" placeholder="Search" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:3px;color:#CCCCCC;float:left;width:325px;border-color:#DDDDDD;border-width:1px;height:40px;">			</input>
-			<img src="/images/img/look_up.png" style="float:left;filter: opacity(30%);width:30px;height:90%; height:70%;float:left;"></img>
+			<div id="opt" style="visibility:hidden;width:15%;background-color:#DDDDDD;float:right;clear:both;top:0%;right:0%;position:absolute;">
+				<div>tài khoản</div>
+				<div style="width:100%;border-top-style:solid;border-width:1px;"></div>
+				<div style="-webkit-user-select: none" onclick="window.location.href = 'logout';">đăng xuất</div>
 			</div>
-			<div style="float:left;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);float:left;width:30%;border-radius:10px;border-color:#CCCCCC;border-width:1px;height:40px;">
-			<img src="/images/img/sort.png" style="filter: opacity(30%);width:20px; height:20px;float:right;"></img>
-			<select style="color:#999999;height:100%;width:90%;border-color:#CCCCCC;" name="cars" id="cars">
-				<option value="">Ngày tháng</option>
-				<option value="">Tổng giá trị</option>
-				<option value="">Địa điểm</option> 
+			<div style="float:left;float:left;border-color:#CCCCCC;border-width:1px;height:40px;">
+			Sắp xếp:
+			<select onchange="sort()" style="color:#999999;height:100%;color:black;"  id="sortby">
+				<option value="1">Ngày tháng</option>
+				<option value="2">Tổng giá trị</option>
+				
 			</select>
 			</div>
-			<div style="height:300px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:5%;clear:both;width:auto;border-color:#AAAAAA;border-width:1px;overflow:auto;">
-				<div style="line-height:15px;color:white;width:100%;background-color:#8F8F80;min-height:30px;overflow:hidden;">
-					<span style="width:10%;height:30px;" class="cell">
-					mã đơn hàng
-					</span>
-					<span style="width:10%;height:30px;" class="cell">
-					ngày đặt hàng
-					</span>
-					<span class="cell">
-					địa chỉ giao hàng
-					</span>
-					<span style="width:10%;height:30px;" class="cell">
-					tổng giá trị
-					</span>
-				</div>
-				
-				<div id="row"  style="visibility:hidden;color:#4c4d4f;background-color:white;width:100%;float:left;height:0px;">
-					<span style="width:10%;" class="cell">
-					#872938
-					</span>
-					<span style="width:10%;" class="cell">
-					30/2/2020
-					</span>
-					<span class="cell">
-					Tân Bình, hẻm 48, Bùi Thị Xuân
-					</span>
-					<span style="width:10%;" class="cell">
-					54$
-					</span>
-					<span style="width:400px;"class="cell">
-					<div class="btnrow" style="background-color:#f02e41;">xử lý</div>
-					<div class="btnrow" style="background-color:#06993c;">chi tiết</div>
-					</span>
-					
-				</div>
-				
-			</div>
 			
-			<div style="background-color:white;line-height:40px;padding:3px;font-weight:bold;height:300px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:5%;clear:both;width:auto;border-color:#AAAAAA;border-width:1px;overflow:auto;">
-				<span>chi tiết đơn hàng #123456</span>
-				</br>
-				<span>địa chỉ giao hàng:Tân Bình, hẻm 48, Bùi Thị Xuân </span>
-				</br>
-				<span>sđt nhận hàng: 0934728394 </span>
-				</br>
-				<span>ghi chú: giao hàng chiều thứ 7 </span>
-				</br>
-				<span class="t_detail_bill_row">mã sp</span>
-				<span class="t_detail_bill_row">tên sp</span>
-				<span class="t_detail_bill_row">số lượng</span>
-				<span class="t_detail_bill_row">kho chứa</span>
-				<span class="t_detail_bill_row">ghi chú</span>
-				</br>
-				<span class="t_detail_bill_row">#1243</span>
-				<span class="t_detail_bill_row">Asus vivobook A902</span>
-				<span class="t_detail_bill_row">1</span>
-				<span class="t_detail_bill_row">1,4,6</span>
-				<span class="t_detail_bill_row">none</span>
-				</br>
-				<span class="t_detail_bill_row">#1243</span>
-				<span class="t_detail_bill_row">Asus vivobook A902</span>
-				<span class="t_detail_bill_row">1</span>
-				<span class="t_detail_bill_row">1,4,6</span>
-				<span class="t_detail_bill_row">none</span>
-				</br>
-				<div class="btnrow" style="display:block;margin-left:calc(50% - 50px);background-color:#3955e3;">xử lý</div>
-			</div>
+			<table class="table" style="">
+			<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Ngày đặt hàng</th>
+				<th scope="col">Địa chỉ</th>
+				<th scope="col">Tổng giá trị</th>
+				<th scope="col">thao tác</th>
+			</tr> 
+			</thead>
+			<tbody id="tb">
+				<tr id="row" style="visibility:hidden;height:0%;overflow:hidden;">
+					<th scope="row">1</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<div class="btnrow" style="background-color:#f02e41;" onclick="process(this)">xử lý</div>
+						<div class="btnrow" style="background-color:#06993c;" onclick="detail(this)">chi tiết</div>
+					</td>
+				</tr>
+			</tbody>
+			</table>
+			
 		</div>
 	</div>
 </div>
 <script src="/script/navigate.js"></script>
 <script>
 	
+	function process(e)
+	{
+		$.ajax({
+		url: "http://localhost:3000/manager/order/done/"+e.parentElement.parentElement.childNodes[1].innerHTML,
+		type: 'PUT',
+		headers: {token : localStorage.getItem("token")}
+		,
+		success: function(data) {
+				location.reload();
+				}
+				});
+	}
+
+	function detail(e)
+	{
+		window.location.replace("/manager/detail_bill/"+e.parentElement.parentElement.childNodes[1].innerHTML);
+		
+	}
 	$.ajax({
 		url: "http://localhost:3000/manager/api/order/pending",
 		type: 'GET',
 		headers: {token : localStorage.getItem("token")}
 		,
 		success: function(data) {
+			console.log(data);
+			var itm = document.getElementById("row");
 			for (var i=0;i < data.data.length ;i++)
 			{
 			
@@ -130,7 +109,7 @@
 			
 			$.ajax({
 				async:false,
-				url: "localhost:3000/manager/order/pending/"+data.data[i].id,
+				url: "http://localhost:3000/manager/api/detailbill/"+data.data[i].id,
 				type: 'GET',
 				headers: {token : localStorage.getItem("token")}
 				,
@@ -148,20 +127,68 @@
 				});
 			
 			console.log(data);
-			var itm = document.getElementById("row");
+			
 			var cln = itm.cloneNode(true);
 			cln.style.visibility="visible";
 			cln.style.height="50px";
-			cln.childNodes[1].innerHTML=data.data[0].id;
-			var t=new Date(data.data[0].date);
+			cln.childNodes[1].innerHTML=data.data[i].id;
+			var t=new Date(data.data[i].date);
 			cln.childNodes[3].innerHTML=t.toDateString();
-			cln.childNodes[5].innerHTML=data.data[0].address;
+			cln.childNodes[5].innerHTML=data.data[i].address;
 			cln.childNodes[7].innerHTML= total;
 				
 			document.getElementById("row").parentElement.appendChild(cln);
 			}
+			itm.parentElement.removeChild(itm.parentElement.childNodes[1]);
 			}
 		});
+	
+	function sortbyday()
+	{
+		var arr=document.getElementById("tb").childNodes;
+	
+		for (var i=2;i<arr.length-1;i++)
+		{
+			
+			for (var j=i+1;j<arr.length;j++)
+			{
+				var d1=new Date(arr[i].childNodes[3].innerHTML);
+				var d2=new Date(arr[j].childNodes[3].innerHTML);
+				if(d1>d2)	
+					arr[i].before(arr[j]);
+			}
+		}
+			
+	}
+	
+	function sortbytotal()
+	{
+		var arr=document.getElementById("tb").childNodes;
+	
+		for (var i=2;i<arr.length-1;i++)
+		{
+			
+			for (var j=i+1;j<arr.length;j++)
+			{
+				var d1=arr[i].childNodes[7].innerHTML;
+				var d2=arr[j].childNodes[7].innerHTML;
+				if(d1>d2)	
+					arr[i].before(arr[j]);
+			}
+		}
+			
+	}
+	
+	function sort(e)	
+	{
+		var str= document.getElementById("sortby").value;
+		if (str=="1")
+			sortbyday();
+		if (str=="2")
+			sortbytotal();
+			
+		
+	}
 	
 	
 </script>

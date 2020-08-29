@@ -63,7 +63,7 @@
 					<td></td>
 					<td></td>
 					<td>
-						<div class="btnrow" style="background-color:#f02e41;">xử lý</div>
+						<div class="btnrow" style="background-color:#f02e41;" onclick="process(this)">xử lý</div>
 						<div class="btnrow" style="background-color:#06993c;" onclick="detail(this)")>chi tiết</div>
 					</td>
 				</tr>
@@ -79,6 +79,20 @@
 	
 	
 	var total=0;
+	
+	function process(e)
+	{
+		
+		$.ajax({
+		url: "/manager/order/pending/"+e.parentElement.parentElement.childNodes[1].innerHTML,
+		type: 'PUT',
+		headers: {token : localStorage.getItem("token")}
+		,
+		success: function(data) {
+					location.reload();
+				}
+		});
+	}
 	
 
 	$.ajax({

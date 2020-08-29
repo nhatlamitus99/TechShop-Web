@@ -33,7 +33,7 @@ function affect()
 		document.getElementById("opt").style.opacity= parseFloat(x)+0.1;
 	}
 function option()
-	{
+{
 		if (document.getElementById("opt").style.visibility != "hidden")
 		{
 			document.getElementById("opt").style.visibility = "hidden";
@@ -42,4 +42,4 @@ function option()
 			document.getElementById("opt").style.visibility = "visible";
 			myvar=setInterval(affect,50);
 		}
-	}
+}

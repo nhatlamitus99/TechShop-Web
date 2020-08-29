@@ -22,13 +22,11 @@
 				<p class="nav-link active">Hàng hóa</p>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" href="/manager/store">• Quản lý kho hàng</a>
+				<a class="nav-link active" href="/manager/store">•  Cửa hàng</a>
 			</li>
+			
 			<li class="nav-item">
-				<a class="nav-link active" href="/manager/catalogy">• Quản lý danh mục</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link active" href="/manager/product">• Quản lý hàng hóa</a>
+				<a class="nav-link active" href="/manager/product">• Hàng hóa</a>
 			</li>
 			
 			

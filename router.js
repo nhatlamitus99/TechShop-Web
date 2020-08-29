@@ -394,6 +394,55 @@ router.put('/product/:id', uploadFile.single('file'), passport.authenticate('jwt
     .catch(err=> console.log(err))
 })
 
+
+// new -> pending
+router.put('/manager/order/pending/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
+    if (req.user.dataValues.type !== true) {
+        return res.sendStatus(403);
+    }
+    order.update({
+        status: 'pending'
+    }, {
+        where:{
+            id: req.params.id
+        }
+    })
+    .then(result=>{
+        res.json({'data': result})
+    })
+}) 
+
+function compareSeller (product1, product2) {
+    return product2.number_sell - product1.number_sell;
+}
+
+router.get('/api/bestSeller', (req, res)=>{
+    product.findAll()
+    .then(results =>{
+        results.sort(compareSeller);
+        var result = results.slice(0,5);
+        res.json({'data': result})
+    })
+    .catch(err=> console.log(err))
+})
+
+// pending -> done
+router.put('/manager/order/done/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
+    if (req.user.dataValues.type !== true) {
+        return res.sendStatus(403);
+    }
+    order.update({
+        status: 'done'
+    }, {
+        where:{
+            id: req.params.id
+        }
+    })
+    .then(result=>{
+        res.json({'data': result})
+    })
+}) 
+
 router.delete('/product/:id', passport.authenticate('jwt', { session: false }), (req, res)=>{
     if (req.user.dataValues.type !== true) {
         return res.sendStatus(403);
@@ -731,6 +780,11 @@ router.get('/manager/product',(req, res)=>{
 router.get('/manager/report',(req, res)=>{
         res.render('manager/report')   
 })
+
+router.get('/manager/cancelled',(req, res)=>{
+        res.render('manager/cancelled')   
+})
+
 router.get('/manager/detail_product',(req, res)=>{
         res.render('manager/detail_product')   
 })
@@ -751,6 +805,9 @@ router.get('/manager/detail_product/:id',(req, res)=>{
  	res.render('manager/detail_product',{'id' : req.params.id});
 })
 
+router.get('/manager/detailstore/:id',(req, res)=>{
+ 	res.render('manager/detailstore',{'id' : req.params.id});
+})
 
 
 router.get('/manager/api/detailbill/:id',passport.authenticate('jwt', { session: false }),(req, res)=>{
@@ -849,6 +906,22 @@ router.get('/manager/api/order/new/:id', passport.authenticate('jwt', { session:
     order.findAll({
         where:{
             status: "new",
+            id: req.params.id
+        }
+    })
+    .then(results=>{
+        res.json({'data': results})
+    })
+    .catch(err=> console.log(err))
+})
+
+router.get('/manager/api/order/all/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
+    if (req.user.dataValues.type !== true) {
+        return res.sendStatus(403);
+    }
+    order.findAll({
+        where:{
+       
             id: req.params.id
         }
     })
