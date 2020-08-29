@@ -97,7 +97,24 @@ header a:hover {
 .header-top .dropdown-item:hover {
     color: #ffe600;
 }
-
+.badge-likeCount {
+    font-size: 13px;
+    background: #ffe600;
+    color: #242424;
+    padding: 3px 8px;
+    border-radius: 100%;
+    transform: translate3d(-105px, -7px, 0px);
+    position: absolute;
+}
+.badge-cartCount {
+    font-size: 13px;
+    background: #ffe600;
+    color: #242424;
+    padding: 3px 8px;
+    border-radius: 100%;
+    transform: translate3d(-42px, -7px, 0px);
+    position: absolute;
+}
 /* ========== Footer ========== */
 footer {
     background-color: #f0f0f0;
@@ -238,4 +255,21 @@ footer > div:nth-child(2) {
 }
 .breadcrumb a {
     color: #7d7d7d;
+}
+
+/* ========== Not found - Empty ========== */
+.empty-board {
+    border: 1px solid #c4c4c4;
+}
+.empty-board .btn-continue-shopping {
+    margin-left: 5px;
+    font-weight: 500;
+    padding: 7px 20px;
+    border: 0;
+    outline-style: none;
+    background-color: #ffe600;
+}
+.empty-board .btn-continue-shopping:hover {
+    color: white;
+    background-color: black;
 }

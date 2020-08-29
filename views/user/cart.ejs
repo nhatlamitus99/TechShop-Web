@@ -38,6 +38,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 px-0">
+                    <% if (cartProducts) { %>
                     <form>
                         <div class="table-responsive">
                             <table class="product-table">
@@ -52,24 +53,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% for (var i = 0; i < cartProducts.length; ++i) { %>
                                     <tr>
                                         <td class="product-remove">
-                                            <a href="#"><i class="far fa-trash-alt"></i></a>
+                                            <button id="remove-cart-<%= cartProducts[i].id %>"
+                                                onclick="removeFromCart('<%= cartProducts[i].id %>')">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
                                         </td>
                                         <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="/images/product/small-size/1.jpg" alt="Li's Product Image" />
+                                            <a href="/product/<%= cartProducts[i].id %>">
+                                                <img src="<%= cartProducts[i].image %>" alt="Li's Product Image" class="w-75"/>
                                             </a>
                                         </td>
-                                        <td class="product-infor">
-                                            Laptop ASUS ROG Strix G G531GD-AL034T (i7-9750H)
+                                        <td class="product-infor" style="max-width: 270px;">
+                                            <%= cartProducts[i].name %>
                                         </td>
                                         <td class="product-price">
-                                            22.990.000đ
+                                            <%= (cartProducts[i].price*(100-cartProducts[i].promo)/100).toLocaleString('vi',{style:'currency',currency:'VND'}) %>
                                         </td>
                                         <td class="product-quantity">
                                             <div class="row justify-content-center">
-                                                <input class="cart-plus-minus-box" value="1" type="text" readonly />
+                                                <input id="read-quantity-<%= cartProducts[i].id %>" class="change-quantity-box" 
+                                                value="<%= cartProducts[i].quantity %>" type="number" readonly 
+                                            onchange="quantityChange(this,'<%= cartProducts[i].id %>','<%= cartProducts[i].price %>','<%= cartProducts[i].promo %>')"/>
                                                 <div class="">
                                                     <div class="inc qtybutton">
                                                         <i class="fa fa-angle-up"></i>
@@ -81,78 +88,17 @@
                                             </div>
                                         </td>
                                         <td class="product-subtotal">
-                                            <span class="amount">22.990.000đ</span>
+                                            <span class="amount">
+                                            <%=((cartProducts[i].price*(100-cartProducts[i].promo)/100) * cartProducts[i].quantity).toLocaleString('vi',{style:'currency',currency:'VND'})%>
+                                            </span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="product-remove">
-                                            <a href="#"><i class="far fa-trash-alt"></i></a>
-                                        </td>
-                                        <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="/images/product/small-size/1.jpg" alt="Li's Product Image" />
-                                            </a>
-                                        </td>
-                                        <td class="product-infor">
-                                            Laptop ASUS ROG Strix G G531GD-AL034T (i7-9750H)
-                                        </td>
-                                        <td class="product-price">
-                                            22.990.000đ
-                                        </td>
-                                        <td class="product-quantity">
-                                            <div class="row justify-content-center">
-                                                <input class="cart-plus-minus-box" value="1" type="text" readonly />
-                                                <div class="">
-                                                    <div class="inc qtybutton">
-                                                        <i class="fa fa-angle-up"></i>
-                                                    </div>
-                                                    <div class="dec qtybutton">
-                                                        <i class="fa fa-angle-down"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">
-                                            <span class="amount">22.990.000đ</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-remove">
-                                            <a href="#"><i class="far fa-trash-alt"></i></a>
-                                        </td>
-                                        <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="/images/product/small-size/1.jpg" alt="Li's Product Image" />
-                                            </a>
-                                        </td>
-                                        <td class="product-infor">
-                                            Laptop ASUS ROG Strix G G531GD-AL034T (i7-9750H)
-                                        </td>
-                                        <td class="product-price">
-                                            22.990.000đ
-                                        </td>
-                                        <td class="product-quantity">
-                                            <div class="row justify-content-center">
-                                                <input class="cart-plus-minus-box" value="1" type="text" readonly />
-                                                <div class="">
-                                                    <div class="inc qtybutton">
-                                                        <i class="fa fa-angle-up"></i>
-                                                    </div>
-                                                    <div class="dec qtybutton">
-                                                        <i class="fa fa-angle-down"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">
-                                            <span class="amount">22.990.000đ</span>
-                                        </td>
-                                    </tr>
+                                    <% } %>
                                 </tbody>
                             </table>
                         </div>
                         <br>
-                        <a class="continue-shopping py-2" href="/index">
+                        <a class="continue-shopping py-2" href="/">
                             <i class="far fa-angle-left mr-2"></i>
                             Tiếp tục mua sắm
                         </a>
@@ -160,9 +106,15 @@
                             <div class="col-md-5 cart-page-total ml-auto px-0">
                                 <h3>Tổng đơn hàng</h3>
                                 <table>
+                                    <% var tmpTotal = 0;
+                                    for (var p of cartProducts) {
+                                        tmpTotal += (p.price*(100-p.promo)/100)*p.quantity;
+                                    } %>
                                     <tr>
                                         <td class="li-head">Tạm tính:</td>
-                                        <td class="temp-total money">68.970.000đ</td>
+                                        <td class="temp-total money <%=tmpTotal%>">
+                                            <%=tmpTotal.toLocaleString('vi',{style:'currency',currency:'VND'})%>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="li-head">Phí giao hàng</td>
@@ -176,7 +128,9 @@
                                 </div>
                                 <div class="total-cost row">
                                     <div class="total-text col-7">Tổng cộng:</div>
-                                    <div class="total-money col-5">68.991.000đ</div>
+                                    <div class="total-money col-5 <%=(tmpTotal+21000)%>">
+                                        <%=(tmpTotal+21000).toLocaleString('vi',{style:'currency',currency:'VND'})%>
+                                    </div>
                                 </div>
                                 <button class="proceed-checkout-btn" onclick="location.href=''" type="button">
                                     Xác nhận giỏ hàng và thanh toán
@@ -184,6 +138,22 @@
                             </div>
                         </div>
                     </form>
+                    <% } else { %>
+                    <div class="empty-board text-center">
+                        <div class="my-5">
+                            <img src="/images/empty.jpg" alt="Empty">
+                        </div>
+                        <div class="my-3">
+                            Không có sản phẩm nào trong Giỏ hàng.
+                        </div>
+                        <div class="mb-5 mt-4">
+                            <button class="btn-continue-shopping" onclick="location.href='/'">
+                                Tiếp tục mua sắm
+                            </button>
+                        </div>
+                    </div>
+                    <% } %>
+                
                 </div>
             </div>
         </div>
@@ -282,6 +252,60 @@
 
     <!-- Optional JavaScript -->
     <script src="/script/public.js"></script>
+    <script>
+        function removeFromCart(productID) {
+            let _id = parseInt(productID);
+            // request delete in database
+            makeRequest('/cart/' + productID, 'DELETE', jwtToken, 'Đã xóa khỏi Giỏ hàng');
+            // delete in storage
+            const i = cartProductIDs.indexOf(_id);
+            cartProductIDs.splice(i, 1);
+            localStorage.setItem("cartProductIDs", JSON.stringify(cartProductIDs));
+            // reload list view, don't know why but must reload 2 times :((
+            window.location.reload(true);
+            window.location.reload(true);
+        }
+        // change quantity of product
+        var btnsQuantity = document.querySelectorAll(".qtybutton");
+        btnsQuantity.forEach(btn => { 
+            btn.onclick = () => {
+                var quantity = btn.parentElement.parentElement.querySelector("input");
+                var oldVal = quantity.value;
+                var newVal = null;
+                if (btn.classList.contains("inc")) {
+                    newVal = parseFloat(oldVal) + 1;
+                } else {
+                    // Don't allow decrementing below zero
+                    if (oldVal > 1) {
+                        newVal = parseFloat(oldVal) - 1;
+                    } else {
+                        newVal = 1;
+                    }
+                }
+                quantity.value = newVal;
+                // Trigger change event
+                var event = new Event('change');
+                // Dispatch it.
+                quantity.dispatchEvent(event);
+            }
+        });
+        function quantityChange(e, id, price, promo) {
+            let quantity = parseInt(e.value); id = parseInt(id);
+            price = parseInt(price); promo = parseInt(promo);
+            let subTotal = e.parentElement.parentElement.parentElement.querySelector('span.amount');
+            subTotal.innerHTML = ((price*(100-promo)/100) * quantity).toLocaleString('vi',{style:'currency',currency:'VND'});
+            let tmpTotal = document.querySelector('.temp-total');
+            let total = document.querySelector('.total-money');
+            let a = 0;
+            let b = 0;
+            tmpTotal.innerHTML = a.toLocaleString('vi',{style:'currency',currency:'VND'});
+            total.innerHTML = b.toLocaleString('vi',{style:'currency',currency:'VND'});
+            tmpTotal.classList.replace(tmpTotal.classList[2],""+a);
+            total.classList.replace(total.classList[2],""+b);
+
+
+        }
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

@@ -196,10 +196,11 @@
                                     <% } %>
                                 </div>
                                 <div class="flex-fill d-flex justify-content-end">
-                                    <button type="button" class="card-btn-wish" id="btn-like-<%= dataProducts[i].id %>">
+                                    <button type="button" class="card-btn-wish" name="btn-like-<%= dataProducts[i].id %>"
+                                        onclick="hitLike('<%= dataProducts[i].id %>')">
                                         <i class="fal fa-heart"></i>
                                     </button>
-                                    <button type="button" class="card-btn-cart">
+                                    <button type="button" class="card-btn-cart" onclick="hitAddCart('<%= dataProducts[i].id %>')">
                                         <i class="fal fa-shopping-cart"></i>
                                     </button>
                                 </div>

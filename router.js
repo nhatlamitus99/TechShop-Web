@@ -25,6 +25,7 @@ var like = require('./models/Like');
 var cart = require('./models/Cart');
 var billdt = require('./models/Billdetail');
 const { access } = require('fs');
+const { raw } = require('body-parser');
 
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -100,21 +101,35 @@ router.post('/login', urlencodedParser, async (req, res) => {
                 req.session.userID = result.id;
                 req.session.role = result.role;
                 req.session.likeProductIDs = null;
+                req.session.cartProductIDs = null;
 
                 // Token based authentication
                 var payload = { id: result.id, role: result.role };
                 var accessToken = jwt.sign(payload, 'secret');
                 
                 if (result.role === 0) {
-                    var likeIDs = await like.findAll({ where: { userID: result.id } });
-                    likeProductIDs = [];
-                    if (likeIDs) {
-                        likeIDs.forEach(element => {
+                    var likes = await like.findAll({ where: { userID: result.id } });
+                    var likeProductIDs = [];
+                    if (likes) {
+                        likes.forEach(element => {
                             likeProductIDs.push(element.productID);
                         });
                     }
+                    var carts = await cart.findAll({ where: { userID: result.id } });
+                    var cartProductIDs = [];
+                    if (carts) {
+                        carts.forEach(element => {
+                            cartProductIDs.push(element.productID);
+                        });
+                    }
                     req.session.likeProductIDs = likeProductIDs;
-                    res.render('user/saveToken', { token: accessToken, username: result.username, likeProductIDs: likeProductIDs });
+                    req.session.cartProductIDs = cartProductIDs;
+                    res.render('user/saveToken', {
+                        'token': accessToken,
+                        'username': result.username,
+                        'likeProductIDs': likeProductIDs,
+                        'cartProductIDs': cartProductIDs
+                    });
                 } else {
                     res.render('manager/saveToken', { token: accessToken, user: result.username });
                 }                    
@@ -137,6 +152,7 @@ router.get('/logout', authenticateUser, (req, res) => {
     req.session.userID = null;
     req.session.role = null;
     req.session.likeProductIDs = null;
+    req.session.cartProductIDs = null;
     res.redirect('/');
 });
 
@@ -261,8 +277,7 @@ router.get('/search', (req, res) => {
 // tab = 0: account infor, tab = 1: order management, tab = 2: wishlist, tab = 3: payment infor
 router.get('/account/:tab', authenticateUser, async (req, res) => {
     if (isNaN(req.params.tab) || parseInt(req.params.tab) < 0) {
-        res.redirect('/404');
-        return;
+        return res.redirect('/404');
     }
     var tab = parseInt(req.params.tab);
     if (tab == 0) {
@@ -288,23 +303,22 @@ router.get('/account/:tab', authenticateUser, async (req, res) => {
 
 //===================================== LIKE PRODUCT API ============================================//
 
-router.put('/like/:productID', authenticateUser, async (req, res) => {
+router.put('/like/:productID', passport.authenticate('jwt', { session: false }), async (req, res) => {
     if (isNaN(req.params.productID) || parseInt(req.params.productID) < 0) {
-        res.redirect('/404');
-        return;
+        return res.redirect('/404');
     }
     var _productID = parseInt(req.params.productID);
     await like.create({
         userID: req.session.userID,
         productID: _productID
     });
-    res.sendStatus(200); 
+    req.session.likeProductIDs.push(_productID);
+    res.sendStatus(200);
 });
 
-router.delete('/like/:productID', authenticateUser, async (req, res) => {
+router.delete('/like/:productID', passport.authenticate('jwt', { session: false }), async (req, res) => {
     if (isNaN(req.params.productID) || parseInt(req.params.productID) < 0) {
-        res.redirect('/404');
-        return;
+        return res.redirect('/404');
     }
     var _productID = parseInt(req.params.productID);
     await like.destroy({
@@ -313,8 +327,80 @@ router.delete('/like/:productID', authenticateUser, async (req, res) => {
             productID: _productID
         }
     });
+    const i = req.session.likeProductIDs.indexOf(_productID);
+    req.session.likeProductIDs.splice(i, 1);
     res.sendStatus(200); 
 });
+
+
+//===================================== CART PRODUCT API ============================================//
+
+router.get('/cart', authenticateUser, async (req, res) => {
+    var cartProducts = await product.findAll({
+        where: {
+            id: { [sequelize.Op.in]: req.session.cartProductIDs }
+        },
+        raw: true,
+        nest: true
+    });
+    if (cartProducts) {
+        for (let i = 0; i < cartProducts.length; ++i) {
+            let quantity = await cart.findOne({
+                where: { userID: req.session.userID, productID: cartProducts[i].id }
+            });
+            cartProducts[i]['quantity'] = quantity.number;
+        }
+    }
+    res.render('user/cart', { 'cartProducts': cartProducts });
+});
+
+router.post('/cart/:productID', authenticateUser, async (req, res) => {
+    console.log('Post to here');
+    if (isNaN(req.params.productID) || parseInt(req.params.productID) < 0) {
+        return res.redirect('/404');
+    }
+    var _quantity = 1;
+    if (req.query.quantity) {
+        _quantity = parseInt(req.query.quantity);
+    }
+    var _productID = parseInt(req.params.productID);
+    await cart.create({
+        userID: req.session.userID,
+        productID: _productID,
+        number: _quantity
+    });
+    req.session.cartProductIDs.push(_productID);
+    res.sendStatus(200);
+});
+
+router.delete('/cart/:productID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    if (isNaN(req.params.productID) || parseInt(req.params.productID) < 0) {
+        return res.redirect('/404');
+    }
+    var _productID = parseInt(req.params.productID);
+    await cart.destroy({
+        where: {
+            userID: req.session.userID,
+            productID: _productID
+        }
+    });
+    const i = req.session.cartProductIDs.indexOf(_productID);
+    req.session.cartProductIDs.splice(i, 1);
+    res.sendStatus(200); 
+});
+
+router.put('/cart/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    cart.update({
+        number: req.body.number
+    }, {
+        where:{
+            id: req.params.id
+        }
+    })
+    .then(result=>{
+        res.json({'data': result})
+    })
+})
 
 
 //===================================== POLICY PAGE ============================================//
@@ -948,68 +1034,6 @@ router.delete('/category/:id', passport.authenticate('jwt', { session: false }),
     .catch(err=> console.log(err))
 })
 
-
-
-// CART route & api
-
-router.post('/cart', passport.authenticate('jwt', { session: false }), (req, res) => {
-    if (req.user.dataValues.role !== 0) {
-        return res.sendStatus(403);
-    }
-    
-    if (!req.body.productID)
-        res.json({ 'message': 'Empty product' })
-
-    if (!req.body.number)
-        res.json({ 'message': 'Empty number of items' })
-
-    cart.create({
-        userID: req.user.dataValues.id,
-        productID: req.body.productID,
-        number: req.body.number
-    })
-        .then(result => {
-            res.json({ 'data': result })
-        })
-});
-
-router.get('/api/cart', passport.authenticate('jwt', { session: false }), (req, res)=>{
-    
-    cart.findOne({
-        where:{
-            userID: req.user.dataValues.id
-        }
-    })
-    .then(result=>{
-        res.json({'data': result})
-    })
-    .catch(err=> console.log(err))
-})
-
-router.put('/cart/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    cart.update({
-        number: req.body.number
-    }, {
-        where:{
-            id: req.params.id
-        }
-    })
-    .then(result=>{
-        res.json({'data': result})
-    })
-})
-
-router.delete('/cart/:id', passport.authenticate('jwt', { session: false }),(req, res)=>{
-    cart.destroy({
-        where:{
-            id: req.params.id
-        }
-    })
-    .then(result=>{
-        res.json({'data': result})
-    }) 
-    .catch(err=>console.log(err))
-})
 
 
 

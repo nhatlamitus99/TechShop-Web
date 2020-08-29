@@ -202,11 +202,11 @@
                                         <% } %>
                                     </div>
                                     <div class="flex-fill d-flex justify-content-end">
-                                        <button type="button" class="card-btn-wish" id="btn-like-<%= topPromo[i].id %>" 
+                                        <button type="button" class="card-btn-wish" name="btn-like-<%= topPromo[i].id %>" 
                                             onclick="hitLike('<%= topPromo[i].id %>')">
                                             <i class="fal fa-heart"></i>
                                         </button>
-                                        <button onclick="" type="button" class="card-btn-cart">
+                                        <button type="button" class="card-btn-cart" onclick="hitAddCart('<%= topPromo[i].id %>')">
                                             <i class="fal fa-shopping-cart"></i>
                                         </button>
                                     </div>
@@ -276,10 +276,11 @@
                                     <% } %>
                                 </div>
                                 <div class="flex-fill d-flex justify-content-end">
-                                    <button type="button" class="card-btn-wish" id="btn-like-<%= topSold[i].id %>">
+                                    <button type="button" class="card-btn-wish" name="btn-like-<%= topSold[i].id %>"
+                                        onclick="hitLike('<%= topSold[i].id %>')">
                                         <i class="fal fa-heart"></i>
                                     </button>
-                                    <button onclick="location.href=''" type="button" class="card-btn-cart">
+                                    <button type="button" class="card-btn-cart" onclick="hitAddCart('<%= topSold[i].id %>')">
                                         <i class="fal fa-shopping-cart"></i>
                                     </button>
                                 </div>
@@ -391,10 +392,11 @@
                                             <% } %>
                                         </div>
                                         <div class="flex-fill d-flex justify-content-end">
-                                            <button type="button" class="card-btn-wish" id="btn-like-<%= topSoldLaptop[i].id %>">
+                                            <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldLaptop[i].id %>"
+                                                onclick="hitLike('<%= topSoldLaptop[i].id %>')">
                                                 <i class="fal fa-heart"></i>
                                             </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
+                                            <button type="button" class="card-btn-cart" onclick="hitAddCart('<%= topSoldLaptop[i].id %>')">
                                                 <i class="fal fa-shopping-cart"></i>
                                             </button>
                                         </div>
@@ -463,10 +465,11 @@
                                             <% } %>
                                         </div>
                                         <div class="flex-fill d-flex justify-content-end">
-                                            <button type="button" class="card-btn-wish" id="btn-like-<%= topSoldLaptop[i].id %>">
+                                            <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldLaptop[i].id %>"
+                                                onclick="hitLike('<%= topSoldLaptop[i].id %>')">
                                                 <i class="fal fa-heart"></i>
                                             </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
+                                            <button type="button" class="card-btn-cart" onclick="hitAddCart('<%= topSoldLaptop[i].id %>')">
                                                 <i class="fal fa-shopping-cart"></i>
                                             </button>
                                         </div>
@@ -578,10 +581,11 @@
                                             <% } %>
                                         </div>
                                         <div class="flex-fill d-flex justify-content-end">
-                                            <button type="button" class="card-btn-wish" id="btn-like-<%= topSoldManHinh[i].id %>">
+                                            <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldManHinh[i].id %>"
+                                                onclick="hitLike('<%= topSoldManHinh[i].id %>')">
                                                 <i class="fal fa-heart"></i>
                                             </button>
-                                            <button onclick="location.href=''" type="button" class="card-btn-cart">
+                                            <button type="button" class="card-btn-cart" onclick="hitAddCart('<%= topSoldManHinh[i].id %>')">
                                                 <i class="fal fa-shopping-cart"></i>
                                             </button>
                                         </div>
@@ -647,10 +651,11 @@
                                                 <% } %>
                                             </div>
                                             <div class="flex-fill d-flex justify-content-end">
-                                                <button type="button" class="card-btn-wish" id="btn-like-<%= topSoldManHinh[i].id %>">
+                                                <button type="button" class="card-btn-wish" name="btn-like-<%= topSoldManHinh[i].id %>"
+                                                    onclick="hitLike('<%= topSoldManHinh[i].id %>')">
                                                     <i class="fal fa-heart"></i>
                                                 </button>
-                                                <button onclick="" type="button" class="card-btn-cart">
+                                                <button type="button" class="card-btn-cart" onclick="hitAddCart('<%= topSoldManHinh[i].id %>')">
                                                     <i class="fal fa-shopping-cart"></i>
                                                 </button>
                                             </div>

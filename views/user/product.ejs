@@ -116,16 +116,17 @@
                                 </div>
                                 <div class="line"></div>
                                 <div class="add-to-wishlist my-3">
-                                    <button type="button" class="card-btn-wish" name="wishlist-btn-<%= dataProduct.id %>">
+                                    <button type="button" class="card-btn-wish" name="wishlist-btn-<%= dataProduct.id %>"
+                                        onclick="hitLike('<%= dataProduct.id %>', 'wishlist-btn-')">
                                         <i class="far fa-heart"></i>
                                     </button>
                                     Thêm vào danh sách yêu thích
                                 </div>
                                 <div class="single-add-to-cart">
                                     <label>Số lượng</label>
-                                    <form action="" class="cart-quantity row">
+                                    <div class="cart-quantity row">
                                         <div class="quantity d-flex mr-4">
-                                            <input id="read-quantity" class="cart-plus-minus-box" value="1" type="text" readonly/>
+                                            <input id="read-quantity" class="cart-plus-minus-box" value="1" type="number" readonly/>
                                             <div>
                                                 <div class="inc qtybutton">
                                                     <i class="fa fa-angle-up"></i>
@@ -135,10 +136,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="add-to-cart" type="submit">
+                                        <button class="add-to-cart" onclick="addToCart('<%= dataProduct.id %>')">
                                             Thêm vào giỏ hàng
                                         </button>
-                                    </form>
+                                    </div>
                                 </div>
                                 <div class="block-reassurance mt-5">
                                     <div class="row align-items-center">
@@ -331,10 +332,11 @@
                                 <% } %>
                             </div>
                             <div class="flex-fill d-flex justify-content-end">
-                                <button type="button" class="card-btn-wish" id="btn-like-<%= similarProducts[i].id %>">
+                                <button type="button" class="card-btn-wish" name="btn-like-<%= similarProducts[i].id %>"
+                                    onclick="hitLike('<%= similarProducts[i].id %>')">
                                     <i class="fal fa-heart"></i>
                                 </button>
-                                <button onclick="location.href=''" type="button" class="card-btn-cart">
+                                <button type="button" class="card-btn-cart" onclick="hitAddCart('<%= similarProducts[i].id %>')">
                                     <i class="fal fa-shopping-cart"></i>
                                 </button>
                             </div>
@@ -442,7 +444,9 @@
     <!-- Optional JavaScript -->
     <script src="/script/public.js"></script>
     <script>
-        document.querySelectorAll(".qtybutton").forEach(btn => { 
+        // change quantity of product
+        var btnsQuantity = document.querySelectorAll(".qtybutton");
+        btnsQuantity.forEach(btn => { 
             btn.onclick = () => {
                 var quantity = btn.parentElement.parentElement.querySelector("input");
                 var oldVal = quantity.value;
@@ -458,8 +462,14 @@
                     }
                 }
                 quantity.value = newVal;
+                console.log(quantity.value);
             }
         });
+        function addToCart(productID) {
+            var quantity = document.querySelector("#read-quantity").value;
+            console.log(quantity, typeof(quantity));
+            hitAddCart(productID, quantity);
+        }
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

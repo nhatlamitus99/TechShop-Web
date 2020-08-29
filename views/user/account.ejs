@@ -355,10 +355,11 @@
                                                                 <% } %>
                                                             </div>
                                                             <div class="flex-fill d-flex justify-content-end">
-                                                                <button type="button" class="card-btn-wish" id="btn-like-<%= likeProducts[i].id %>">
+                                                                <button type="button" class="card-btn-wish" name="btn-like-<%= likeProducts[i].id %>"
+                                                                    onclick="removeFromLikeList('<%= likeProducts[i].id %>')">
                                                                     <i class="fas fa-heart"></i>
                                                                 </button>
-                                                                <button onclick="" type="button" class="card-btn-cart">
+                                                                <button type="button" class="card-btn-cart" onclick="hitAddCart('<%= likeProducts[i].id %>')">
                                                                     <i class="fal fa-shopping-cart"></i>
                                                                 </button>
                                                             </div>
@@ -504,6 +505,18 @@
                     ele.classList.add('d-none');
                 });
             }
+        }
+        function removeFromLikeList(productID) {
+            let _id = parseInt(productID);
+            // request delete in database
+            makeRequest('/like/' + productID, 'DELETE', jwtToken, 'Đã xóa khỏi Danh sách yêu thích');
+            // delete in storage
+            const i = likeProductIDs.indexOf(_id);
+            likeProductIDs.splice(i, 1);
+            localStorage.setItem("likeProductIDs", JSON.stringify(likeProductIDs));
+            // reload list view, don't know why but must reload 2 times :((
+            window.location.reload(true);
+            window.location.reload(true);
         }
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

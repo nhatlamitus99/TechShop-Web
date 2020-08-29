@@ -100,24 +100,6 @@ table {
     width: 330px;
 }
 
-.empty-board {
-    border: 1px solid #c4c4c4;
-}
-
-.empty-board .btn-continue-shopping {
-    margin-left: 5px;
-    font-weight: 500;
-    padding: 7px 20px;
-    border: 0;
-    outline-style: none;
-    background-color: #ffe600;
-}
-
-.empty-board .btn-continue-shopping:hover {
-    color: white;
-    background-color: black;
-}
-
 #my-wishlist tr {
     border: 1px solid #e5e5e5;
 }
