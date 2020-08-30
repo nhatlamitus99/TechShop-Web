@@ -9,6 +9,7 @@ const passport = require('passport');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const authenticateUser = require('./middlewares/auth');
+const lunr = require('lunr');
 
 const HASH_KEY_SYNC = 10;
 const PRODUCTS_PER_PAGE = 12;
@@ -264,11 +265,92 @@ router.get('/404', (req, res) => {
 
 //===================================== SEARCH FOR PRODUCT ============================================//
 
-router.get('/search', (req, res) => {
-    var query = req.query.q;
-    console.log(query);
-    // res.sendStatus(200);
-    res.redirect('/');
+router.get('/search', async (req, res) => {
+    var keyword = req.query.keyword;
+    console.log(keyword);
+    res.locals.UpdateQueryString = UpdateQueryString;
+    res.locals.url = req.url;
+
+    var dataForSearch = await product.findAll({
+        attributes: ['id', 'name'],//, 'info', 'detail'],
+        raw: true,
+        nest: true
+    });
+
+    // Prepare for searching
+    var idx = lunr(function () {
+        this.ref('id');
+        this.field('name');
+        // this.field('info');
+        // this.field('detail');
+        for (data of dataForSearch) {
+            this.add(data);
+        }        
+    });
+
+    var idxResult = idx.search(keyword);
+    var resultIDs = idxResult.map((item) => { return item.ref });
+    
+    /*
+    req.query can contain: 
+        + page: page index - from 1 (show limit PRODUCTS_PER_PAGE)
+        + sortBy: 0 = name from A-Z
+                  1 = name from Z-A
+                  2 = price asc
+                  3 = price desc
+                  4 = newest first
+                  5 = oldest first 
+    */
+    
+    // // for pagination
+    var page = 1;
+    if (req.query.page && /^\d+$/.test(req.query.page)) {
+        page = parseInt(req.query.page);
+        if (page < 1) {
+            res.redirect('/search?keyword=' + keyword + '&page=1');
+        }
+    } else {
+        res.redirect('/search?keyword=' + keyword + '&page=1');
+    }
+    // for sorting
+    const mapSort = [['name', 'ASC'], ['name', 'DESC'], ['price', 'ASC'], ['price', 'DESC'], ['createdAt', 'DESC'], ['createdAt', 'ASC']];
+    var sortBy = 0;
+    if (req.query.sortBy && /^\d+$/.test(req.query.sortBy)) {
+        let n = parseInt(req.query.sortBy);
+        if (n >= 0 && n < 6) {
+            sortBy = n;
+        }
+    }
+    res.locals.sortBy = sortBy;
+
+    var len = idxResult.length;
+    // if no product found, response null data
+    if (len === 0) {
+        res.render('user/search', {
+            'dataProducts': null,
+            'searchKeyword': keyword,
+            'nofProducts': 0,
+        });
+        return;
+    }
+    // calculate index of last page
+    var lastPage = Math.ceil(len / PRODUCTS_PER_PAGE);
+    if (page > lastPage) {
+        res.redirect('/search?keyword=' + keyword + '&page=' + lastPage);
+    }
+    var dataProducts = await product.findAndCountAll({
+        order: [mapSort[sortBy]],
+        where: { id: { [sequelize.Op.in]: resultIDs } },
+        limit: 12,
+        offset: (page - 1) * PRODUCTS_PER_PAGE
+    });
+    res.render('user/search', {
+        'dataProducts': dataProducts.rows,
+        'searchKeyword': keyword,
+        'nofProducts': len,
+        'lastPage': lastPage,
+        'page': page
+    });
 });
 
 

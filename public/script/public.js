@@ -71,12 +71,13 @@ if (typeof(jwtToken) !== 'undefined' && jwtToken && jwtToken.length) {
     htLogout.classList.add('d-none');
 }
 
+// For searching product
 function searchBox() {
     var searchBox = document.querySelector('#search-box');
-    var query = searchBox.value.trim();
-    if (query && query.length > 0) {
-        console.log(query);
-        window.location.replace("/search?q=" + query);
+    var keyword = searchBox.value.trim().replace(/[&\/\\#+()$~%.'":?<>{}]/g, '');
+    if (keyword && keyword.length > 1) {
+        console.log(keyword);
+        window.location.replace("/search?keyword=" + keyword);
     }
 }
 
