@@ -58,10 +58,10 @@ if (typeof(jwtToken) !== 'undefined' && jwtToken && jwtToken.length) {
     badgeCart.classList.remove('d-none');
     badgeCart.innerHTML = 0;
     badgeLike.innerHTML = 0;
-    if (likeProductIDs) {
+    if (typeof (likeProductIDs) && likeProductIDs) {
         badgeLike.innerHTML = likeProductIDs.length;
     }
-    if (cartProductIDs) {
+    if (typeof (cartProductIDs) && cartProductIDs) {
         badgeCart.innerHTML = cartProductIDs.length;
     }
 } else {

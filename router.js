@@ -204,9 +204,35 @@ router.get('/auth/facebook/callback',
 // Register via Google
 router.get('/auth/google',  passport.authenticate('google', { scope: ['email']}));
 router.get('/auth/google/callback',
-    passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }),
-    function (req, res) {
-        res.redirect('/');
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    async function (req, res) {
+        console.log(req.user);
+        req.session.userID = null;
+        req.session.isAuth = false;
+        req.session.role = 0;
+        req.session.likeProductIDs = null;
+        req.session.cartProductIDs = null;
+
+        var userInfo = await user.findOne({
+            where: { email: req.user._json.email }
+        });
+        if (userInfo) {
+            req.session.userID = userInfo.id;
+            req.session.isAuth = true;
+
+            // Token based authentication
+            var payload = { id: userInfo.id, role: 0 };
+            var accessToken = jwt.sign(payload, 'secret');
+            
+            res.render('user/saveToken', {
+                'token': accessToken,
+                'username': userInfo.username,
+                'likeProductIDs': [],
+                'cartProductIDs': []
+            });
+        } else {
+            res.redirect('/404');
+        }
     }
 );
 
